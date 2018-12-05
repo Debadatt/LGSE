@@ -1,0 +1,7 @@
+.noaccess{
+    padding: 12px;
+    font-size: 24px;
+    font-family: inherit;
+    color: red;
+    text-align: center !important;
+}

@@ -1,0 +1,113 @@
+<div>
+    <!-- HOME -->
+    <section>
+        <div class="row">
+            <div class="col" style="align-self: center">
+                <div>
+                    <div class="simple-page-form animated zoomIn" id="useradd-form">
+                        <span class="lblsubtitle" translate>USERADD.title.text</span>
+                        <form [formGroup]="userAddForm" (ngSubmit)="onSubmit()">
+                            <div class="userAdd-group" style="padding-top: 10px">
+                                <!-- 1st row -->
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-12">
+                                        <span *ngIf="!userAddForm.get('firstName').valid && userAddForm.get('firstName').touched" class="help-box" translate>USERADD.firstname.validate.text</span>
+                                        <div class="form-group has-float-label">
+                                            <input id="firstName" type="text" class="form-control" placeholder="" formControlName="firstName" maxlength="20">
+                                            <label for="firstName" translate>USERADD.firstname.text
+                                                <i class="text-danger">*</i>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12">
+                                        <span *ngIf="!userAddForm.get('lastName').valid && userAddForm.get('lastName').touched" class="help-box" translate>USERADD.lastname.validate.text</span>
+                                        <div class="form-group has-float-label">
+                                            <input id="lastName" type="text" class="form-control" placeholder="" formControlName="lastName" maxlength="20">
+                                            <label for="lastName" translate>USERADD.lastname.text
+                                                <i class="text-danger">*</i>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- 2nd row -->
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-12">
+                                        <div class="form-group has-float-label">
+                                            <input id="employeeId" type="text" class="form-control" placeholder="" formControlName="employeeId">
+                                            <label for="employeeId" translate>USERADD.empid.text
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12">
+                                        <span *ngIf="!userAddForm.get('email').valid && userAddForm.get('email').touched" class="help-box" translate>USERADD.emailid.validate.text</span>
+                                        <div class="form-group has-float-label">
+                                            <input id="email" type="text" class="form-control" placeholder="" formControlName="email">
+                                            <label for="email" translate>USERADD.emailid.text
+                                                <i class="text-danger">*</i>
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <!-- 3rd row -->
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-12">
+                                        <!-- <span class="help-box" *ngIf="!userAddForm.get('contactNo').valid && userAddForm.get('contactNo').touched" translate>USERADD.contactno.validate.text</span> -->
+                                        <div class="form-group has-float-label">
+                                            <input id="contactNo" type="text" class="form-control" placeholder="" formControlName="contactNo" maxlength="13">
+                                            <label for="contactNo" translate>USERADD.contactno.text
+                                                <!-- <i class="text-danger">*</i> -->
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 example-container">
+                                        <mat-form-field>
+                                            <mat-select required placeholder="Select Role" id="role" formControlName="role">
+                                                <mat-option *ngFor="let role of formRoles" [value]="role.id" (click)="selectChangeHandler(role.name)">{{role.name}}</mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+
+                                <!-- 4th row -->
+                                <span *ngIf="roleName=='Engineer'">
+                                    <div class="row">
+                                        <div class="col-md-6 col-sm-12">
+                                            <span class="help-box" *ngIf="!userAddForm.get('eusr').valid && userAddForm.get('eusr').touched && roleName=='Engineer'" translate>USERADD.eusr.validate.text</span>
+                                            <div class="form-group has-float-label">
+                                                <input id="eusr" type="text" class="form-control" placeholder="" formControlName="eusr" maxlength="9">
+                                                <label for="eusr" translate>USERADD.eusr.text
+                                                     <i class="text-danger">*</i>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </span>
+
+                                <!-- 5th row -->
+                                <div class="row">
+                                    <div class="pull-right" style="display: inline-flex;">
+                                        <span *ngIf="localstorageservice.checkCreatePermission(feature.PORTAL_MANAGEMENT)">
+                                            <button class="btn btn-orange" [disabled]="!userAddForm.valid">
+                                                <span translate>USERADD.save.button.text</span>
+                                            </button>
+                                        </span>
+                                        <button class="btn btn-orange" style="margin-left:5px;" type="button" routerLink="/portalManagment/userList">
+                                            <span translate>USERADD.cancel.button.text</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- #useradd-form -->
+                </div>
+                <!-- .simple-page-wrap -->
+            </div>
+            <!-- end col -->
+        </div>
+    </section>
+    <!-- END HOME -->
+</div>

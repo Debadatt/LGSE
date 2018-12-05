@@ -1,0 +1,243 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                         x:Class="LGSEApp.View.MainPage"
+             Title="Properties"
+             NavigationPage.HasBackButton="False">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem     x:Name="Filter"
+                        Command="{Binding FilterCommand}"
+                        Icon="filter_24px.png" />
+        <ToolbarItem    x:Name="User"
+                        Command="{Binding SettingCommand}"
+                        Icon="user_white_24px.png" />
+    </ContentPage.ToolbarItems>
+
+    <StackLayout >
+        <StackLayout
+               Margin="2,2,2,2"
+               Padding="0,0,0,0"
+               HorizontalOptions="FillAndExpand"              
+               IsVisible="{Binding IsFilter}">
+
+
+            <StackLayout HorizontalOptions="FillAndExpand"
+                         VerticalOptions="Start" Padding="0,0,0,0"
+                         BackgroundColor="White">
+
+                <Grid RowSpacing="0"
+                      Padding="0,0,0,0"
+                      HorizontalOptions="FillAndExpand">
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition   Height="auto" />
+                        <RowDefinition   Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                       <ColumnDefinition Width="auto" />
+                        <!-- <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />-->
+                    </Grid.ColumnDefinitions>
+                    <Switch Grid.Column="0"
+                            Grid.Row="0"
+                            IsToggled="{Binding IsInProgress}"
+                            HorizontalOptions="EndAndExpand" />
+                    <Switch Grid.Column="0"
+                            Grid.Row="1"
+                            IsToggled="{Binding IsPriority}"
+                            HorizontalOptions="EndAndExpand" />
+                    <Label Text="Sort by"
+                           HorizontalOptions="FillAndExpand"
+                           VerticalOptions="Center"
+                           LineBreakMode="NoWrap"
+                           Grid.Column="0"
+                           Grid.Row="2"></Label>
+                    <Label Text="{Binding IsStatusText}"
+                           Grid.Column="1" 
+                           Grid.Row="0"
+                           HorizontalOptions="FillAndExpand"
+                           VerticalOptions="Center"
+                           LineBreakMode="NoWrap"
+                           FontSize="Small"
+                           Style="{StaticResource labelStyle}" />
+                    <Label Text="{Binding IsPriorityText}"
+                           Grid.Column="1"
+                           Grid.Row="1"
+                           HorizontalOptions="FillAndExpand"
+                           VerticalOptions="Center"
+                           LineBreakMode="NoWrap"
+                           FontSize="Small"
+                           Style="{StaticResource labelStyle}" />
+                    <Picker Style="{StaticResource PickerStyle}" 
+                                   HorizontalOptions="FillAndExpand"   Title="Sort by"                  
+                            x:Name="SortingId" Grid.Row="2" Grid.Column="1"
+                            ItemsSource="{Binding SortingList}"
+                            ItemDisplayBinding="{Binding SortingText}"
+                            SelectedItem="{Binding Sort, Mode=TwoWay}">
+                    </Picker>
+
+                    <StackLayout    HorizontalOptions="Center"
+                                    VerticalOptions="FillAndExpand"
+                                    Grid.Row="3"
+                                    Grid.Column="0"
+                                    Grid.ColumnSpan="5">
+                        <StackLayout   Orientation="Horizontal"
+                                       HorizontalOptions="FillAndExpand"
+                                       VerticalOptions="FillAndExpand">
+                            <StackLayout  Orientation="Horizontal"
+                                          HorizontalOptions="Center">
+                                <Button HorizontalOptions="FillAndExpand"
+                                        TextColor="{StaticResource ErrorColor}"
+                                        FontSize="Small"
+                                        Text="Clear all Filter"
+                                        BackgroundColor="Transparent"
+                                        Command="{Binding ClearCommand}" />
+                              
+                            </StackLayout>
+                            <StackLayout  Orientation="Horizontal"
+                                          HorizontalOptions="Center">
+                                <Button TextColor="{StaticResource TextColor}"
+                                        Text="Cancel"
+                                        Command="{Binding CancelCommand}"
+                                        FontSize="Small"
+                                        BackgroundColor="Transparent" />
+                            </StackLayout>
+                            <StackLayout  Orientation="Horizontal"
+                                          HorizontalOptions="Center">
+                                <Button TextColor="{StaticResource FilterApplyColor}"
+                                        Text="Apply"
+                                        FontSize="Small"
+                                        BackgroundColor="Transparent"
+                                        Command="{Binding ApplyCommand}" />
+                            </StackLayout>
+                        </StackLayout>
+                    </StackLayout>
+                    
+                </Grid>
+
+            </StackLayout>
+
+        </StackLayout>
+        <SearchBar HorizontalOptions="FillAndExpand"
+                   IsVisible="{Binding IsListEnabled}"
+                   Text="{Binding SearchText}"
+                   SearchCommand="{Binding SearchCommand}"></SearchBar>
+        <ListView     x:Name="ItemsListView" IsVisible="{Binding IsListEnabled}" 
+                      ItemsSource="{Binding Items}"
+                      VerticalOptions="FillAndExpand"
+                      HasUnevenRows="true"
+                      SeparatorVisibility="None"
+                      RefreshCommand="{Binding LoadItemsCommand}"
+                      IsPullToRefreshEnabled="true" 
+                      IsRefreshing="{Binding IsBusy, Mode=OneWay}"
+                      CachingStrategy="RecycleElement"
+                      ItemSelected="OnItemSelected" 
+                     >
+            <ListView.ItemTemplate >
+                <DataTemplate >
+                    <ViewCell>
+                        <Frame IsClippedToBounds="True"
+                               HasShadow="True"
+                               CornerRadius="15"
+                               Padding="0,0,0,0"
+                               BackgroundColor="{StaticResource WhiteColor}">
+
+                            <Frame.Margin>
+                                <OnPlatform x:TypeArguments="Thickness" 
+                                            Android="5"
+                                            iOS="10" />
+                            </Frame.Margin>
+                            <StackLayout  Orientation="Horizontal"
+                                          >
+                                <BoxView Color="#2A2D42"
+                                         WidthRequest="10" />
+
+                                <Grid VerticalOptions="CenterAndExpand"
+                                      Padding="0,5,5,5"
+                                      RowSpacing="0"
+                                      HorizontalOptions="FillAndExpand"
+                                     >
+                                    <Grid.RowDefinitions >
+                                        <RowDefinition   Height="*" />
+                                        <RowDefinition Height="*" />
+                                        <RowDefinition Height="*" />
+                                       
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />                                       
+                                    </Grid.ColumnDefinitions>
+
+
+                                    <Label LineBreakMode="NoWrap"
+                                           Grid.Row="0"                                          
+                                           Grid.Column="0" Grid.ColumnSpan="2"
+                                           Text="{Binding FirstRow}"
+                                           Style="{StaticResource labelStyle}">
+                                        <!--<Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="{Binding buildingNumber}"  />
+                                                <Span  Text=", " />
+                                                <Span Text="{Binding buildingName}" />                                               
+                                            </FormattedString>
+                                        </Label.FormattedText>-->
+                                    </Label>
+
+                                    <Label LineBreakMode="NoWrap"
+                                           Grid.Row="1"
+                                           Grid.Column="0"
+                                           Grid.ColumnSpan="2"
+                                           Text="{Binding SecoundRow} "
+                                           Style="{StaticResource labelStyle}">
+                                        <!--<Label.FormattedText>
+                                            <FormattedString>                                                   
+                                                    <Span Text="{Binding principalStreet} " />
+                                                    <Span   Text=", "  />
+                                                    <Span Text="{Binding postcode}" />                                                
+                                            </FormattedString>
+                                        </Label.FormattedText>-->
+                                    </Label>
+
+                                    <Label Text="{Binding ConcatStatus}"
+                                           LineBreakMode="NoWrap"
+                                           Grid.Row="2" HorizontalOptions="End" FontAttributes="Bold" TextColor="Red"
+                                           Grid.Column="0" Grid.ColumnSpan="3"
+                                           Style="{StaticResource labelStyle}" />
+
+                                    <!--<Label LineBreakMode="NoWrap"
+                                           Grid.Row="0"
+                                           Grid.Column="1"
+                                           Text="{Binding buildingName}"
+                                           Style="{StaticResource labelStyle}">
+                                       
+                                    </Label>
+
+                                    <Label LineBreakMode="NoWrap"
+                                           Grid.Row="1"
+                                           Grid.Column="1"
+                                           Text="{Binding postcode} "
+                                           Style="{StaticResource labelStyle}">
+                                     
+                                    </Label>-->
+                                    <Image Source="flag_24px.png" HeightRequest="24"
+                                           IsVisible="{Binding PriorityCustomer}"
+                                           Grid.Row="0"
+                                           Grid.Column="2"   
+                                           Grid.RowSpan="2"
+                                           HorizontalOptions="End"></Image>
+
+                                </Grid>
+                            </StackLayout>
+                        </Frame>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
+
+</ContentPage>

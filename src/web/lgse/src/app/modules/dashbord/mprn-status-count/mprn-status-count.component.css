@@ -1,0 +1,69 @@
+/* :host ::ng-deep {
+  .row {
+    overflow: hidden;
+  } */
+
+  .pie-chart-container {
+    height: 300px;
+    width: 100%;
+    min-width: 100%;
+    display: block;
+    background: #fff;
+  }
+/* } */
+.fullscreen{
+ z-index: 10000  !important;
+ width: 100% !important;
+ height: 100% !important;
+ position: absolute;
+ top: 0 ;
+ left: 0 ;
+ right: 0;
+ bottom: 0;
+ overflow:hidden !important;
+ background: white !important;
+ border: none !important;
+ border-radius: 0px !important;
+}
+.fullscreen2{
+ /* z-index: 9999 !important; 
+ width: 100% !important;
+ min-height:calc(100vh - 20%);
+ height: auto !important;
+ overflow:hidden !important;
+ position: absolute !important;
+ border: none !important; */
+ position: absolute;
+    top: 50px;
+    left: 10px;
+    right: 10px;
+    bottom: 1px;
+  
+}
+
+.notmalheight{
+  height: 300px;
+}
+.test{
+  padding-top: 12px;
+}
+.fa-refresh {
+  font-size: 13px;
+}
+.minmax{
+  font-size: 16px;
+    vertical-align: text-top;
+}
+#piechartparent {  display: grid !important; }
+/* .advanced-pie-legend .total-label {
+  font-size: 28px;
+  margin-bottom: 19px;
+  font-family: Helvetica, Arial, sans-serif !important;
+} */
+
+/* ::ng-deep .advanced-pie-legend  {
+    font-family: Helvetica, Arial, sans-serif !important;
+  } */
+ .customfont  {
+    font-family: Helvetica, Arial, sans-serif !important;
+  }

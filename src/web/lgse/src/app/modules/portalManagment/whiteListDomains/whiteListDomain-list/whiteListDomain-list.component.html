@@ -1,0 +1,84 @@
+<div class="content">
+    <div>
+        <div class="content div">
+            <div class="simple-page-form animated zoomIn">
+                <div class="row">
+                    <div class="col-md-12 clo-lg-12">
+                        <label class="lblsubtitle" translate>DOMAIN.title.text</label>
+                        <div class="pull-right customsearchbox">
+                            <i class="fa fa-plus btn btn-warning" style="width:auto;" title="Add New Domain" (click)="addDomain();" aria-hidden="true"
+                                *ngIf="localstorageservice.checkCreatePermission(feature.PORTAL_MANAGEMENT);"></i>&nbsp;
+                            <i class="fa fa-refresh btn btn-warning" style="width:auto;" (click)="refresh();" title="Refresh"></i>&nbsp;
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <mat-table [dataSource]="dataSource" matSort class="table table-striped content tbl mat-elevation-z8">
+                        <ng-container matColumnDef="id" hidden>
+                            <mat-header-cell *matHeaderCellDef mat-sort-header mat-sort-header-arrow>
+                                <label translate>DOMAIN.id.text</label>
+                            </mat-header-cell>
+                            <mat-cell *matCellDef="let element">{{element.id}} </mat-cell>
+                        </ng-container>
+
+                        <ng-container matColumnDef="domainName">
+                            <mat-header-cell *matHeaderCellDef mat-sort-header class="mat-column-CODIGO">
+                                <label translate>DOMAIN.domainname.text</label>
+                            </mat-header-cell>
+                            <mat-cell *matCellDef="let element">
+                                <span class="mat-cell-responsive-label" translate>DOMAIN.domain.text</span>
+                                <span class="ellipsis mat-cell-text">{{element.domainName}}</span>
+                            </mat-cell>
+                        </ng-container>
+
+                        <ng-container matColumnDef="orgName">
+                            <mat-header-cell *matHeaderCellDef mat-sort-header class="mat-column-CODIGO">
+                                <label translate>DOMAIN.organisation.text</label>
+                            </mat-header-cell>
+                            <mat-cell *matCellDef="let element">
+                                <span class="mat-cell-responsive-label" translate>DOMAIN.organisation.text</span>
+                                <span class="ellipsis mat-cell-text">{{element.orgName}}</span>
+                            </mat-cell>
+                        </ng-container>
+
+                        <ng-container matColumnDef="isActive">
+                            <mat-header-cell *matHeaderCellDef mat-sort-header class="mat-column-CODIGO">
+                                <label translate>DOMAIN.active.text</label>
+                            </mat-header-cell>
+                            <mat-cell *matCellDef="let element">
+                                <span class="mat-cell-responsive-label" translate>USER.active.text</span>
+                                <div class="statusBlock" *ngIf="element.isActive==0" style="background-color:#FFBE00">Inactive</div>
+                                <div class="statusBlock" *ngIf="element.isActive==1" style="background-color:#28a745;">Active</div>
+                            </mat-cell>
+                        </ng-container>
+
+                        <ng-container matColumnDef="action">
+                            <mat-header-cell *matHeaderCellDef class="mat-column-CODIGO" style="flex:0 0 5%;">
+                            </mat-header-cell>
+                            <mat-cell *matCellDef="let element" style="flex:0 0 5%;">
+                                <span *ngIf="localstorageservice.checkUpdatePermission(feature.PORTAL_MANAGEMENT)">
+                                    <button mat-icon-button color="primary" [matMenuTriggerFor]="menu">
+                                        <mat-icon aria-hidden="true" matTooltip="Menu">more_vert</mat-icon>
+                                    </button>
+                                </span>
+                                <mat-menu #menu="matMenu">
+                                    <ng-template matMenuContent>
+                                        <button mat-menu-item (click)="editDomain(element.id)" *ngIf="localstorageservice.checkUpdatePermission(feature.PORTAL_MANAGEMENT);">
+                                            <mat-icon color='primary'>edit</mat-icon>
+                                            <span translate>DOMAIN.editdomain.text</span>
+                                        </button>
+
+                                    </ng-template>
+                                </mat-menu>
+                            </mat-cell>
+                        </ng-container>
+
+                        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                    </mat-table>
+                    <mat-paginator [pageSizeOptions]="[50, 100, 200, 500, 1000]" [pageSize]="50" showFirstLastButtons></mat-paginator>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

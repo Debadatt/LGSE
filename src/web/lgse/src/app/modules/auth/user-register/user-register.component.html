@@ -1,0 +1,140 @@
+<div class="simple-page">
+
+  <!-- HOME -->
+  <section class="bg-custom home" id="home">
+    <div class="home-sm">
+      <div class="container">
+        <!-- Info after registration -->
+        <div class="row">
+          <div class="col-lg-8">
+            <div class="home-wrapper home-wrapper-alt p-50">
+              <div class="main-logo">
+                <img src="../../assets/images/walesandwestcoloredlogo.png" class="img-responsive login-main-logo" alt="walesandwest">
+              </div>
+              <h4 class="w-full text-justify auth-paragraph wordbreak" >{{welcomeText}}</h4>
+
+            </div>
+          </div>
+          <!-- end col -->
+
+          <div class="col-lg-4 ">
+
+            <div class="simple-page-wrap">
+
+              <div class="simple-page-form animated zoomIn" id="login-form">
+                <h4 class="form-title m-b-xxl text-center auth-heading" translate>REGISTER.register.title</h4>
+                <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+                  <div class="register-group" formGroupName="registerData">
+                    <span *ngIf="!registerForm.get('registerData.workemail').valid && registerForm.get('registerData.workemail').touched" class="help-box"
+                      translate>REGISTER.valid.email.text</span>
+                    <div class="form-group has-float-label">
+
+                      <input id="sign-up-email" type="email" class="form-control" placeholder="" formControlName="workemail">
+                      <label for="sign-up-email" translate>REGISTER.email.text
+                        <i class="text-danger">*</i>
+                      </label>
+                    </div>
+
+
+                    <span *ngIf="!registerForm.get('registerData.firstname').valid && registerForm.get('registerData.firstname').touched" class="help-box"
+                      translate>
+                      REGISTER.valid.first.name</span>
+                    <div class="form-group has-float-label">
+
+                      <input id="sign-up-fname" type="text" class="form-control" placeholder="" formControlName="firstname" maxlength="20">
+                      <label for="sign-up-fname" translate>REGISTER.first.name.text
+                        <i class="text-danger">*</i>
+                      </label>
+                    </div>
+
+                    <span *ngIf="!registerForm.get('registerData.lastname').valid && registerForm.get('registerData.lastname').touched" class="help-box"
+                      translate>REGISTER.valid.lastname</span>
+                    <div class="form-group has-float-label">
+
+                      <input id="sign-up-sname" type="text" class="form-control" placeholder="" formControlName="lastname" maxlength="20">
+                      <label for="sign-up-sname" translate>REGISTER.lastname.text
+                        <i class="text-danger">*</i>
+                      </label>
+                    </div>
+
+
+                    <span *ngIf="!registerForm.get('registerData.employeeid').valid && registerForm.get('registerData.employeeid').touched" class="help-box"
+                      translate>REGISTER.valid.employee.id</span>
+                    <div class="form-group has-float-label">
+
+                      <input id="sign-up-employee_id" type="text" class="form-control" placeholder="" formControlName="employeeid">
+                      <label for="sign-up-employee_id" translate>REGISTER.empid.text
+                      </label>
+                    </div>
+
+                    <span *ngIf="!registerForm.get('registerData.role').valid && registerForm.get('registerData.role').touched" class="help-box"></span>
+                    <!-- <div class="form-group has-float-label">
+                      <select class="form-control" id="role" formControlName="role" (change)="onSelectRole($event.target.value)">
+                        <option *ngFor="let role of formRoles" [value]="role.id">{{role.name}}</option>
+                      </select>
+                      <label for="sign-up-role" translate>REGISTER.role.text
+                        <i class="text-danger">*</i>
+                      </label>
+                    </div> -->
+                   
+                      <div class="example-container">
+                        <mat-form-field >
+                          <mat-select required placeholder="Select Role" id="role" formControlName="role">
+                            <mat-option *ngFor="let role of formRoles" [value]="role.id" (click)="onSelectRole(role.id)">{{role.name}}</mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </div>
+
+                   
+                    <span *ngIf="!registerForm.get('registerData.eusr').valid && registerForm.get('registerData.eusr').touched && isEngineer"
+                      class="help-box" translate>REGISTER.valid.euser</span>
+                    <div class="form-group has-float-label" *ngIf="isEngineer">
+
+                      <input id="sign-up-euser" type="text" class="form-control" placeholder="" formControlName="eusr" maxlength="9">
+                      <label for="sign-up-euser" translate>REGISTER.euser.text
+                        <i class="text-danger">*</i>
+                      </label>
+                    </div>
+
+                    <span *ngIf="!registerForm.get('registerData.telnumber').valid && registerForm.get('registerData.telnumber').touched" class="help-box"
+                      translate>REGISTER.valid.contact.number</span>
+                    <div class="form-group has-float-label">
+                      <input id="sign-up-contact_number" type="tel" class="form-control" placeholder="" formControlName="telnumber" maxlength="13">
+                      <label for="sign-up-contact_number" translate>REGISTER.contact.text
+                        <i class="text-danger"></i>
+                      </label>
+                    </div>
+
+                    <div class="form-group m-b-xl tandc">
+                      <div class="checkbox checkbox-primary ">
+                        <input type="checkbox" formControlName="isAcceptTandC" />
+                        <label for="keep_me_logged_in" (click)="openTandCDialog()" translate>REGISTER.tandc.text</label>
+                      </div>
+                    </div>
+
+                    <input type="submit" class="btn btn-orange" [value]="'REGISTER.signup.text' | translate" [disabled]="!registerForm.valid">
+                  </div>
+                </form>
+              </div>
+              <!-- #login-form -->
+
+              <div class="simple-page-footer zoomIn">
+
+                <p>
+                  <small translate>REGISTER.already.have.account.text</small>
+                  <a routerLink="/auth/login" translate>REGISTER.signin.text</a>
+                </p>
+              </div>
+              <!-- .simple-page-footer -->
+            </div>
+            <!-- .simple-page-wrap -->
+          </div>
+          <!-- end col -->
+        </div>
+      </div>
+    </div>
+
+  </section>
+  <!-- END HOME -->
+
+</div>

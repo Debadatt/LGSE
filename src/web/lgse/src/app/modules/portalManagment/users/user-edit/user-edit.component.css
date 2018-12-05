@@ -1,0 +1,18 @@
+
+
+@import '../../../../shared/assets/css/misc-pages.css';
+
+.help-box {
+  font-size: 12px;
+  color: red;
+}
+
+.error {
+    text-align: center;
+}
+input {
+    border-bottom: 1px solid #000000 !important;
+}
+input[readonly] {
+  pointer-events: none;
+}

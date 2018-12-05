@@ -1,0 +1,72 @@
+<div>
+    <!-- HOME -->
+    <section>
+        <div class="row">
+            <div class="col" style="align-self: center">
+                <div class="simple-page-wrap">
+                    <div class="simple-page-form animated zoomIn" id="roleadd-form">
+                        <span class="lblsubtitle" translate>DOMAINADD.edittitle.text</span>
+                        <form [formGroup]="domainAddForm" (ngSubmit)="onSubmit()">
+                            <div class="domainAdd-group" style="padding-top: 10px">
+                                <!-- 1st row -->
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-12">
+                                        <span class="help-box"></span>
+                                        <div class="form-group has-float-label">
+                                            <input id="domainName" type="text" class="form-control" placeholder="" formControlName="domainName" readonly>
+                                            <label for="domainName" translate>DOMAINADD.domainname.text
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12">
+                                        <span *ngIf="!domainAddForm.get('organisation').valid && domainAddForm.get('organisation').touched" class="help-box" translate>DOMAINADD.organisation.validate.text</span>
+                                        <div class="form-group has-float-label">
+                                            <input id="organisation" type="text" class="form-control" placeholder="" formControlName="organisation">
+                                            <label for="organisation" translate>DOMAINADD.organisation.text
+                                                <i class="text-danger">*</i>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- 2nd row -->
+
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-12">
+                                        <mat-radio-group class="example-radio-group" formControlName="status" name="status">
+                                            <mat-radio-button value="1" checked>
+                                                <span translate>DOMAINADD.active.text</span>
+                                            </mat-radio-button>
+                                            <mat-radio-button value="0" style="padding-left:10px">
+                                                <span translate>DOMAINADD.deactive.text</span>
+                                            </mat-radio-button>
+                                        </mat-radio-group>
+                                    </div>
+                                </div>
+
+                                <!-- 3rd row -->
+                                <div class="row">
+                                    <div class="pull-right" style="display: inline-flex;">
+                                            <span *ngIf="localstorageservice.checkUpdatePermission(feature.PORTAL_MANAGEMENT)">
+                                        <button class="btn btn-orange" [disabled]="!domainAddForm.valid">
+                                            <span translate>DOMAINADD.save.button.text</span>
+                                        </button>
+                                        </span>
+                                        <button class="btn btn-orange" style="margin-left:5px;" type="button" routerLink="/portalManagment/whiteListDomain">
+                                            <span translate>DOMAINADD.cancel.button.text</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- #whitelistdomain-Edit-form -->
+                </div>
+
+                <!-- .simple-page-wrap -->
+            </div>
+            <!-- end col -->
+        </div>
+    </section>
+    <!-- END HOME -->
+</div>

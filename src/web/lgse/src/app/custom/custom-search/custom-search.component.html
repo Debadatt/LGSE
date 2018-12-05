@@ -1,0 +1,73 @@
+<div class="row" *ngIf="closesearchvalue">
+  <div class="col-sm-12 col-md-12 col-lg-12">
+    <div class="accordian-padding">
+      <mat-accordion class="example-headers-align">
+        <mat-expansion-panel [expanded]="true" hideToggle="true" class="border-color" #matExpansionPanel1>
+          <mat-expansion-panel-header class="back-color">
+            <mat-panel-title>
+              <span style="padding-left:10px">Search</span>
+            </mat-panel-title>
+
+            <mat-panel-description class="align">
+              <span class="actionButton" (click)="expandPanel(matExpansionPanel1, $event)">
+                <!-- <mat-icon class="icon-color">
+              <a (click)="viewHistory('basichistorycomponent')">
+                <i class="fa fa-history" aria-hidden="true"></i>
+              </a>
+            </mat-icon> -->
+                <mat-icon class="icon-color">
+                  <i class="fa fa-remove" aria-hidden="true" (click)="closeSearch()"></i>
+                </mat-icon>
+              </span>
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <div class=" row row-top-padding">
+            <!-- <form> -->
+            <!-- <div *ngFor="let item of testarray; let i=index"> -->
+            <div class="col-sm-6 col-md-3 col-lg-3">
+              <select class="form-control" [(ngModel)]="searchkey1" (change)="clearValue1();">
+                <option *ngFor="let search of customSearchData" [ngValue]="search">
+                  {{search.searchkeydisplayname}} </option>
+              </select>
+            </div>
+            <div class="col-sm-6 col-md-3 col-lg-3" *ngIf="searchkey1 && searchkey1.controltype==='input'">
+              <input class="form-control" placeholder="Search Value" [(ngModel)]="searchvalue1" (keyup.enter)="passSearchkeysValues()">
+            </div>
+            <div class="col-sm-6 col-md-3 col-lg-3" *ngIf="searchkey1 && searchkey1.controltype==='Select'">
+              <select class="form-control" [(ngModel)]="searchvalue1">
+                <option *ngFor="let display of searchkey1.controlvalues" [ngValue]="display.value">
+                  {{display.displaytext}} </option>
+              </select>
+            </div>
+
+
+            <div class="col-sm-6 col-md-3 col-lg-3">
+
+              <select class="form-control" [(ngModel)]="searchkey2" (change)="clearValue2();">
+                <option *ngFor="let search of customSearchData" [ngValue]="search">
+                  {{search.searchkeydisplayname}} </option>
+              </select>
+            </div>
+            <div class="col-sm-6 col-md-3 col-lg-3" *ngIf="searchkey2 && searchkey2.controltype==='input'">
+              <input class="form-control" placeholder="Search Value" [(ngModel)]="searchvalue2" (keyup.enter)="passSearchkeysValues()">
+            </div>
+            <div class="col-sm-6 col-md-3 col-lg-3" *ngIf="searchkey2 && searchkey2.controltype=='Select'">
+              <select class="form-control" [(ngModel)]="searchvalue2">
+                <option *ngFor="let display of searchkey2.controlvalues" [ngValue]="display.value">
+                  {{display.displaytext}} </option>
+              </select>
+            </div>
+
+            <!-- </div> -->
+            <!-- </form> -->
+          </div>
+          <div class="row row-top-padding">
+            <button class="btn btn-warning pull-right" (click)="passSearchkeysValues();">Search</button>
+            <button class="btn btn-warning pull-right" style="margin-right: 6px;" (click)="resetData()">Reset</button>
+          </div>
+
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+  </div>
+</div>

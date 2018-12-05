@@ -1,0 +1,47 @@
+<div>
+    <section>
+        <div class="row">
+            <div class="col" style="align-self: center">
+                <div>
+                    <div class="simple-page-form animated zoomIn" id="rolemanagment-form">
+                        <label class="lblsubtitle" translate>ROLEMANAGMENT.title.text</label>
+                        <form>
+                            <div class="roleManagmentForUser-group" style="padding-top: 10px">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div>
+                                            <b>
+                                                <label style="font-weight: bold;" translate>ROLEMANAGMENT.name.text </label>
+                                            </b> : {{Name}}
+                                        </div>
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="row">
+                                    <div *ngFor="let role of userroles">
+                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                            <label> {{role.rolename}}</label>
+                                        </div>
+                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                            <mat-checkbox [(ngModel)]="role.checked" [ngModelOptions]="{standalone: true}"></mat-checkbox>
+                                        </div>
+                                    </div>
+                                    <div class="pull-right" style="display: inline-flex;">
+                                        <span *ngIf="localstorageservice.checkUpdatePermission(feature.PORTAL_MANAGEMENT)">
+                                            <button class="btn btn-orange" (click)="onSubmit()">
+                                                <span translate>ROLEMANAGMENT.save.button.text</span>
+                                            </button>
+                                        </span>
+                                        <button class="btn btn-orange" style="margin-left:5px;" type="button" routerLink="/portalManagment/userList">
+                                            <span translate>ROLEMANAGMENT.cancel.button.text</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

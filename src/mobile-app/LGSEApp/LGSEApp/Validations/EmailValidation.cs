@@ -1,0 +1,27 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+using System.Text.RegularExpressions;
+
+namespace LGSEApp.Validations
+{
+  public  class EmailValidation
+    {
+        const string emailRegex = @"^(?("")("".+?(?<!\\)""@)|(([0-9a-z]((\.(?!\.))|[-!#\$%&'\*\+/=\?\^`\{\}\|~\w])*)(?<=[0-9a-z])@))" +
+           @"(?(\[)(\[(\d{1,3}\.){3}\d{1,3}\])|(([0-9a-z][-\w]*[0-9a-z]*\.)+[a-z0-9][\-a-z0-9]{0,22}[a-z0-9]))$";
+
+        public static bool EmailIsValid(string Email)
+        {
+            bool IsValid = false;
+            IsValid = (Regex.IsMatch(Email, emailRegex, RegexOptions.IgnoreCase, TimeSpan.FromMilliseconds(250)));
+            return IsValid;
+        }
+
+        public static bool WorkEmailIsValid(string Email)
+        {
+            bool IsValid = false;
+            IsValid = (Regex.IsMatch(Email, emailRegex, RegexOptions.IgnoreCase, TimeSpan.FromMilliseconds(250)));
+            return IsValid;
+        }
+    }
+}

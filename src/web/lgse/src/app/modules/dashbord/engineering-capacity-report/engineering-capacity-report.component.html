@@ -1,0 +1,133 @@
+<div class="content">
+  <div>
+    <div class="content div">
+      <div class="simple-page-form animated zoomIn">
+
+        <mat-card>
+          <!-- : {{Incident.incidentid}} -->
+          <mat-card-title>
+            <div class="row">
+              <label class="lblsubtitle" translate>DASHBOARD.Engcapacity.text</label>
+              <div class="pull-right" style="display: inline-flex;padding: 14px;">
+                <div>
+                  <mat-radio-group style="display: inline-flex;" [(ngModel)]="sortingtypt" (ngModelChange)="cleartFilter();">
+                    <mat-radio-button class="input-sm" value="all" style="margin-right:3px;">
+                      <label class="inline" translate>DASHBOARD.all.text</label>
+                    </mat-radio-button>
+                    <mat-radio-button class="input-sm" value="zone" style="margin-right:3px;">
+                      <label class="inline" translate>DASHBOARD.zone.text</label>
+                    </mat-radio-button>
+                    <mat-radio-button class="input-sm" value="cell">
+                      <label class="inline" translate>DASHBOARD.cell.text</label>
+                    </mat-radio-button>
+                  </mat-radio-group>
+                </div>
+                <div>
+                  <select class="form-control input-sm " [(ngModel)]="filtervalue" (change)="filterChart();" style="display: inline-flex;margin-left: 9px;"
+                    *ngIf="sortingtypt=='zone'">
+                    <option *ngFor="let data of zones" [value]="data">{{data}}</option>
+                  </select>
+                </div>
+                <div>
+                  <select class="form-control input-sm " [(ngModel)]="filtervalue" (change)="filterChart();" style="display: inline-flex;margin-left: 9px;"
+                    *ngIf="sortingtypt=='cell'">
+                    <option *ngFor="let data of cells" [value]="data">{{data}}</option>
+
+                  </select>
+                </div>
+                <div>
+                  <button class="btn btn-warning btn-sm" [ngClass]="(sortingtypt && sortingtypt!==null)?'test':'diseable'" style="margin-left: 18px;"
+                    (click)="downloadReport()" translate>DASHBOARD.download.text</button>
+                </div>
+              </div>
+            </div>
+          </mat-card-title>
+          <div class="row">
+            <mat-table [dataSource]="dataSource" matSort class="table table-striped content tbl mat-elevation-z8">
+              <ng-container matColumnDef="FirstName" hidden>
+                <mat-header-cell *matHeaderCellDef>
+                  <label translate>RESOURCELIST.name.text</label>
+                </mat-header-cell>
+                <mat-cell *matCellDef="let resource">
+                  <label class="mat-cell-responsive-label" translate>RESOURCELIST.name.text</label>
+                  {{resource.firstname}} {{resource.lastname}} </mat-cell>
+              </ng-container>
+
+
+              <ng-container matColumnDef="Zones" hidden>
+                <mat-header-cell *matHeaderCellDef style="justify-content:center;display: inline-flex;">
+                  <label translate>RESOURCELIST.zone.text</label>
+                </mat-header-cell>
+                <mat-cell *matCellDef="let resource" style="justify-content:center;display: inline-flex;">
+                  <label class="mat-cell-responsive-label" translate>RESOURCELIST.zone.text</label>
+                  <span>
+                    {{cellZone(resource.zone)}}
+                  </span>
+                </mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="Cells" hidden>
+                <mat-header-cell *matHeaderCellDef style="justify-content:center;display: inline-flex;">
+                  <label translate>RESOURCELIST.cell.text</label>
+                </mat-header-cell>
+                <mat-cell *matCellDef="let resource" style="justify-content:center;display: inline-flex;">
+                  <label class="mat-cell-responsive-label" translate>RESOURCELIST.cell.text</label>
+                 <span>
+                    {{cellZone(resource.cell)}}
+                  </span>
+                </mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="Login" hidden>
+                <mat-header-cell *matHeaderCellDef>
+                  <label translate>RESOURCELIST.loggedin.text</label>
+                </mat-header-cell>
+                <mat-cell *matCellDef="let resource" style="justify-content:center;">
+                  <label class="mat-cell-responsive-label" translate>RESOURCELIST.loggedin.text</label>
+                  {{resource.loggedInTime | date: 'dd/MM/yyyy hh:mm:ss a'}} </mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="Logout" hidden>
+                <mat-header-cell *matHeaderCellDef>
+                  <label translate>RESOURCELIST.logout.text</label>
+                </mat-header-cell>
+                <mat-cell *matCellDef="let resource" style="justify-content:center;">
+                  <label class="mat-cell-responsive-label" translate>RESOURCELIST.logout.text</label>
+                  {{resource.loggedOutTime | date: 'dd/MM/yyyy hh:mm:ss a'}} </mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="action">
+                <mat-header-cell *matHeaderCellDef class="mat-column-CODIGO" style="padding-right:0px;">
+                  <label translate>ASSIGNEDMPRNLIST.action.text</label>
+                </mat-header-cell>
+                <mat-cell *matCellDef="let resource" style="justify-content:center;">
+                  <span class="mat-cell-responsive-label" translate>INCIDENTLIST.action.text</span>
+                  <span *ngIf="localstorageservice.checkReadPermission(feature.RESOURCE_MANAGEMENT)">
+                    <button mat-icon-button color="primary" [matMenuTriggerFor]="menu">
+                      <mat-icon aria-hidden="true" matTooltip="Menu">more_vert</mat-icon>
+                    </button>
+                  </span>
+                  <mat-menu #menu="matMenu">
+                    <ng-template matMenuContent>
+                      <button mat-menu-item (click)="viewSelctedresourcesMPRN(resource);" *ngIf="localstorageservice.checkReadPermission(feature.RESOURCE_MANAGEMENT)">
+                        <mat-icon color='primary'>remove_red_eye</mat-icon>
+                        <span translate>Assigned MPRN(S)</span>
+                      </button>
+                      <button mat-menu-item data-toggle="modal" data-target=".bd-example-modal-lg" (click)="portalUserDetails(resource.id);" *ngIf="localstorageservice.checkUpdatePermission(feature.PORTAL_MANAGEMENT)">
+                        <mat-icon color='primary'>account_circle</mat-icon>
+                        <span translate>User Details</span>
+                      </button>
+
+                    </ng-template>
+                  </mat-menu>
+                </mat-cell>
+              </ng-container>
+              <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+              <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+            </mat-table>
+            <mat-paginator #paginator [pageSizeOptions]="[20,50, 100, 200, 500, 1000]"></mat-paginator>
+
+          </div>
+
+
+        </mat-card>
+      </div>
+    </div>
+  </div>
+</div>

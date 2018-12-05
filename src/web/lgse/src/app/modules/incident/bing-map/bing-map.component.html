@@ -1,0 +1,58 @@
+<div class="content">
+  <div class="content div">
+    <div class="simple-page-form animated zoomIn">
+      <div class="row">
+        <div class="col-12">
+          <label class="lblsubtitle" translate> INCIDENTADD.incidentid.text </label> : {{incidentname}}
+        </div>
+      </div>
+      <div class="row" style="text-align: center;" *ngIf="!mapvisible">
+      <i class="fa fa-spinner fa-spin" style="font-size: 17px;"></i> <span style="padding: 2px;font-size: 18px;font-family: inherit;"> Loading ...</span>
+     </div>
+      <div  [ngClass]="mapvisible?'visiblemap':'collapsemap'" >
+      <div id="showMap" class="map-container row"></div>
+      </div>
+      <div class="row">
+        <div class="col-md-12 clo-lg-12" style="padding-top: 8px;">
+
+          <div class="pull-right customsearchbox">
+            <div class="col-sm-12 col-md-5 col-lg-5" style="margin-bottom:2px;">
+              <a href="/#/twitter" target="_blank" class="btn btn-warning" style="margin-left:4px">
+                <i class="fa fa-twitter pr-1"></i>
+                <span translate>&nbsp; MAPS.twitter.text</span>
+              </a>
+            </div>
+            <div class="col-sm-12 col-md-7 col-lg-7" style="display:inline-flex">
+              <a href="/#/facebook" target="_blank" class="btn btn-warning" style="width:auto;">
+                <i class="fa fa-facebook pr-1"></i>
+                <span translate>&nbsp; MAPS.facebook.text</span>
+               </a>
+               <button class="btn btn-warning" (click)="Back()" style="margin-left: 15px;width:auto;">Back</button>
+              </div>
+          </div>
+        </div>
+      </div>
+
+
+
+
+      <!-- <div class="row" style="display: inline-flex">
+        <div class="pull-right">
+        <a type="button" href="/#/facebook" target="_blank" class="btn btn-primary  btn-fb col-md-3">
+          <i class="fa fa-facebook pr-1"></i>
+          <span translate>&nbsp; MAPS.facebook.text</span>
+        </a>
+
+        <a type="button" href="/#/twitter" target="_blank" class="btn btn-primary  btn-tw col-md-3" style="margin-left:4px">
+          <i class="fa fa-twitter pr-1"></i>
+          <span translate>&nbsp; MAPS.twitter.text</span>
+        </a>
+      </div>
+      </div> -->
+
+
+
+
+    </div>
+  </div>
+</div>

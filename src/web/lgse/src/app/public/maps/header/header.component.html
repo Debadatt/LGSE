@@ -1,0 +1,121 @@
+<div class="logo-content">
+  <div class="row">
+    <div class="col-md-6 col-xs-6"><img class="logo" src="../../../assets/images/walesandwestlogo.png" alt="something"></div>
+    <div class="col-md-6 col-xs-6">
+        <div class="pull-right" style="display: inline-flex;padding-right: 5px;">
+       <div class="faround btn" >
+            <a href="/#/twitter" target="_blank"  title="Twitter">
+                <i class="fa fa-2x fa-twitter  pr-1" style="color: #188AE2;"></i>
+                <!-- <span translate>&nbsp; MAPS.twitter.text</span> -->
+              </a> 
+       </div> 
+       <div class="second faround btn">
+            <a href="/#/facebook" target="_blank"   title="Facebook">
+                <i class="fa fa-2x fa-facebook faround pr-1" style="color: #4267B2;"></i>
+                <!-- <span translate>&nbsp; MAPS.twitter.text</span> -->
+              </a> 
+       </div> 
+    </div>
+    </div>
+   
+  </div>
+</div>
+
+<div class="info-cards">
+  <div class="row" style="margin-bottom: -1%;">
+
+        <div class="col-md-1"></div>
+    <!-- start -->
+    <div class="col-md-2">
+   <div class="panel panel-warning">
+        <div class="panel-heading">
+            <div class="row">
+                <div class="col-xs-3">
+                    <i class="fa fa-th-list fa-3x custicon"></i>
+                </div>
+                <div class="col-xs-9 text-right">                    
+                    <div><span translate>PUBLICMAPS.properties.affected</span></div>
+                    <div class="huge">{{countOfPropertiesAffected}}</div>
+                </div>
+            </div>
+        </div>       
+    </div>
+    </div>
+    <!-- end  -->
+<!-- start -->
+<div class="col-md-2">
+  <div class="panel panel-primary">
+       <div class="panel-heading">
+           <div class="row">
+               <div class="col-xs-3">
+                   <i class="fa fa-calendar-o  fa-3x custicon" aria-hidden="true"></i>
+               </div>
+               <div class="col-xs-9 text-right">                    
+                <span class="count-name" translate>PUBLICMAPS.start.time</span>
+                   <div style="font-size: 14px;">{{startTime | date: 'dd/MM/yyyy hh:mm:ss a'}}</div>
+               </div>
+           </div>
+       </div>       
+   </div>
+   </div>
+   
+    <!-- start -->
+<div class="col-md-2">
+  <div class="panel panel-danger">
+       <div class="panel-heading">
+           <div class="row">
+               <div class="col-xs-3">
+                   <i class="fa fa-flag  fa-3x custicon" aria-hidden="true"></i>
+               </div>
+               <div class="col-xs-9 text-right">                    
+                <span  translate>PUBLICMAPS.status</span>
+                   <div class="huge">{{status}}</div>
+               </div>
+           </div>
+       </div>       
+   </div>
+   </div>
+   <!-- end  -->
+   <!-- start -->
+<div class="col-md-2">
+    <div class="panel panel-info">
+         <div class="panel-heading">
+             <div class="row">
+                 <div class="col-xs-3">
+                     <i class="fa fa-info-circle  fa-3x custicon" aria-hidden="true"></i>
+                 </div>
+                 <div class="col-xs-9 text-right">                    
+                  <span  translate>PUBLICMAPS.incident.id</span>
+                     <div class="huge">{{incidentId}}</div>
+                 </div>
+             </div>
+         </div>       
+     </div>
+     </div>
+     <!-- end  -->
+
+   
+
+     <!-- start -->
+<div class="col-md-2">
+  <div class="panel panel-success">
+       <div class="panel-heading">
+           <div class="row">
+               <div class="col-xs-3">
+                   <i class="fa fa-thumbs-up  fa-3x" aria-hidden="true"></i>
+               </div>
+               <div class="col-xs-9 text-right">                    
+                <span  translate>PUBLICMAPS.completed.properties</span>
+                   <div class="huge">{{completedProperties}}</div>
+               </div>
+           </div>
+       </div>       
+   </div>
+   </div>
+   <!-- end  -->
+
+<div class="col-md-1"></div>
+    
+
+  </div>
+</div>

@@ -1,0 +1,238 @@
+<div class="content">
+  <div>
+    <div class="content div">
+      <form>
+        <!-- <label translate> RESOURCELIST.resourcelist.title</label> -->
+        <div class="simple-page-form animated zoomIn">
+          <!-- markup for search box  -->
+          <div class="row">
+            <div class="col-md-12 clo-lg-12">
+              <label class="lblsubtitle" translate> ASSIGNEDMPRNLIST.title.text </label> : {{username}}
+              <!-- remove this comment if client ask about search -->
+              <!-- <div class="pull-right customsearchbox">
+                 <i class="fa fa-search  btn btn-warning btnserach" style="width:auto;" (click)="hideShowSeacrh();" aria-hidden="true"></i>&nbsp;
+              </div> -->
+
+              <div class="row" style="text-align: center;" *ngIf="isinprogress">
+                <i class="fa fa-spinner fa-spin" style="font-size: 17px;"></i>
+                <span class="inprogressmsg"> Saving.Please Wait ...</span>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="isvisible==true">
+            <app-custom-search [customsearchdata]="customSearchDataMain"></app-custom-search>
+          </div>
+          <!--- mark up for showwing all resources list -->
+          <mat-table [dataSource]="dataSource" matSort class="table table-striped content tbl mat-elevation-z8">
+            <ng-container matColumnDef="select" hidden>
+              <mat-header-cell *matHeaderCellDef style="flex:0 0 8%;">
+                <mat-checkbox [(ngModel)]="selectall" name="selectall" (ngModelChange)="selectAlll();" *ngIf="assignedMPRNResponse.length>1"
+                  style="border-color: white;">
+                </mat-checkbox>
+              </mat-header-cell>
+              <mat-cell *matCellDef="let resource;let i=index;" style="flex:0 0 8%;">
+                <label class="mat-cell-responsive-label" translate>ASSIGNEDMPRNLIST.select.text</label>
+                <mat-checkbox [(ngModel)]="resource.checked" [ngModelOptions]="{standalone: true}"></mat-checkbox>
+                <span class="pcustomatr" *ngIf="resource.priorityCustomer">
+                  <i class="fa fa-flag" aria-hidden="true"></i>
+                </span>
+              </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="mprn" hidden>
+              <mat-header-cell *matHeaderCellDef mat-sort-header mat-sort-header-arrow>
+                <label translate>ASSIGNEDMPRNLIST.mprn.text</label>
+              </mat-header-cell>
+              <mat-cell *matCellDef="let resource">
+                <label class="mat-cell-responsive-label" translate>ASSIGNEDMPRNLIST.mprn.text</label>
+                {{ resource.mprn }}</mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="buildingName" hidden>
+              <mat-header-cell *matHeaderCellDef mat-sort-header mat-sort-header-arrow>
+                <label translate>ASSIGNEDMPRNLIST.buildingname.text</label>
+              </mat-header-cell>
+              <mat-cell *matCellDef="let resource">
+                <label class="mat-cell-responsive-label" translate>ASSIGNEDMPRNLIST.buildingname.text</label>
+                {{resource.buildingName }}</mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="subBuildingName" hidden>
+              <mat-header-cell *matHeaderCellDef mat-sort-header mat-sort-header-arrow>
+                <label translate>ASSIGNEDMPRNLIST.subbuildingname.text</label>
+              </mat-header-cell>
+              <mat-cell *matCellDef="let resource">
+                <label class="mat-cell-responsive-label" translate>ASSIGNEDMPRNLIST.subbuildingname.text</label>
+                {{resource.subBuildingName }}</mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="buildingNumber" hidden>
+              <mat-header-cell *matHeaderCellDef mat-sort-header mat-sort-header-arrow>
+                <label translate>ASSIGNEDMPRNLIST.buildingnumber.text</label>
+              </mat-header-cell>
+              <mat-cell *matCellDef="let resource">
+                <label class="mat-cell-responsive-label" translate>ASSIGNEDMPRNLIST.buildingnumber.text</label>
+                {{ resource.buildingNumber }}</mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="principalStreet" hidden>
+              <mat-header-cell *matHeaderCellDef mat-sort-header mat-sort-header-arrow>
+                <label translate>ASSIGNEDMPRNLIST.principalestreet.text</label>
+              </mat-header-cell>
+              <mat-cell *matCellDef="let resource">
+                <label class="mat-cell-responsive-label" translate>ASSIGNEDMPRNLIST.principalestreet.text</label>
+                {{ resource.principalStreet }}</mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="dependentStreet" hidden>
+              <mat-header-cell *matHeaderCellDef mat-sort-header mat-sort-header-arrow>
+                <label translate>ASSIGNEDMPRNLIST.dependentStreet.text</label>
+              </mat-header-cell>
+              <mat-cell *matCellDef="let resource">
+                <label class="mat-cell-responsive-label" translate>ASSIGNEDMPRNLIST.dependentStreet.text</label>
+                {{ resource.dependentStreet }}</mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="postTown" hidden>
+              <mat-header-cell *matHeaderCellDef mat-sort-header mat-sort-header-arrow>
+                <label translate>ASSIGNEDMPRNLIST.posttown.text</label>
+              </mat-header-cell>
+              <mat-cell *matCellDef="let resource">
+                <label class="mat-cell-responsive-label" translate>ASSIGNEDMPRNLIST.posttown.text</label>
+                {{ resource.postTown }}</mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="localityName" hidden>
+              <mat-header-cell *matHeaderCellDef mat-sort-header mat-sort-header-arrow>
+                <label translate>ASSIGNEDMPRNLIST.localityname.text</label>
+              </mat-header-cell>
+              <mat-cell *matCellDef="let resource">
+                <label class="mat-cell-responsive-label" translate>ASSIGNEDMPRNLIST.localityname.text</label>
+                {{ resource.localityName }}
+              </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="dependentLocality" hidden>
+              <mat-header-cell *matHeaderCellDef mat-sort-header mat-sort-header-arrow>
+                <label translate>ASSIGNEDMPRNLIST.dependentlocality.text</label>
+              </mat-header-cell>
+              <mat-cell *matCellDef="let resource">
+                <label class="mat-cell-responsive-label" translate>ASSIGNEDMPRNLIST.dependentlocality.text</label>
+                {{ resource.dependentLocality }}</mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="country" hidden>
+              <mat-header-cell *matHeaderCellDef mat-sort-header mat-sort-header-arrow>
+                <label translate>ASSIGNEDMPRNLIST.country.text</label>
+              </mat-header-cell>
+              <mat-cell *matCellDef="let resource">
+                <label class="mat-cell-responsive-label" translate>ASSIGNEDMPRNLIST.country.text</label>
+                {{ resource.country }}</mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="postcode" hidden>
+              <mat-header-cell *matHeaderCellDef mat-sort-header mat-sort-header-arrow>
+                <label translate>ASSIGNEDMPRNLIST.postcode.text</label>
+              </mat-header-cell>
+              <mat-cell *matCellDef="let resource">
+                <label class="mat-cell-responsive-label" translate>ASSIGNEDMPRNLIST.postcode.text</label>
+                {{ resource.postcode }}</mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="priorityCustomer" hidden>
+              <mat-header-cell *matHeaderCellDef mat-sort-header mat-sort-header-arrow>
+                <label translate>ASSIGNEDMPRNLIST.priritycustomar.text</label>
+              </mat-header-cell>
+              <mat-cell *matCellDef="let resource">
+                <label class="mat-cell-responsive-label" translate>ASSIGNEDMPRNLIST.priritycustomar.text</label>
+                <span class="pcustomatr" *ngIf="resource.priorityCustomer">
+                  <i class="fa fa-flag" aria-hidden="true"></i>
+                </span>
+              </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="zone" hidden>
+              <mat-header-cell *matHeaderCellDef mat-sort-header mat-sort-header-arrow>
+                <label translate>ASSIGNEDMPRNLIST.zone.text</label>
+              </mat-header-cell>
+              <mat-cell *matCellDef="let resource">
+                <label class="mat-cell-responsive-label" translate>ASSIGNEDMPRNLIST.zone.text</label>
+                {{ resource.zone }}</mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="cell" hidden>
+              <mat-header-cell *matHeaderCellDef mat-sort-header mat-sort-header-arrow>
+                <label translate>ASSIGNEDMPRNLIST.cell.text</label>
+              </mat-header-cell>
+              <mat-cell *matCellDef="let resource">
+                <label class="mat-cell-responsive-label" translate>ASSIGNEDMPRNLIST.cell.text</label>
+                {{ resource.cell }}</mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="ZoneManager" hidden>
+              <mat-header-cell *matHeaderCellDef mat-sort-header mat-sort-header-arrow>
+                <label translate>ASSIGNEDMPRNLIST.zonemanager.text</label>
+              </mat-header-cell>
+              <mat-cell *matCellDef="let resource">
+                <label class="mat-cell-responsive-label" translate>ASSIGNEDMPRNLIST.zonemanager.text</label>
+                {{ resource.zoneManager }}</mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="CellManager" hidden>
+              <mat-header-cell *matHeaderCellDef mat-sort-header mat-sort-header-arrow>
+                <label translate>ASSIGNEDMPRNLIST.cellmanager.text</label>
+              </mat-header-cell>
+              <mat-cell *matCellDef="let resource">
+                <label class="mat-cell-responsive-label" translate>ASSIGNEDMPRNLIST.cellmanager.text</label>
+                {{ resource.cellManager }}</mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="status" hidden>
+              <mat-header-cell *matHeaderCellDef>
+                <label translate>RESOURCELIST.status.text</label>
+              </mat-header-cell>
+              <mat-cell *matCellDef="let resource">
+                <label class="mat-cell-responsive-label" translate>ASSIGNEDMPRNLIST.status.text</label>
+                <span *ngIf="resource.assignedResourceCount > 0">
+                  <span class="circle">{{resource.assignedResourceCount}}</span>
+                </span>
+
+              </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="LatestStatus">
+              <mat-header-cell *matHeaderCellDef mat-sort-header class="mat-column-CODIGO" style="">
+                <label translate>ASSIGNEDMPRNLIST.substatus.text</label>
+              </mat-header-cell>
+              <mat-cell *matCellDef="let resource" style="">
+                <span class="mat-cell-responsive-label" translate>Status</span>
+                <span class="ellipsis mat-cell-text">{{resource.latestStatus}}</span>
+              </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="action">
+              <mat-header-cell *matHeaderCellDef class="mat-column-CODIGO" style="flex: 0 0 5%">
+                <label translate>ASSIGNEDMPRNLIST.action.text</label>
+              </mat-header-cell>
+              <mat-cell *matCellDef="let resource" style="flex: 0 0 5%">
+                <span class="mat-cell-responsive-label" translate>INCIDENTLIST.action.text</span>
+                <button mat-icon-button color="primary" [matMenuTriggerFor]="menu">
+                  <mat-icon aria-hidden="true" matTooltip="Menu">more_vert</mat-icon>
+                </button>
+                <mat-menu #menu="matMenu">
+                  <ng-template matMenuContent style="padding-bottom:0px !important;">
+                    <button mat-menu-item (click)="showPropertiesOnMap(resource)">
+                      <mat-icon color='primary'>place</mat-icon>
+                      <span translate>Map</span>
+                    </button>
+                    <button mat-menu-item (click)="updateStatus(resource)" *ngIf="localstorageservice.checkUpdatePermission(feature.INCIDENT_MANAGEMENT)">
+                      <mat-icon color='primary'>edit</mat-icon>
+                      <span translate>PROPERTYLIST.updatestatus.button.text</span>
+                    </button>
+                  </ng-template>
+                </mat-menu>
+              </mat-cell>
+            </ng-container>
+            <!-- end of ng container -->
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+          </mat-table>
+          <mat-paginator [pageSize]="50" [pageSizeOptions]="[50, 100, 200, 500, 1000]" showFirstLastButtons></mat-paginator>
+
+          <div class="row">
+            <div class="pull-right" style="display: inline-flex;">
+              <button class="btn btn-warning" type="button" routerLink="/resources/all-resources" translate>BUTTONS.back.text</button>
+              <button style="margin-left: 5px; width:auto !important; " class="btn btn-warning" (click)="assignSelected();" [disabled]="isinprogress" *ngIf="localstorageservice.checkUpdatePermission(feature.RESOURCE_MANAGEMENT)"
+                translate>BUTTONS.unassignselected.text</button>
+
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+
+  </div>
+</div>

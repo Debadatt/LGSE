@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="LGSEApp.View.SettingPopupPage"
+             BackgroundColor="#2A2D42"
+             NavigationPage.HasNavigationBar="True">
+   
+    <StackLayout VerticalOptions="Center"
+                 Padding="20,0"
+                 HorizontalOptions="Center">
+        <StackLayout HorizontalOptions="FillAndExpand">
+            <Label Text="{Binding UserName}" HorizontalOptions="CenterAndExpand"
+                   TextColor="{StaticResource WhiteColor}"></Label>
+            <Label Text="{Binding RoleName}"
+                   HorizontalOptions="CenterAndExpand"
+                   TextColor="{StaticResource WhiteColor}"></Label>
+        </StackLayout>
+        <Frame CornerRadius="10"
+               Padding="15,15,15,15"
+               BackgroundColor="#FFFFFF">
+         
+
+            <RelativeLayout HorizontalOptions="FillAndExpand">
+
+                <StackLayout Orientation="Vertical"
+                             Margin="2"
+                             BackgroundColor="Transparent"
+                             RelativeLayout.XConstraint="{ConstraintExpression         Type=RelativeToParent,Property=Width,Factor=.0000,Constant=0}"
+                             RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent,        Property=Width,Factor=.5,Constant=0}">
+                    <Frame CornerRadius="10"
+                           Padding="0,0,0,10"                          
+                           BackgroundColor="#2A2D42">
+                        <StackLayout>
+                        <Button x:Name="btnChangePassword"
+                                    Image="Group_833.png"
+                            TextColor="White"
+                            FontSize="Medium"
+                            VerticalOptions="CenterAndExpand"
+                                    Command="{Binding ChangePasswordCommand}"
+                                    BackgroundColor="#2A2D42" />
+                    <Label Text="Change Password"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center"
+                           Style="{StaticResource MediumSize}"
+                                   TextColor="{StaticResource WhiteColor}"></Label>
+                        </StackLayout>
+                    </Frame>
+                </StackLayout>
+               
+                <StackLayout Orientation="Vertical" Margin="2"
+                             BackgroundColor="Transparent"
+                             RelativeLayout.XConstraint="{ConstraintExpression        Type=RelativeToParent,Property=Width,Factor=0.5,Constant=0}"
+                             RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent,        Property=Width,Factor=.5,Constant=0}">
+                    <Frame CornerRadius="10"
+                           Padding="0,0,0,10"
+                           
+                           BackgroundColor="#2A2D42">
+                        <StackLayout>
+                            <Button x:Name="btnLogOut"
+                                    Command="{Binding LogOutCommand}"
+                                    Image="logout_white_24px.png"
+                            FontSize="Medium"
+                            VerticalOptions="CenterAndExpand"
+                            BackgroundColor="#2A2D42" />
+                    <Label Text="Logout" 
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center"
+                           Style="{StaticResource MediumSize}"
+                           TextColor="White"></Label>
+                        </StackLayout>
+                    </Frame>
+                </StackLayout>
+            </RelativeLayout>
+        
+
+       
+
+        </Frame>
+
+        <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="Start">
+            <Button Text="Sync Data"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"
+                    Command="{Binding SyncCommand}" BackgroundColor="Transparent"
+                    TextColor="{StaticResource WhiteColor}"
+                    IsVisible="{Binding IsVisiable}"></Button>
+        </StackLayout>
+    </StackLayout>
+
+</ContentPage>

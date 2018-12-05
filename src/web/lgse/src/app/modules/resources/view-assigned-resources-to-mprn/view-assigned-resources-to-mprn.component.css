@@ -1,0 +1,28 @@
+@import '../../../shared/assets/css/misc-pages.css';
+.content .tblbtn  {
+  background-color: #1CBECA;
+  min-width: 168% !important;
+}
+
+.mat-form-field {
+    font-size: 14px;
+    width: 100%;
+  }
+  .red{
+    color:red;
+  }
+
+  .circle {
+    display: inline-block;
+    min-width: 10px;
+    padding: 5px 7px;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1;
+    color: #fff;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    background-color: #FF7300;
+    border-radius: 10px;
+  }

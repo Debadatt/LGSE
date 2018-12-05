@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Operations Version="1.0" xmlns="http://schemas.microsoft.com/sqlserver/dac/Serialization/2012/02">
+  <Operation Name="Rename Refactor" Key="effdcd8d-f589-4115-9ec1-a3b09c372e84" ChangeDateTime="09/16/2018 15:21:25">
+    <Property Name="ElementName" Value="[dbo].[UserRoleMaps].[IsPrefered]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[UserRoleMaps]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="IsPreferred" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="96e39bbd-9da0-428e-93f1-14c2c0972a5e" ChangeDateTime="09/16/2018 15:22:11">
+    <Property Name="ElementName" Value="[dbo].[UserRoleMaps].[IsPreferred]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[UserRoleMaps]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="IsPreferredRole" />
+  </Operation>
+</Operations>

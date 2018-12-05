@@ -1,0 +1,82 @@
+<div class="content">
+    <div>
+        <div class="content div">
+            <div class="simple-page-form animated zoomIn">
+                <div class="row">
+                    <div class="col-md-12 clo-lg-12">
+                        <label class="lblsubtitle" translate>ROLE.rolelist.title</label>
+                        <div class="pull-right customsearchbox">
+                            <i class="fa fa-plus btn btn-warning" style="width:auto;" title="Add New Role" (click)="addRole();" aria-hidden="true" *ngIf="localstorageservice.checkCreatePermission(feature.PORTAL_MANAGEMENT);"></i>&nbsp;
+                            <i class="fa fa-refresh btn btn-warning" style="width:auto;" (click)="refresh();" title="Refresh"></i>&nbsp;
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <!-- <hr> -->
+                    <mat-table [dataSource]="dataSource" matSort class="table table-striped content tbl mat-elevation-z8">
+                        <ng-container matColumnDef="id" hidden>
+                            <mat-header-cell *matHeaderCellDef mat-sort-header mat-sort-header-arrow>
+                                <label translate>ROLE.rolelist.id.text</label>
+                            </mat-header-cell>
+                            <mat-cell *matCellDef="let element">{{element.id}} </mat-cell>
+                        </ng-container>
+
+                        <ng-container matColumnDef="roleName">
+                            <mat-header-cell *matHeaderCellDef mat-sort-header class="mat-column-CODIGO" style="flex:0 0 40%;">
+                                <label translate>ROLE.role.role.text</label>
+                            </mat-header-cell>
+                            <mat-cell *matCellDef="let element" style="flex:0 0 40%;">
+                                <span class="mat-cell-responsive-label" translate>ROLE.role.role.text</span>
+                                <span class="ellipsis mat-cell-text">{{element.roleName}}</span>
+                            </mat-cell>
+                        </ng-container>
+
+                        <ng-container matColumnDef="description">
+                            <mat-header-cell *matHeaderCellDef mat-sort-header class="mat-column-CODIGO" style="flex:0 0 50%;">
+                                <label translate>ROLE.role.description.text</label>
+                            </mat-header-cell>
+                            <mat-cell *matCellDef="let element" style="flex:0 0 50%;">
+                                <span class="mat-cell-responsive-label" translate>ROLE.role.description.text</span>
+                                <span class="ellipsis mat-cell-text">{{element.description}}</span>
+                            </mat-cell>
+                        </ng-container>
+
+                        <ng-container matColumnDef="action">
+                            <mat-header-cell *matHeaderCellDef class="mat-column-CODIGO" style="flex:0 0 10%;">
+                                <!-- <label translate>ROLE.rolelist.action.text</label> -->
+                            </mat-header-cell>
+                            <mat-cell *matCellDef="let element" style="flex:0 0 10%;">
+                                <!-- <span class="mat-cell-responsive-label" translate>ROLE.rolelist.action.text</span> -->
+                                <span *ngIf="localstorageservice.checkUpdatePermission(feature.PORTAL_MANAGEMENT)">
+                                <button mat-icon-button color="primary" [matMenuTriggerFor]="menu">
+                                    <mat-icon aria-hidden="true" matTooltip="Menu">more_vert</mat-icon>
+                                </button>
+                                </span>
+                                <mat-menu #menu="matMenu">
+                                    <ng-template matMenuContent>
+                                        <button mat-menu-item (click)="editRole(element.id)" *ngIf="localstorageservice.checkUpdatePermission(feature.PORTAL_MANAGEMENT);">
+                                            <mat-icon color='primary'>edit</mat-icon>
+                                            <span translate>ROLE.rolelist.editrole.text</span>
+                                        </button>
+                                        <button mat-menu-item (click)="assignRole(element.id,element.roleName)" *ngIf="localstorageservice.checkUpdatePermission(feature.PORTAL_MANAGEMENT);">
+                                            <mat-icon color='primary'>assignment</mat-icon>
+                                            <span translate>ROLE.rolelist.assignuser.text</span>
+                                        </button>
+                                        <button mat-menu-item (click)="accessPermission(element.id,element.roleName)" *ngIf="localstorageservice.checkUpdatePermission(feature.PORTAL_MANAGEMENT);">
+                                                <mat-icon color='primary'>warning</mat-icon>
+                                                <span translate>ROLE.rolelist.roleaccesspermission.text</span>
+                                            </button>
+                                    </ng-template>
+                                </mat-menu>
+                            </mat-cell>
+                        </ng-container>
+
+                        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                    </mat-table>
+                    <mat-paginator [pageSizeOptions]="[50, 100, 200, 500, 1000]" [pageSize]="50" showFirstLastButtons></mat-paginator>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,101 @@
+.logo-area {
+    text-align: center;
+    padding: 3% 0 3% 0;
+}
+
+input[type="text"], input[type='password']{
+    border: 0;
+    border-bottom: 2px solid #7a7a7a;
+    outline: 0;
+}
+
+input.ng-invalid.ng-touched {
+    border: 0;
+    border-bottom: 2px solid red;
+    outline: 0;
+}
+
+.help-box {
+    font-size: 12px;
+    color: red;
+}
+
+label {
+    margin-bottom: 1px;
+    margin-left: 1px;
+}
+
+.clearfix {
+    text-align: center;
+    padding: 5%;
+}
+.main {
+    color: #FBFDFF;
+    background: #4B5C67;
+    height: auto;
+}
+.form-control {
+    min-height: 41px;
+    background: #fff;
+    box-shadow: none !important;
+    border-color: #e3e3e3;
+}
+.form-control:focus {
+    border-color: #FBFDFF;
+}
+.form-control, .btn {        
+    border-radius: 2px;
+}
+.user-form {
+    max-width: 450px;
+    margin: 0 auto;		
+}
+.user-form form {
+    color: #7a7a7a;
+    border-radius: 2px;
+    margin-bottom: 15px;
+    font-size: 13px;
+    background: #FBFDFF;
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    padding: 30px;	
+    position: relative;	
+}
+.user-form h2 {
+    font-size: 22px;
+    margin: 35px 0 25px;
+}
+.user-form input[type="checkbox"] {
+    margin-top: 2px;
+}
+.user-form .btn {        
+    font-size: 16px;
+    font-weight: bold;
+    background: #EF7B10;
+    border: none;
+    margin-bottom: 20px;
+}
+.user-form .btn:hover, .user-form .btn:focus {
+    background: rgb(240, 151, 68);
+    outline: none !important;
+}    
+.user-form a {
+    color: #FBFDFF;
+    text-decoration: underline;
+}
+.user-form a:hover {
+    text-decoration: none;
+}
+.user-form form a {
+    color: #7a7a7a;
+    text-decoration: none;
+}
+.user-form form a:hover {
+    text-decoration: underline;
+}
+.form-group {
+    padding: 5% 0 0 0;
+}
+input::-webkit-input-placeholder {
+    font-size: 12px;
+    line-height: 3;
+}

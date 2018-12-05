@@ -1,0 +1,92 @@
+<!-- <html lang="en"> -->
+
+
+<!-- <body class="menubar-left menubar-unfold menubar-light theme-primary"> -->
+<!--============= start main area -->
+
+<!-- APP NAVBAR ==========-->
+<nav id="app-navbar" class="navbar navbar-inverse navbar-fixed-top primary in">
+  <!-- navbar header -->
+  <div class="navbar-header">
+    <button type="button" id="menubar-toggle-btn" class="menubar-toggle-btn navbar-toggle visible-xs-inline-block navbar-toggle-left hamburger hamburger--collapse js-hamburger">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="hamburger-box">
+        <span class="hamburger-inner"></span>
+      </span>
+    </button>
+    <button type="button" class="navbar-toggle navbar-toggle-right collapsed" data-toggle="collapse" data-target="#app-navbar-collapse"
+      aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="zmdi zmdi-hc-lg zmdi-more"></span>
+    </button>
+    <button type="button" class="navbar-toggle navbar-toggle-right collapsed" data-toggle="collapse" data-target="#navbar-search"
+      aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="zmdi zmdi-hc-lg zmdi-search"></span>
+    </button>
+    <a href="javascript:void(0);" style="cursor: default;" class="navbar-brand">
+      <!-- to do later -->
+      <!-- <img *ngIf="toggleOn" src="../assets/images/mobile_logo.png"  class="{{styles}}" alt="walesandwestmobilelogo" width= "40" height="40">
+      <img *ngIf="!toggleOn" src="../assets/images/walesandwestlogo.png" class="{{styles1}}" alt="walesandwestlogo" width= "120" height="40"> -->
+      <img id="" src="../assets/images/mobile_logo.png" class="hidden-lg hidden-md hidden-xs" alt="walesandwestmobilelogo" width="40"
+        height="40">
+      <img id="" src="../assets/images/walesandwestlogo.png" class="img-responsive hidden-sm" alt="walesandwestlogo" width="120"
+        height="40">
+    </a>
+  </div>
+  <!-- .navbar-header -->
+  <div class="navbar-container container-fluid">
+    <div class="collapse navbar-collapse" id="app-navbar-collapse">
+      <ul class="nav navbar-toolbar navbar-toolbar-left navbar-left">
+        <li class="hidden-float hidden-menubar-top">
+          <a href="javascript:void(0)" (click)="removeCss()" role="button" id="menubar-fold-btn" class="menubar-fold-btn hamburger hamburger--arrowalt is-active js-hamburger">
+            <span class="hamburger-box">
+              <span class="hamburger-inner"></span>
+            </span>
+          </a>
+        </li>
+        <li>
+          <h5 class="page-title hidden-menubar-top hidden-float">{{selectedmodule}}</h5>
+        </li>
+      </ul>
+
+      <ul class="nav  navbar-toolbar-right navbar-right">
+
+        <!-- <li class="dropdown">
+          <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+            <i class="fa fa-user"></i>
+          </a>
+          <ul class="dropdown-menu animated fadeInUp">
+            <li>
+              <a href="javascript:void(0);" routerLink='/auth/new-password' (touch)="test()" styel="cursor: pointer !important;">
+                <i class="zmdi m-r-md zmdi-hc-lg zmdi-account-box"></i>Change Password</a>
+            </li>
+            <li>
+              <a href="javascript:void(0);" (click)="logout();" styel="cursor: pointer !important;">
+                <i class="zmdi m-r-md zmdi-hc-lg zmdi-power"></i>Logout</a>
+            </li>
+          </ul>
+        </li> -->
+        <li class="dropdown icon-right" style="display: inline-flex;position: inherit;">
+          <a class="dropdown-toggle icon" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+            <i class="fa fa-user"></i>
+          </a>
+
+          <ul class="dropdown-menu animated fadeInUp  ul-width" role="menu" aria-labelledby="ddaction">
+            <li role="presentation" style="margin-bottom:3px">
+              <a href="#" routerLink='/auth/new-password' (touch)="test()" styel="cursor: pointer !important;" role="button">
+                <i class="zmdi m-r-md zmdi-hc-lg zmdi-account-box"></i>Change Password</a>
+            </li>
+            <li class="border-bottom-li"></li>
+            <li>
+              <a href="javascript:void(0);" (click)="logout(true);" styel="cursor: pointer !important;" role="button">
+                <i class="zmdi m-r-md zmdi-hc-lg zmdi-power"></i>Logout</a>
+            </li>
+          </ul>
+        </li>
+
+      </ul>
+    </div>
+  </div>
+  <!-- navbar-container -->
+</nav>

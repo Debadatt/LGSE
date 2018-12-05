@@ -1,0 +1,15 @@
+{
+  "IsEncrypted": false,
+  "Values": {
+    "AzureWebJobsStorage": "DefaultEndpointsProtocol=https;AccountName=salgsedev;AccountKey=hLvDhM+3vESRjPM0raCiPNLjjczWEckCW+8u1k/LQfkg5+k9PFNRX8kGLtvS1jZSqybC6NoxqFRdEd5pgh9qIg==;BlobEndpoint=https://salgsedev.blob.core.windows.net/;TableEndpoint=https://salgsedev.table.core.windows.net/;QueueEndpoint=https://salgsedev.queue.core.windows.net/;FileEndpoint=https://salgsedev.file.core.windows.net/",
+    "FUNCTIONS_WORKER_RUNTIME": "dotnet",
+    "MS_TableConnectionString": "Server=tcp:lgse-sqldb-dev-server.database.windows.net,1433;Initial Catalog=LGSE-SQLDB-DEV;Persist Security Info=False;User ID=LgseDevAdmin;Password=LgseDev@dm!n;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;",
+    //  "MS_TableConnectionString": "Data Source=.;Initial Catalog=LGSE-DEV;User Id=sa;Password=sa;MultipleActiveResultSets=True",
+    "BingMapKey": "At7iPrYTWNA8YXAb8tUnI1oJ1OTzbmSnQ23xqdw0HqyOrM_m5WjaPI8u_AI0uPk8",
+   // "Apiu5N8o7_72FUmE33bvupI31kyg2Wz7sDIQviRwPttMKfu7Pmmhf219uIso-1ra"
+  
+  }
+  //"ConnectionStrings": {
+  //  "MS_TableConnectionString": "Data Source=.;Initial Catalog=LGSE-DEV;User Id=sa;Password=sa;MultipleActiveResultSets=True"
+  //}
+}

@@ -1,0 +1,29 @@
+
+<mat-card id="fullscreen" [ngClass]="(fullscreen==true)?'fullscreen':'test'">
+  <mat-card-title>  
+    <label class="lblsubtitle" translate>DASHBOARD.incidentsummey.text</label>
+    <label class="lblsubtitle">{{Incident.incidentid}}</label>
+    <div class="pull-right">
+       <label class="lblsubtitle" translate>DASHBOARD.incidentstatus.text</label>
+      <label *ngIf="status==incidentStatus.INPROGRESS">&nbsp;In Progress</label>
+      <label *ngIf="status==incidentStatus.COMPLETED">&nbsp; Completed</label>
+      <label *ngIf="status==incidentStatus.CANCELED">&nbsp; Cancelled</label>
+     <i class="btn-sm  pointer fa fa-refresh" aria-hidden="true"  (click)="getStatuswiseIncident();" *ngIf="!fullscreen"></i>
+     
+      <mat-icon aria-hidden="true" class="btn-sm  minmax pointer"  (click)="openFullscreen()">fullscreen</mat-icon>
+     
+    </div>
+  </mat-card-title>
+  <div class="row">
+    <div class="col-12" [ngClass]="(fullscreen==true)?'fullscreen2':'notmalheight'">
+      <ngx-charts-advanced-pie-chart class="customfont"
+       [gradient]=true
+        [animations]=true 
+        [results]="statuswiseIncidentChart" 
+        [customColors]="customColors">
+      </ngx-charts-advanced-pie-chart>
+    </div>
+  </div>
+  <!-- </div>
+    </div> -->
+</mat-card>

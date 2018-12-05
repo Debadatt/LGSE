@@ -1,0 +1,48 @@
+@import '../../../shared/assets/css/misc-pages.css';
+.content .tblbtn  {
+  background-color: #1CBECA;
+  min-width: 168% !important;
+}
+.infobox-title {
+  font-family: Verdana;
+  font-size: 10pt;
+  line-height: 1.1;
+  margin-right: 20px;
+  font-weight: bold;
+  padding: 10px;
+  color: red !important;
+}
+.visiblemap{
+  visibility: visible;
+}
+.collapsemap {
+  visibility: collapse;
+}
+
+.map-container {
+  display: block !important;
+  /* min-height: calc(100%-100px); */
+  height: 55vh;
+}
+@media(max-width:1024px) {
+  .map-container {
+    display: block !important;
+    /* min-height: calc(100%-100px); */
+    height: 50vh;
+}
+}
+@media(min-width: 1224px) {
+  .map-container {
+    display: block !important;
+    /* min-height: calc(100%-100px); */
+    height: 66vh;
+}
+}
+@media only screen  and (min-width : 1824px) {
+  .map-container {
+    display: block !important;
+    /* min-height: calc(100%-100px); */
+    height: 75vh;
+}
+  }
+  

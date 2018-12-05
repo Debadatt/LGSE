@@ -1,0 +1,168 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="LGSEApp.View.SummaryPage"
+             Title="Summary"   
+             NavigationPage.HasNavigationBar="True"
+           >
+    <ContentPage.ToolbarItems>
+        <ToolbarItem           Command="{Binding SettingCommand}"
+                               Icon="user_white_24px.png" />
+    </ContentPage.ToolbarItems>
+  
+        <StackLayout>
+
+            <Frame IsClippedToBounds="True"
+                   HasShadow="True"
+                   CornerRadius="15"
+                   Padding="0,0,0,0"
+                   BackgroundColor="#FFFFFF">
+
+                <Frame.Margin>
+                    <OnPlatform x:TypeArguments="Thickness"
+                                Android="5"
+                                iOS="10" />
+                </Frame.Margin>
+                <StackLayout  Orientation="Vertical"
+                              Padding="0">
+                    <BoxView Color="#2A2D42"
+                             HeightRequest="16" />
+                    <ScrollView  Orientation="Vertical"
+                                 VerticalOptions="FillAndExpand"
+                                 HorizontalOptions="CenterAndExpand">
+                        <Grid VerticalOptions="CenterAndExpand"
+                              RowSpacing="1"
+                              Padding="5,5,5,5"
+                              HorizontalOptions="FillAndExpand"
+                              BackgroundColor="#FFFFFF">
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition   Height="auto" />
+                                <RowDefinition   Height="auto" />
+                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="auto" />
+                                <RowDefinition   Height="auto" />
+                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="auto" />
+                            <RowDefinition Height="auto" />
+                        </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+
+
+                            <Label Text="Summary"
+                                   Grid.Row="0"
+                                   Grid.Column="0"
+                                   Grid.ColumnSpan="2"
+                                   FontSize="Large" />
+                            <Label Text="Building Name"
+                                   LineBreakMode="NoWrap"
+                                   Grid.Row="1"
+                               Grid.Column="0"
+                               Grid.ColumnSpan="2"
+                               Style="{StaticResource labelTitleStyle}" />
+                        <Label Text="{Binding PropertyModel.PropertyModel.BuildingName}"
+                                   LineBreakMode="NoWrap"
+                                   Grid.Row="2"
+                               Grid.Column="0"
+                               Grid.ColumnSpan="2"
+                               Style="{StaticResource labelDetailsStyle}" />
+                            <Label Text="Post Code"
+                                   LineBreakMode="NoWrap"
+                                   Grid.Row="3"
+                               Grid.Column="0"
+                               Grid.ColumnSpan="2"
+                               Style="{StaticResource labelTitleStyle}" />
+                        <Label Text="{Binding PropertyModel.PropertyModel.Postcode}"
+                                   LineBreakMode="NoWrap"
+                                   Grid.Row="4"
+                               Grid.Column="0"
+                               Grid.ColumnSpan="2"
+                               Style="{StaticResource labelDetailsStyle}" />
+                            <Label Text="Status"
+                                   LineBreakMode="NoWrap"
+                                   Grid.Row="5"
+                               Grid.Column="0"
+                               Grid.ColumnSpan="2"
+                               Style="{StaticResource labelTitleStyle}" />
+                        <Label Text="{Binding PropertyModel.Status.Status}"
+                                   LineBreakMode="NoWrap"
+                                   Grid.Row="6"
+                               Grid.Column="0"
+                               Grid.ColumnSpan="2"
+                               Style="{StaticResource labelDetailsStyle}" />
+                        <Label Text="Sub Status"
+                               IsVisible="{Binding IsSubStatus}"
+                                   LineBreakMode="NoWrap"
+                                   Grid.Row="7"
+                               Grid.Column="0"
+                               Grid.ColumnSpan="2"
+                               Style="{StaticResource labelTitleStyle}" />
+                        <Label Text="{Binding PropertyModel.SubStatus.SubStatus}"
+                               LineBreakMode="NoWrap"
+                               IsVisible="{Binding IsSubStatus}"
+                               Grid.Row="8"
+                               Grid.Column="0"
+                               Grid.ColumnSpan="2"
+                               Style="{StaticResource labelDetailsStyle}" />
+                            <Label Text="Notes"
+                                   LineBreakMode="NoWrap"
+                                   Grid.Row="9"
+                               Grid.Column="0"
+                               Grid.ColumnSpan="2"
+                               Style="{StaticResource labelTitleStyle}" />
+                            
+                            <Editor  Text="{Binding Notes}"
+                                    Grid.Row="10"
+                                 Grid.Column="0"
+                                 Grid.ColumnSpan="2"
+                                 VerticalOptions="FillAndExpand"
+                                 Keyboard="Chat"                              
+                                   HeightRequest="100"
+                                    ></Editor>
+                        <!--<Label Text="A Notes is required."
+                               Grid.Row="11"
+                               Grid.Column="0"
+                               Grid.ColumnSpan="2"
+                               IsVisible="{Binding Isnotes}"
+                               Style="{StaticResource ValidationErrorLabelStyle}" />-->
+                        <Button x:Name="btnCancel"
+                                                Text="Cancel"
+                                                TextColor="White"
+                                                FontAttributes="Bold"
+                                            FontSize="Medium"
+                                            Grid.Row="12"
+                                            Grid.Column="0"
+                                            HorizontalOptions="FillAndExpand"
+                                            Command="{Binding CancelCommand}"
+                                            BackgroundColor="#EF7B10" />
+                                  
+                                        <Button x:Name="btnComplete"
+                                                TextColor="White"
+                                                Text="Complete"
+                                                FontAttributes="Bold"
+                                FontSize="Medium"
+                                Grid.Row="12"
+                                Grid.Column="1"
+                                HorizontalOptions="FillAndExpand"
+                                            Command="{Binding SubmitCommand}"
+                                                BackgroundColor="#EF7B10"></Button>
+                                  
+                               
+                           
+                        </Grid>
+                    </ScrollView>
+                </StackLayout>
+
+            </Frame>
+
+        </StackLayout>
+       
+</ContentPage>

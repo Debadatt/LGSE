@@ -1,0 +1,183 @@
+<div class="content">
+  <div>
+    <div class="content div">
+      <!-- <label translate> RESOURCELIST.resourcelist.title</label> -->
+      <div class="simple-page-form animated zoomIn">
+        <label class="lblsubtitle" translate> RESOURCELIST.assingedresourcesto.text</label>
+        <span> MPRN {{receivedmprn}}</span>
+
+        <div class="row" style="text-align: center;" *ngIf="isinprogress">
+          <i class="fa fa-spinner fa-spin" style="font-size: 17px;"></i>
+          <span class="inprogressmsg"> Saving.Please Wait ...</span>
+        </div>
+        <!--- mark up for showwing all resources list -->
+        <div>
+          <!-- <mat-form-field>
+              <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search Resources">
+            </mat-form-field> -->
+          <div>
+            <mat-table [dataSource]="dataSource" matSort class="table table-striped content tbl mat-elevation-z8">
+              <ng-container matColumnDef="select" hidden>
+                <mat-header-cell *matHeaderCellDef style="flex:0 0 10%;">
+                  <mat-checkbox [(ngModel)]="selectall" name="selectall" (ngModelChange)="selectAlll();" *ngIf="getAllResourcesResponse.length>1 && localstorageservice.checkCreatePermission(feature.RESOURCE_MANAGEMENT)"
+                    style="border-color: white;">
+                  </mat-checkbox>
+                </mat-header-cell>
+                <mat-cell *matCellDef="let resource;let i=index;" style="flex:0 0 10%;">
+                  <label class="mat-cell-responsive-label" translate>RESOURCELIST.select.text</label>
+                  <mat-checkbox [(ngModel)]="resource.checked" [ngModelOptions]="{standalone: true}"></mat-checkbox>
+                </mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="mprn" hidden>
+                <mat-header-cell *matHeaderCellDef mat-sort-header mat-sort-header-arrow>
+                  <label translate>RESOURCELIST.mprn.text</label>
+                </mat-header-cell>
+                <mat-cell *matCellDef="let resource">
+                  <label class="mat-cell-responsive-label" translate>RESOURCELIST.name.text</label>
+                  {{resource.mprn}} </mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="name" hidden>
+                <mat-header-cell *matHeaderCellDef mat-sort-header mat-sort-header-arrow>
+                  <label translate>RESOURCELIST.name.text</label>
+                </mat-header-cell>
+                <mat-cell *matCellDef="let resource">
+                  <label class="mat-cell-responsive-label" translate>RESOURCELIST.name.text</label>
+                  {{resource.firstName}} {{resource.lastName}} </mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="roleName" hidden>
+                <mat-header-cell *matHeaderCellDef mat-sort-header mat-sort-header-arrow>
+                  <label translate>RESOURCELIST.role.text</label>
+                </mat-header-cell>
+                <mat-cell *matCellDef="let resource">
+                  <label class="mat-cell-responsive-label" translate>RESOURCELIST.role.text</label>
+                  {{resource.roleName}}
+                </mat-cell>
+              </ng-container>
+              <!-- <ng-container matColumnDef="zones" hidden>
+                <mat-header-cell *matHeaderCellDef mat-sort-header mat-sort-header-arrow style="justify-content:center;">
+                  <label translate>RESOURCELIST.zone.text</label>
+                </mat-header-cell>
+                <mat-cell *matCellDef="let resource" style="justify-content:center;">
+                  <label class="mat-cell-responsive-label" translate>zones</label>
+                  <span *ngIf="resource.zones && resource.zones.length > 0">
+                    <span *ngFor="let zone of resource.zones;let i=index">
+                      <span *ngIf="i > 0  && resource.zones[i-1]!=' '">,</span>
+                      <span>{{zone}}</span>
+                    </span>
+                  </span>
+                </mat-cell>
+              </ng-container> -->
+              <!-- <ng-container matColumnDef="cells" hidden>
+                <mat-header-cell *matHeaderCellDef mat-sort-header mat-sort-header-arrow style="justify-content:center;">
+                  <label translate>RESOURCELIST.cell.text</label>
+                </mat-header-cell>
+                <mat-cell *matCellDef="let resource" style="justify-content:center;">
+                  <label class="mat-cell-responsive-label" translate>Cells</label>
+                  <span *ngIf="resource.cells && resource.cells.length > 0">
+                    <span *ngFor="let cell of resource.cells;let i=index">
+                      <span *ngIf="i > 0 &&  resource.cells[i-1]!=' '">,</span>
+                      <span>{{cell}}</span>
+                    </span>
+                  </span>
+                </mat-cell>
+              </ng-container> -->
+              <ng-container matColumnDef="inprogress" hidden>
+                <mat-header-cell *matHeaderCellDef mat-sort-header mat-sort-header-arrow>
+                  <label translate>RESOURCELIST.inprogress.text</label>
+                </mat-header-cell>
+                <mat-cell *matCellDef="let resource" style="justify-content:center;">
+                  <label class="mat-cell-responsive-label" translate>RESOURCELIST.inprogress.text</label>
+                  {{resource.inprogress}} </mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="completed" hidden>
+                <mat-header-cell *matHeaderCellDef mat-sort-header mat-sort-header-arrow>
+                  <label translate>RESOURCELIST.completed.text</label>
+                </mat-header-cell>
+                <mat-cell *matCellDef="let resource" style="justify-content:center;">
+                  <label class="mat-cell-responsive-label" translate>RESOURCELIST.completed.text</label>
+                  {{resource.completed}} </mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="organization" hidden>
+                <mat-header-cell *matHeaderCellDef mat-sort-header mat-sort-header-arrow>
+                  <label translate>RESOURCELIST.organization.text</label>
+                </mat-header-cell>
+                <mat-cell *matCellDef="let resource">
+                  <label class="mat-cell-responsive-label" translate>RESOURCELIST.organization.text</label>
+                  {{resource.organization}} </mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="empid" hidden>
+                <mat-header-cell *matHeaderCellDef mat-sort-header mat-sort-header-arrow>
+                  <label translate>RESOURCELIST.empid.text</label>
+                </mat-header-cell>
+                <mat-cell *matCellDef="let resource">
+                  <label class="mat-cell-responsive-label" translate>RESOURCELIST.empid.text</label>
+                  {{resource.employeeId}} </mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="Zones" hidden>
+                <mat-header-cell *matHeaderCellDef>
+                  <label translate>Zone</label>
+                </mat-header-cell>
+                <mat-cell *matCellDef="let resource">
+                  <label class="mat-cell-responsive-label" translate>RESOURCELIST.zone.text</label>
+                  <span>{{cellZone(resource.zones)}}</span>
+  
+                </mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="Cells" hidden>
+                <mat-header-cell *matHeaderCellDef>
+                  <label translate>Cell</label>
+                </mat-header-cell>
+                <mat-cell *matCellDef="let resource">
+                  <label class="mat-cell-responsive-label" translate>RESOURCELIST.cell.text</label>
+                  <span>{{cellZone(resource.cells)}}</span>
+                </mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="Completed" hidden>
+                <mat-header-cell *matHeaderCellDef mat-sort-header mat-sort-header-arrow>
+                  <label translate>RESOURCELIST.completed.text</label>
+                </mat-header-cell>
+                <mat-cell *matCellDef="let resource" style="text-align:center !important;">
+                  <label class="mat-cell-responsive-label" translate>RESOURCELIST.completed.text</label>
+                  {{resource.completed}} </mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="AssignedMPRNCount" hidden>
+                <mat-header-cell *matHeaderCellDef mat-sort-header mat-sort-header-arrow style="justify-content:center;">
+                  <label translate>RESOURCELIST.status.text</label>
+                </mat-header-cell>
+                <mat-cell *matCellDef="let resource" style="justify-content:center;display:inline-flex !important;">
+                  <label class="mat-cell-responsive-label" translate>RESOURCELIST.status.text</label>
+                  <span *ngIf="resource.assignedMPRNCount>0">
+                    <!-- <span  style="cursor: pointer !important;" matBadge="{{resource.inprogress}}" matBadgeOverlap="false" matBadgeColor="accent"></span> -->
+                    <span class="circle">{{resource.assignedMPRNCount}}</span>
+                  </span>
+                </mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="email" hidden>
+                <mat-header-cell *matHeaderCellDef mat-sort-header mat-sort-header-arrow style="flex:0 0 26%;">
+                  <label translate>RESOURCELIST.email.text</label>
+                </mat-header-cell>
+                <mat-cell *matCellDef="let resource" style="flex:0 0 26%;">
+                  <label class="mat-cell-responsive-label" translate>RESOURCELIST.email.text</label>
+                  {{resource.email}} </mat-cell>
+              </ng-container>
+              <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+              <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+            </mat-table>
+            <mat-paginator [pageSize]="50" [pageSizeOptions]="[50, 100, 200, 500, 1000]" showFirstLastButtons></mat-paginator>
+          </div>
+        </div>
+        <div class="row">
+          <div class="pull-right" style="display: inline-flex;">
+            <button class="btn btn-warning" routerLink="/resources/assign-mprn" translate>BUTTONS.back.text</button>
+            <button class="btn btn-warning" style="margin-left: 5px;width:auto; " (click)="unssignSelected();" [disabled]="isinprogress" *ngIf="localstorageservice.checkUpdatePermission(feature.RESOURCE_MANAGEMENT)"
+              translate>BUTTONS.unassignselected.text</button>
+          </div>
+        </div>
+        <p class="red" *ngIf="getAllResourcesResponse.length==0"><label translate>BUTTONS.notfound.text</label></p>
+
+
+        <!-- end of markup     -->
+      </div>
+    </div>
+  </div>
+</div>

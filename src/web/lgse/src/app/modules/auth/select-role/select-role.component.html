@@ -1,0 +1,51 @@
+<div class="simple-page">
+  <!-- HOME -->
+  <section class="bg-custom home" id="home">
+    <div class="home-sm">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8">
+            <div class="home-wrapper home-wrapper-alt p-50">
+              <div class="main-logo">
+                <img src="../../assets/images/walesandwestcoloredlogo.png" class="img-responsive login-main-logo" alt="walesandwest">
+              </div>
+              <h4 class="w-full text-justify auth-paragraph wordbreak" translate>SELECT-ROLE.left.side.text</h4>
+            </div>
+          </div>
+          <!-- end col -->
+
+          <div class="col-lg-4 ">
+            <div class="simple-page-wrap">
+
+              <div class="simple-page-form animated zoomIn" id="login-form">
+                <h4 class="form-title m-b-xxl text-center auth-heading" translate>SELECT-ROLE.title.text</h4>
+                <form [formGroup]="selectRoleForm" (ngSubmit)="onConfirm()">
+                  <div class="form-group m-b-xxl" formGroupName="selectRoleData">
+
+                    <span *ngIf="!selectRoleForm.get('selectRoleData.role').valid && selectRoleForm.get('selectRoleData.role').touched" class="help-box"
+                      ></span>
+
+                    <select name="sign-in-role" id="sign-in-role" class="form-control" data-plugin="select2" placeholder="" formControlName="role" (ngModelChange)="onSelectRole()">
+                      <!-- <option [ngValue]="null"></option> -->
+                       <option [value]="select">Select</option>
+                      <option *ngFor="let role of formRoles" [value]="role.id">{{role.name}}</option>
+                     
+                    </select> 
+
+                  </div>
+                  <input type="submit" class="btn btn-orange " [value]="'SELECT-ROLE.confirm.login' | translate" [disabled]="!selectRoleForm.valid">
+                </form>
+              </div>
+              <!-- #login-form -->
+            </div>
+            <!-- .simple-page-wrap -->
+          </div>
+          <!-- end col -->
+        </div>
+      </div>
+    </div>
+
+  </section>
+  <!-- END HOME -->
+
+</div>

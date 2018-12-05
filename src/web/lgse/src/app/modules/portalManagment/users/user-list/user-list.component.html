@@ -1,0 +1,135 @@
+<div class="content">
+    <div>
+        <div class="content div">
+            <div class="simple-page-form animated zoomIn">
+                <div class="row">
+                    <div class="col-md-12 clo-lg-12">
+                        <label class="lblsubtitle" translate>USER.title.text</label>
+                        <div class="pull-right customsearchbox">
+                            <i class="fa fa-plus btn btn-warning" style="width:auto;" title="Add New User" (click)="addUser();" aria-hidden="true" *ngIf="localstorageservice.checkCreatePermission(feature.PORTAL_MANAGEMENT);"></i>&nbsp;
+                            <i class="fa fa-refresh btn btn-warning" style="width:auto;" (click)="refresh();" title="Refresh"></i>&nbsp;
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <mat-table [dataSource]="dataSource" matSort class="table table-striped content tbl mat-elevation-z8">
+                        <ng-container matColumnDef="id" hidden>
+                            <mat-header-cell *matHeaderCellDef mat-sort-header mat-sort-header-arrow>
+                                <label translate>USER.id.text</label>
+                            </mat-header-cell>
+                            <mat-cell *matCellDef="let element">{{element.id}} </mat-cell>
+                        </ng-container>
+
+                        <ng-container matColumnDef="firstName">
+                            <mat-header-cell *matHeaderCellDef mat-sort-header class="mat-column-CODIGO">
+                                <label translate>USER.firstname.text</label>
+                            </mat-header-cell>
+                            <mat-cell *matCellDef="let element">
+                                <span class="mat-cell-responsive-label" translate>USER.firstname.text</span>
+                                <span class="ellipsis mat-cell-text">{{element.firstName}}</span>
+                            </mat-cell>
+                        </ng-container>
+
+                        <ng-container matColumnDef="lastName">
+                            <mat-header-cell *matHeaderCellDef mat-sort-header class="mat-column-CODIGO">
+                                <label translate>USER.lastname.text</label>
+                            </mat-header-cell>
+                            <mat-cell *matCellDef="let element">
+                                <span class="mat-cell-responsive-label" translate>USER.lastname.text</span>
+                                <span class="ellipsis mat-cell-text">{{element.lastName}}</span>
+                            </mat-cell>
+                        </ng-container>
+
+                        <ng-container matColumnDef="roles">
+                            <mat-header-cell *matHeaderCellDef mat-sort-header class="mat-column-CODIGO">
+                                <label translate>USER.role.text</label>
+                            </mat-header-cell>
+                            <mat-cell *matCellDef="let element">
+                                <span class="mat-cell-responsive-label" translate>USER.role.text</span>
+                                <span class="ellipsis mat-cell-text">{{element.roles}}</span>
+                            </mat-cell>
+                        </ng-container>
+
+                        <ng-container matColumnDef="eusr">
+                            <mat-header-cell *matHeaderCellDef mat-sort-header class="mat-column-CODIGO">
+                                <label translate>USER.eusr.text</label>
+                            </mat-header-cell>
+                            <mat-cell *matCellDef="let element">
+                                <span class="mat-cell-responsive-label" translate>USER.eusr.text</span>
+                                <span class="ellipsis mat-cell-text">{{element.eusr}}</span>
+                            </mat-cell>
+                        </ng-container>
+
+                        <ng-container matColumnDef="email">
+                            <mat-header-cell *matHeaderCellDef mat-sort-header class="mat-column-CODIGO" style="flex:0 0 20%;justify-content:left">
+                                <label translate>USER.emailid.text</label>
+                            </mat-header-cell>
+                            <mat-cell *matCellDef="let element" style="flex:0 0 20%;">
+                                <span class="mat-cell-responsive-label" translate>USER.emailid.text</span>
+                                <span class="ellipsis mat-cell-text">{{element.email}}</span>
+                            </mat-cell>
+                        </ng-container>
+
+                        <ng-container matColumnDef="contactNo">
+                            <mat-header-cell *matHeaderCellDef mat-sort-header class="mat-column-CODIGO">
+                                <label translate>USER.contactno.text</label>
+                            </mat-header-cell>
+                            <mat-cell *matCellDef="let element">
+                                <span class="mat-cell-responsive-label" translate>USER.contactno.text</span>
+                                <span class="ellipsis mat-cell-text">{{element.contactNo}}</span>
+                            </mat-cell>
+                        </ng-container>
+
+                        <ng-container matColumnDef="employeeId">
+                            <mat-header-cell *matHeaderCellDef mat-sort-header class="mat-column-CODIGO">
+                                <label translate>USER.empid.text</label>
+                            </mat-header-cell>
+                            <mat-cell *matCellDef="let element">
+                                <span class="mat-cell-responsive-label" translate>USER.empid.text</span>
+                                <span class="ellipsis mat-cell-text">{{element.employeeId}}</span>
+                            </mat-cell>
+                        </ng-container>
+
+                        <ng-container matColumnDef="isActive">
+                            <mat-header-cell *matHeaderCellDef mat-sort-header class="mat-column-CODIGO">
+                                <label translate>USER.isactive.text</label>
+                            </mat-header-cell>
+                            <mat-cell *matCellDef="let element">
+                                <span class="mat-cell-responsive-label" translate>USER.isactive.text</span>
+                                <div class="statusBlock" *ngIf="element.isActive==0" style="background-color:#FFBE00">Inactive</div>
+                                <div class="statusBlock" *ngIf="element.isActive==1" style="background-color:#28a745;">Active</div>
+                            </mat-cell>
+                        </ng-container>
+
+                        <ng-container matColumnDef="action">
+                            <mat-header-cell *matHeaderCellDef class="mat-column-CODIGO" style="flex:0 0 5%;">
+                            </mat-header-cell>
+                            <mat-cell *matCellDef="let element" style="flex:0 0 5%;">
+                                <span *ngIf="localstorageservice.checkUpdatePermission(feature.PORTAL_MANAGEMENT)">
+                                    <button mat-icon-button color="primary" [matMenuTriggerFor]="menu">
+                                        <mat-icon aria-hidden="true" matTooltip="Menu">more_vert</mat-icon>
+                                    </button>
+                                </span>
+                                <mat-menu #menu="matMenu">
+                                    <ng-template matMenuContent>
+                                        <button mat-menu-item (click)="editUser(element.id)" *ngIf="localstorageservice.checkUpdatePermission(feature.PORTAL_MANAGEMENT);">
+                                            <mat-icon color='primary'>edit</mat-icon>
+                                            <span translate>USER.edituser.text</span>
+                                        </button>
+                                        <button mat-menu-item (click)="assignUserToRoles(element.id,element.firstName,element.lastName)" *ngIf="localstorageservice.checkUpdatePermission(feature.PORTAL_MANAGEMENT);">
+                                            <mat-icon color='primary'>assignment</mat-icon>
+                                            <span translate>USER.assignusertoroles.text</span>
+                                        </button>
+                                    </ng-template>
+                                </mat-menu>
+                            </mat-cell>
+                        </ng-container>
+                        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                    </mat-table>
+                    <mat-paginator [pageSizeOptions]="[50, 100, 200, 500, 1000]" [pageSize]="50" showFirstLastButtons></mat-paginator>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,86 @@
+<div class="content">
+  <div>
+    <div class="content div">
+      <!-- <label translate> RESOURCELIST.resourcelist.title</label> -->
+      <div class="simple-page-form animated zoomIn">
+        <!-- <label translate> RESOURCELIST.subtitle.text</label> -->
+         <label translate> RESOURCELIST.subtitle.text</label>      
+        <div>         
+          <mat-table [dataSource]="dataSource" matSort class="table table-striped content tbl mat-elevation-z8">
+            <ng-container matColumnDef="name" hidden>
+              <mat-header-cell *matHeaderCellDef mat-sort-header mat-sort-header-arrow>
+                <label translate>RESOURCELIST.name.text</label>
+              </mat-header-cell>
+              <mat-cell *matCellDef="let resource">
+                <label class="mat-cell-responsive-label" translate>RESOURCELIST.name.text</label>
+                {{resource.firstName}} {{resource.lastName}}
+              </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="role" hidden>
+              <mat-header-cell *matHeaderCellDef mat-sort-header mat-sort-header-arrow>
+                <label translate>RESOURCELIST.role.text</label>
+              </mat-header-cell>
+              <mat-cell *matCellDef="let resource">
+                <label class="mat-cell-responsive-label" translate>RESOURCELIST.role.text</label>
+                <span *ngIf="resource.roles &&  resource.roles.length>0"> {{resource.roles[0]}}</span> </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="organization" hidden>
+              <mat-header-cell *matHeaderCellDef mat-sort-header mat-sort-header-arrow>
+                <label translate>RESOURCELIST.organization.text</label>
+              </mat-header-cell>
+              <mat-cell *matCellDef="let resource">
+                <label class="mat-cell-responsive-label" translate>RESOURCELIST.organization.text</label>
+                {{resource.organization}} </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="empid" hidden>
+              <mat-header-cell *matHeaderCellDef mat-sort-header mat-sort-header-arrow style="flex:0 0 15%">
+                <label translate>RESOURCELIST.empid.text</label>
+              </mat-header-cell>
+              <mat-cell *matCellDef="let resource" style="flex:0 0 15%">
+                <label class="mat-cell-responsive-label" translate>RESOURCELIST.empid.text</label>
+                {{resource.employeeId}} </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="email" hidden>
+              <mat-header-cell *matHeaderCellDef mat-sort-header mat-sort-header-arrow style="flex:0 0 25%">
+                <label translate>RESOURCELIST.email.text</label>
+              </mat-header-cell>
+              <mat-cell *matCellDef="let resource" style="flex:0 0 25%">
+                <label class="mat-cell-responsive-label" translate>RESOURCELIST.email.text</label>
+                {{resource.email}} </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="inprogress" hidden>
+              <mat-header-cell *matHeaderCellDef mat-sort-header mat-sort-header-arrow>
+                <label translate>RESOURCELIST.inprogress.text</label>
+              </mat-header-cell>
+              <mat-cell *matCellDef="let resource" style="justify-content:center;">
+                <label class="mat-cell-responsive-label" translate>RESOURCELIST.inprogress.text</label>
+                {{resource.inprogress}} </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="completed" hidden>
+              <mat-header-cell *matHeaderCellDef mat-sort-header mat-sort-header-arrow>
+                <label translate>RESOURCELIST.completed.text</label>
+              </mat-header-cell>
+              <mat-cell *matCellDef="let resource" style="justify-content:center;">
+                <label class="mat-cell-responsive-label" translate>RESOURCELIST.completed.text</label>
+                {{resource.completed}} </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="action" hidden>
+              <mat-header-cell *matHeaderCellDef style="padding-right:0px;">
+                <label translate>RESOURCELIST.action.text</label>
+              </mat-header-cell>
+              <mat-cell *matCellDef="let resource">
+                <label class="mat-cell-responsive-label" translate>RESOURCELIST.action.text</label>
+                <button class="btn btn-info btn-xs" (click)="viewSelctedresourcesMPRN(resource.email,resource.id);" translate>
+                  RESOURCELIST.viewmprn.text </button>
+              </mat-cell>
+            </ng-container>
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+          </mat-table>
+          <mat-paginator [pageSize]="50" [pageSizeOptions]="[5, 10, 50,100,500]" showFirstLastButtons></mat-paginator>
+        </div>
+        <!-- end of markup     -->
+      </div>
+    </div>
+  </div>
+</div>

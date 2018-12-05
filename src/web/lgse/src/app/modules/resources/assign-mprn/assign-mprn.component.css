@@ -1,0 +1,61 @@
+@import '../../../shared/assets/css/misc-pages.css';
+.content .tblbtn  {
+  background-color: #1CBECA;
+  min-width: 168% !important;
+}
+
+.mat-form-field {
+    font-size: 14px;
+    width: 100%;
+  }
+  .red{
+    color:red;
+  }
+
+  .icon-background {
+    color: #FF6901;
+}
+.fa-stack-1x {
+  line-height: inherit;
+  color: white;
+}
+.fa-stack {
+  position: relative;
+  display: inline-block;
+  width: 2em;
+  height: 2em;
+  line-height: 2em;
+  vertical-align: middle;
+  font-size: 21px;
+}
+.mat-expansion-panel-header-description {
+  flex-grow: 0 !important;
+}
+.badge {
+  border-radius: 2px;
+  font-size: 12px;
+}
+::ng-deep.mat-badge-content {
+  color: white !important;
+}
+
+.pcustomatr{
+  color:#FF7300;
+  font-size: 17px; 
+  margin-left: 6px; 
+}
+.circle {
+  display: inline-block;
+  min-width: 10px;
+  padding: 5px 7px;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1;
+  color: #fff;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  background-color: #FF7300;
+  border-radius: 10px;
+}
+

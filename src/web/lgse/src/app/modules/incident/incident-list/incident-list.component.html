@@ -1,0 +1,228 @@
+<div class="content">
+  <div>
+    <div class="content div">
+      <div class="simple-page-form animated zoomIn">
+        <div>
+          <div class="row">
+            <div class="col-md-12 clo-lg-12">
+              <label class="lblsubtitle" translate>INCIDENTLIST.incidentlist.subtitle</label>
+              <div class="pull-right customsearchbox">
+                <i class="fa fa-search  btn btn-warning btnserach" style="width:auto;" (click)="hideShowSeacrh();" aria-hidden="true" *ngIf="localstorageservice.checkReadPermission(feature.INCIDENT_MANAGEMENT)"></i>&nbsp;
+                <i class="fa fa-plus btn btn-warning" style="width:auto;" title="Add New Incident" (click)="addIncident();" aria-hidden="true"
+                  *ngIf="localstorageservice.checkCreatePermission(feature.INCIDENT_MANAGEMENT);"></i>&nbsp;
+                <i class="fa fa-refresh btn btn-warning" style="width:auto;" (click)="refresh();" title="Refresh"></i>&nbsp;
+              </div>
+            </div>
+          </div>
+          <div *ngIf="isvisible==true">
+            <app-custom-search [customsearchdata]="customSearchDataMain"></app-custom-search>
+          </div>
+          <mat-table [dataSource]="dataSource" matSort class="table table-striped content tbl mat-elevation-z8">
+            <ng-container matColumnDef="id" hidden>
+              <mat-header-cell *matHeaderCellDef mat-sort-header mat-sort-header-arrow>
+                <label translate>INCIDENTLIST.incidentid.text</label>
+              </mat-header-cell>
+              <mat-cell *matCellDef="let element">{{element.id}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="IncidentId" style="justify-content:left;">
+              <mat-header-cell *matHeaderCellDef mat-sort-header mat-sort-header-arrow class="mat-column-CODIGO;">
+                <label translate>INCIDENTLIST.incidentid.text</label>
+              </mat-header-cell>
+
+              <mat-cell *matCellDef="let element" style="justify-content:left;">
+                <span class="mat-cell-responsive-label" translate>INCIDENTLIST.incidentid.text</span>
+                <span class="ellipsis mat-cell-text">{{element.incidentId}}</span>
+              </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="Description">
+              <mat-header-cell *matHeaderCellDef mat-sort-header class="mat-column-CODIGO" style="justify-content:left;flex:0 0 15%;">
+                <label translate>INCIDENTLIST.description.text</label>
+              </mat-header-cell>
+              <mat-cell *matCellDef="let element" style="justify-content:left;flex:0 0 15%;">
+                <span class="mat-cell-responsive-label" translate>INCIDENTLIST.description.text</span>
+                <span class="ellipsis mat-cell-text">{{element.description}}</span>
+              </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="NoOfPropsAffected">
+              <mat-header-cell *matHeaderCellDef mat-sort-header class="mat-column-CODIGO" style="justify-content:left;">
+                <label translate>INCIDENTLIST.noofpropertiesaffected.text</label>
+              </mat-header-cell>
+              <mat-cell *matCellDef="let element" style="justify-content:center;">
+                <span class="mat-cell-responsive-label" translate>INCIDENTLIST.noofpropertiesaffected.text</span>
+                <span class="ellipsis mat-cell-text ">{{element.noOfPropsAffected}}</span>
+              </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="propsStatusCounts" style="justify-content:center;flex:0 0 20%;display:inline-flex;">
+              <mat-header-cell *matHeaderCellDef class="mat-column-CODIGO" style="justify-content:center;flex:0 0 20%;">
+                <label translate>INCIDENTLIST.propertycount.text</label>
+              </mat-header-cell>
+              <mat-cell *matCellDef="let element" style="justify-content:center;flex:0 0 20%;display:inline-flex;" #status>
+                <span class="mat-cell-responsive-label" translate>INCIDENTLIST.propertycount.text</span>
+                <div *ngFor="let status of element.propertyAllStatusCounts">
+                    <div>{{status.propertyStatusMaster.shortText}}&nbsp;</div>
+                    <div>
+                      <span *ngIf="status.propertyStatusMaster.shortText=='NA'">
+                        <div>
+                            <span class="oval-shape" style="background-color:#796308">{{status.count}}&nbsp;</span>
+                        </div>
+                      </span>
+                      <span *ngIf="status.propertyStatusMaster.shortText=='NC'">
+                        <div>
+                            <span class="oval-shape" style="background-color:#63377F">{{status.count}}&nbsp;</span>
+                        </div>
+                      </span>
+                      <span *ngIf="status.propertyStatusMaster.shortText=='IS'">
+                        <div >
+                            <span class="oval-shape" style="background-color: #5E7F49;">{{status.count}}&nbsp;</span>
+                        </div>
+                      </span>
+                      <span *ngIf="status.propertyStatusMaster.shortText=='RS'">
+                        <div>
+                            <span class="oval-shape" style="background-color:#6DB0EE">{{status.count}}&nbsp;</span>
+                        </div>
+                      </span>
+                      <span *ngIf="status.propertyStatusMaster.shortText=='NS'">
+                        <div>
+                          <span class="oval-shape" style="background-color:#EF1421">{{status.count}}&nbsp;</span>
+                        </div>
+                    </span>
+                    </div>
+                  </div>
+              </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="CategoryName">
+              <mat-header-cell *matHeaderCellDef mat-sort-header class="mat-column-CODIGO" style="justify-content:left;">
+                <label translate>INCIDENTLIST.category.text</label>
+              </mat-header-cell>
+              <mat-cell *matCellDef="let element" style="justify-content:left;">
+                <span class="mat-cell-responsive-label" translate>INCIDENTLIST.category.text</span>
+                <span class="ellipsis mat-cell-text">{{element.categoryName}} </span>
+              </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="StartTime">
+              <mat-header-cell *matHeaderCellDef mat-sort-header class="mat-column-CODIGO" style="justify-content:left;">
+                <label translate>INCIDENTLIST.starttime.text</label>
+              </mat-header-cell>
+              <mat-cell *matCellDef="let element" style="justify-content:left;">
+                <span class="mat-cell-responsive-label" translate>INCIDENTLIST.starttime.text</span>
+                <span class="ellipsis mat-cell-text">{{ element.startTime | date: 'dd/MM/yyyy hh:mm:ss a'}}</span>
+              </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="Status">
+              <mat-header-cell *matHeaderCellDef mat-sort-header class="mat-column-CODIGO" style="justify-content:center;">
+                <label translate>INCIDENTLIST.status.text</label>
+              </mat-header-cell>
+              <mat-cell *matCellDef="let element" style="justify-content:center;">
+                <span class="mat-cell-responsive-label" translate>INCIDENTLIST.status.text</span>
+                <span class="ellipsis mat-cell-text">
+                  <div class="statusBlock" *ngIf="element.status==0 || element.status== null || element.status== undefined" style="background-color:darkturquoise">In Progress</div>
+                  <div class="statusBlock" *ngIf="element.status==1" style="background-color:#28a745;">Completed</div>
+                  <div class="statusBlock" *ngIf="element.status==2" style="background-color:#FFBE00;">Cancelled</div>
+                </span>
+              </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="EndTime">
+              <mat-header-cell *matHeaderCellDef mat-sort-header class="mat-column-CODIGO" style="justify-content:left;">
+                <label translate>INCIDENTLIST.endtime.text</label>
+              </mat-header-cell>
+              <mat-cell *matCellDef="let element" style="justify-content:left;">
+                <span class="mat-cell-responsive-label" translate>INCIDENTLIST.endtime.text</span>
+                <span class="ellipsis mat-cell-text">{{ element.endTime | date: 'dd/MM/yyyy hh:mm:ss a' }}</span>
+              </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="action">
+              <mat-header-cell *matHeaderCellDef class="mat-column-CODIGO" style="flex:0 0 5%;">
+              </mat-header-cell>
+              <mat-cell *matCellDef="let element" style="flex:0 0 5%;justify-content:right;">
+                <span class="mat-cell-responsive-label" translate>INCIDENTLIST.action.text</span>
+                <span *ngIf="localstorageservice.checkReadPermission(feature.INCIDENT_MANAGEMENT) || localstorageservice.checkUpdatePermission(feature.INCIDENT_MANAGEMENT)">
+                  <button mat-icon-button color="primary" [matMenuTriggerFor]="menu">
+                    <mat-icon aria-hidden="true" matTooltip="Menu">more_vert</mat-icon>
+                  </button>
+                </span>
+                <mat-menu #menu="matMenu">
+                  <ng-template matMenuContent>
+                    <button mat-menu-item (click)="showProperties(element.id,element.incidentId,element.status)" *ngIf="localstorageservice.checkReadPermission(feature.INCIDENT_MANAGEMENT);">
+                      <mat-icon color='primary'>view_list</mat-icon>
+                      <span translate>INCIDENTLIST.showproperties.button.text</span>
+                    </button>
+                    <span *ngIf="element.status==0">
+                      <button mat-menu-item (click)="editIncident(element.id)" *ngIf="localstorageservice.checkUpdatePermission(feature.INCIDENT_MANAGEMENT);">
+                        <mat-icon color='primary'>edit</mat-icon>
+                        <span translate>INCIDENTLIST.editincident.button.text</span>
+                      </button>
+                    </span>
+
+                    <span *ngIf="element.status==1 || element.status==2">
+                      <button mat-menu-item (click)="editIncident(element.id)" *ngIf="localstorageservice.checkReadPermission(feature.INCIDENT_MANAGEMENT);">
+                        <mat-icon color='primary'>remove_red_eye</mat-icon>
+                        <span translate>INCIDENTLIST.viewincident.button.text</span>
+                      </button>
+                    </span>
+
+                    <span *ngIf="element.status==1 || element.status==2">
+                      <button mat-menu-item (click)="downloadReport(element.id,element.incidentId)" *ngIf="localstorageservice.checkReadPermission(feature.INCIDENT_MANAGEMENT);">
+                        <mat-icon color='primary'>
+                          <i class="fa fa-download" aria-hidden="true"></i>
+                        </mat-icon>
+                        <span translate>INCIDENTLIST.downloadcsvfile.text</span>
+                      </button>
+                    </span>
+                    <button mat-menu-item (click)="viewDashbord(element.id,element.incidentId,element.status)" *ngIf="localstorageservice.checkReadPermission(feature.INCIDENT_MANAGEMENT);">
+                      <i class="menu-icon zmdi zmdi-view-dashboard zmdi-hc-lg" style="color:#DF552E;padding: 3px;margin-right: 7px;"></i>
+                      <span translate> Dashboard </span>
+                    </button>
+                    <button mat-menu-item (click)="showBingMap(element.id, element.incidentId)" skipLocationChange data-toggle="modal" data-target=".bd-example-modal-lg"
+                      *ngIf="localstorageservice.checkReadPermission(feature.INCIDENT_MANAGEMENT);">
+                      <mat-icon color='primary'>place</mat-icon>
+                      <span translate>Map</span>
+                    </button>
+                  </ng-template>
+                </mat-menu>
+              </mat-cell>
+            </ng-container>
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+          </mat-table>
+          <mat-paginator #paginator [length]="resultsLength" [pageSizeOptions]="[1,50, 100, 200, 500, 1000]"></mat-paginator>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div style="height: 700px;" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Incident ID:
+          <b> {{selectedIncidentId}} </b>
+        </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <!-- <app-show-map></app-show-map> -->
+      </div>
+      <div class="modal-footer">
+        <a type="button" href="/#/facebook" target="_blank" class="btn btn-primary btn-sm btn-fb">
+          <i class="fa fa-facebook pr-1"></i>
+          <span translate>&nbsp; MAPS.facebook.text</span>
+        </a>
+        <a type="button" href="/#/twitter" target="_blank" class="btn btn-primary btn-sm btn-tw">
+          <i class="fa fa-twitter pr-1"></i>
+            <span translate>&nbsp; MAPS.twitter.text</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,164 @@
+<div>
+  <!-- HOME -->
+  <section>
+    <div class="row">
+      <div class="col" style="align-self: center">
+        <div>
+          <div class="simple-page-wrap">
+            <div class="simple-page-form animated zoomIn" id="incidentadd-form">
+              <span class="lblsubtitle" translate>INCIDENTADD.incidentadd.title</span>
+              <br>
+              <br>
+              <div class="row" style="text-align: center;" *ngIf="uploadbuttonvisible">
+                <i class="fa fa-spinner fa-spin" style="font-size: 17px;"></i>
+                <span style="padding: 2px;font-size: 18px;font-family: inherit;"> Saving.Please Wait ...</span>
+              </div>
+
+              <form [formGroup]="incidentAddForm" (ngSubmit)="onSubmit()">
+                <div class="incidentAdd-group" style="padding-top: 10px">
+                  <div class="row ">
+                    <div class="col-md-6 example-container">
+                      <mat-form-field>
+                        <mat-select required placeholder="Select Category" id="category" formControlName="category">
+                          <mat-option *ngFor="let category of formCategories" [value]="category.id">{{category.name}}</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                  </div>
+
+                  <!-- 2nd row -->
+                  <div class="row">
+                    <div class="col-md-12 col-sm-12">
+                      <span *ngIf="!incidentAddForm.get('description').valid && incidentAddForm.get('description').touched" class="help-box" translate>INCIDENTADD.valid.description.text</span>
+                      <div class="form-group has-float-label">
+                        <input id="incidentDescription" type="text" class="form-control" placeholder="" formControlName="description">
+                        <label for="incidentDescription" translate>INCIDENTADD.description.text
+                          <i class="text-danger">*</i>
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- 3nd row -->
+                  <div class="row">
+                    <div class="col-md-12 col-sm-12">
+                      <span class="help-box"></span>
+                      <div class="form-group has-float-label">
+                        <textarea id="incidentNotes" class="form-control" rows="2" placeholder="" formControlName="notes"></textarea>
+                        <label for="incidentNotes" translate>INCIDENTADD.notes.text</label>
+                        <i class="text-danger"></i>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-3 col-sm-12">
+                      <div>
+                        <label class="btn btn-orange" (click)="uploadFileButtonClick();" [ngClass]="uploadbuttonvisible?'clsreadonly':'editable'">
+                          <i class="fa fa-file"></i>
+                          &nbsp;&nbsp;
+                          <label translate>INCIDENTADD.uploadaffectedprop.text</label>
+                        </label>
+                        <input style="visibility:hidden" type='file' onclick="this.value = null" id="fileInput" #fileInput accept=".csv" (change)="uploadCsvFile()"
+                          formControlName="uploadAffectedProperties" class="pull-right" />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-4 col-sm-12">
+                      <div class="form-group has-float-label">
+                        <input id="noOfProperties" type="text" class="form-control" placeholder="" formControlName="noOfProperties" readonly>
+                        <label for="noOfProperties" translate>INCIDENTADD.noofprop.text</label>
+                      </div>
+                    </div>
+
+                    <div class="col-md-4 col-sm-12">
+                      <div class="form-group has-float-label">
+                        <input id="noOfZones" type="text" class="form-control" placeholder="" formControlName="noOfZones" readonly>
+                        <label for="noOfZones" translate>INCIDENTADD.noofzones.text</label>
+                      </div>
+                    </div>
+
+                    <div class="col-md-4 col-sm-12">
+                      <div class="form-group has-float-label">
+                        <input id="noOfCells" type="text" class="form-control" placeholder="" formControlName="noOfCells" readonly>
+                        <label for="noOfCells" translate>INCIDENTADD.noofcells.text</label>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="pull-right" style="display: inline-flex;">
+                      <button class="btn btn-orange" [disabled]="!incidentAddForm.valid" [ngClass]="uploadbuttonvisible?'clsreadonly':'editable'">
+                        <span translate>INCIDENTADD.addincident.text</span>
+                      </button>
+                      <button class="btn btn-orange" style="margin-left: 5px;" [ngClass]="uploadbuttonvisible?'clsreadonly':'editable'" routerLink="/incident">Cancel</button>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+          <!-- #incidentadd-form -->
+        </div>
+        <!-- .simple-page-wrap -->
+      </div>
+      <!-- end col -->
+    </div>
+
+    <div class="container">
+      <!-- Trigger the modal with a button -->
+      <button style="display: none" #opendialog type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>
+      <!-- Modal -->
+      <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">{{title}}</h4>
+            </div>
+            <div class="modal-body">
+              <p>{{modalbody}}</p>
+              <!-- code by sneha -->
+              <!-- <mat-radio-group class="example-radio-group" [(ngModel)]="selectedUser">
+                <mat-radio-button class="example-radio-button" *ngFor="let emailId of emailIds" [value]="emailId">
+                  {{emailId}}
+                </mat-radio-button>
+              </mat-radio-group> -->
+              <!-- code written by sarjerao -->
+              <div *ngFor="let item of duplicateIncidentRec">
+                <div class="row">
+                  <div class="col-sm-12 col-md-12">
+                    <p class="titletextdata">User Name: {{item.username}}</p>
+                    <p>
+                      <mat-radio-group class="example-radio-group" [(ngModel)]="item.selecteditem">
+                        <mat-radio-button class="example-radio-button" *ngFor="let emaidata of item.emaillist" [value]="emaidata" style="margin-right: 8px;">
+                          {{emaidata.Email}}
+                        </mat-radio-button>
+                      </mat-radio-group>
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <!-- end of code -->
+            </div>
+            <div class="modal-footer">
+              <span *ngIf="modalfor=='duplicaterecords'">
+                <button class="btn btn-orange" (click)="checkDuplicateRecord()">OK</button>
+                <button class="btn btn-orange" data-dismiss="modal">Cancel</button>
+              </span>
+              <span *ngIf="modalfor=='userNotExist'">
+                <button class="btn btn-orange" data-dismiss="modal">OK</button>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+  <!-- END HOME -->
+
+</div>

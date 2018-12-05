@@ -1,0 +1,59 @@
+<div>
+    <!-- HOME -->
+    <section>
+        <div class="row">
+            <div class="col" style="align-self: center">
+                <div>
+                    <div class="simple-page-form animated zoomIn" id="roleadd-form">
+                        <span class="lblsubtitle" translate>ROLEADD.roleadd.title</span>
+                        <form [formGroup]="roleAddForm" (ngSubmit)="onSubmit()">
+                            <div class="roleAdd-group" style="padding-top: 10px">
+                                <!-- 1st row -->
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-12">
+                                        <span *ngIf="!roleAddForm.get('roleName').valid && roleAddForm.get('roleName').touched" class="help-box" translate>ROLEADD.roleadd.role.validate.text</span>
+                                        <div class="form-group has-float-label">
+                                            <input id="roleName" type="text" class="form-control" placeholder="" formControlName="roleName">
+                                            <label for="roleName" translate>ROLEADD.role.role.text
+                                                <i class="text-danger">*</i>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12">
+                                        <span class="help-box"></span>
+                                        <div class="form-group has-float-label">
+                                            <input id="description" type="text" class="form-control" placeholder="" formControlName="description">
+                                            <label for="description" translate>ROLEADD.role.description.text
+                                                <i class="text-danger"></i>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <!-- 2rd row -->
+                                <div class="row">
+                                    <div class="pull-right" style="display: inline-flex;">
+                                        <span *ngIf="localstorageservice.checkCreatePermission(feature.PORTAL_MANAGEMENT)">
+                                            <button class="btn btn-orange" [disabled]="!roleAddForm.valid">
+                                                <span translate>ROLEADD.roleadd.save.button.text</span>
+                                            </button>
+                                        </span>
+                                        <button class="btn btn-orange" style="margin-left:5px;" type="button" routerLink="/portalManagment/roleList">
+                                            <span translate>ROLEADD.roleadd.cancel.button.text</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- #roleadd-form -->
+                </div>
+
+                <!-- .simple-page-wrap -->
+            </div>
+            <!-- end col -->
+        </div>
+    </section>
+    <!-- END HOME -->
+</div>

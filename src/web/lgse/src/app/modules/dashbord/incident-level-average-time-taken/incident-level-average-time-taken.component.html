@@ -1,0 +1,44 @@
+<mat-card>
+  <div class="row">
+    <div class="col-sm-12 col-md-7 col-lg-7">
+      <label class="lblsubtitle" translate style="padding-bottom: 6%;">DASHBOARD.avgtimetakenincidentlevel.text </label>
+      <div class="pull-right">
+       <i class="btn-sm  minmax pointer fa fa-refresh" aria-hidden="true" (click)="getStatuswiseIncident();"></i>
+       </div>
+   
+      <table class="table table-responsive">
+        <thead>
+          <tr>
+            <th>
+              <b><label translate>DASHBOARD.name.text</label></b>
+            </th>
+            <th>
+              <label translate>DASHBOARD.starttime.text</label>
+            </th>
+            <th>
+              <label translate>DASHBOARD.endtime.text</label>
+            </th>
+            <th>
+              <label translate>DASHBOARD.time.text</label>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let  status of statuswiseIncidentResponse">
+            <td>{{status.name}} ({{status.propCount}})</td>
+            <td>{{status.startTime | date: 'dd/MM/yyyy hh:mm:ss a'}}</td>
+            <td>{{status.endTime | date: 'dd/MM/yyyy hh:mm:ss a'}}</td>
+            <td>{{ status.value}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-sm-12 col-md-5 col-lg-5" style="height:200px;">
+
+      <ngx-charts-bar-vertical [results]="statuswiseIncidentChart" [xAxis]="true" [customColors]="customColors" [yAxis]="true"
+        [gradient]=true [animations]=true [barPadding]="2" [animations]="animations">
+      </ngx-charts-bar-vertical>
+      <!-- [valueFormatting]="valueFormatting" -->
+    </div>
+  </div>
+</mat-card>

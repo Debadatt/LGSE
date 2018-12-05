@@ -1,0 +1,39 @@
+<mat-card>
+  <!-- : {{Incident.incidentid}} -->
+  <mat-card-title>
+    <label class="lblsubtitle" translate>DASHBOARD.avgtimetakenuserlevel.text</label>
+    <div class="pull-right">
+      <div class="row">
+        <div class="col-sm-4 col-md-4 col-lg-4" style="display: inline-flex;">
+          <div class="input-sm">Cell </div>
+        </div>
+        <div class="col-sm-8 col-md-8 col-lg-8" style="display: inline-flex;">
+          <select class="form-control input-sm " [(ngModel)]="filtervalue" (change)="filterChart();">
+            <option *ngFor="let data of cells" [value]="data">{{data}}</option>
+          </select>
+          <i class="btn-sm  minmax pointer fa fa-refresh" aria-hidden="true" (click)="userWiseStatus();"></i>
+      
+          <!-- <i class="glyphicon glyphicon-transfer  pointer fullscreen" (click)="fullWidthChart()"></i> -->
+        </div>
+      </div>
+    </div>
+  </mat-card-title>
+  <div class="row">
+    <div class="col-12" style="height:350px !important">
+      <ngx-charts-bar-vertical-stacked  class="customfont"
+      [customColors]="customColors"
+       [gradient]=true 
+       [results]="userwiseIncidentChart"     
+        [xAxis]="showXAxis" 
+        [animations]=true     
+        [yAxis]="showYAxis"
+         [legend]="showLegend" 
+         [showXAxisLabel]="showXAxisLabel"
+          [showYAxisLabel]="showYAxisLabel"
+           [xAxisLabel]="xAxisLabel"
+        [yAxisLabel]="yAxisLabel">
+      </ngx-charts-bar-vertical-stacked>
+    </div>
+  </div>
+</mat-card>
+    

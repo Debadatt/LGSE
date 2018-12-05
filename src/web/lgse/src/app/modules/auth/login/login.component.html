@@ -1,0 +1,66 @@
+<div class="simple-page">
+
+  <!-- HOME -->
+  <section class="bg-custom home" id="home">
+
+    <div class="home-sm">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8">
+            <div class="home-wrapper home-wrapper-alt p-50">
+              <div class="main-logo">
+                <img src="../../assets/images/walesandwestcoloredlogo.png" class="img-responsive login-main-logo" alt="walesandwest">
+              </div>
+              <h4 class="w-full text-justify auth-paragraph wordbreak"> {{welcomeText}}</h4>
+              <p translate>WELCOMETXT.defaulttext.text </p>
+
+            </div>
+          </div>
+          <!-- end col -->
+          <div class="col-lg-4 ">
+            <div class="simple-page-wrap">
+              <div class="simple-page-form animated zoomIn" id="login-form">
+                <h4 class="form-title m-b-xxl text-center auth-heading" translate>LOGIN.signin.title</h4>
+                <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+                  <div formGroupName="loginData">
+                    <span class="help-box" *ngIf="!loginForm.get('loginData.workemail').valid && loginForm.get('loginData.workemail').touched"
+                      translate>LOGIN.valid.email.text</span>
+                    <div class="form-group has-float-label">
+                      <input id="sign-in-email" type="email" class="form-control" placeholder="" formControlName="workemail">
+                      <label for="sign-in-email" translate>LOGIN.email.text
+                        <i class="text-danger">*</i>
+                      </label>
+                    </div>
+                    <span class="help-box" *ngIf="!loginForm.get('loginData.password').valid && loginForm.get('loginData.password').touched"
+                      translate>LOGIN.valid.password.text</span>
+                    <div class="form-group has-float-label">
+                      <input id="sign-in-password" type="password" class="form-control" placeholder="" formControlName="password">
+                      <label for="sign-in-password" translate>LOGIN.password.text
+                        <i class="text-danger">*</i>
+                      </label>
+                    </div>
+                    <input type="submit" class="btn btn-orange" [value]="'LOGIN.signin.text' | translate " [disabled]="!loginForm.valid">
+                  </div>
+                </form>
+              </div>
+              <!-- #login-form -->
+              <div class="simple-page-footer">
+                <p>
+                  <a routerLink="/auth/forgot-password" translate>LOGIN.forgot.password</a>
+                </p>
+                <p>
+                  <small translate>LOGIN.dont.have.account.text</small>
+                  <a routerLink="/auth/register" translate> LOGIN.signup.text</a>
+                </p>
+              </div>
+              <!-- .simple-page-footer -->
+            </div>
+            <!-- .simple-page-wrap -->
+          </div>
+          <!-- end col -->
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- END HOME -->
+</div>

@@ -1,0 +1,7 @@
+.rightmargin{
+    margin-right: 15px;
+}
+.wordbreak{
+    width: 100% !important;
+    word-break: break-all !important;
+}

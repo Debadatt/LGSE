@@ -1,0 +1,168 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:LGSEApp.Behaviors"
+             xmlns:converters="clr-namespace:LGSEApp.Converters"
+             xmlns:ef="clr-namespace:LGSEApp.Effects"
+             x:Class="LGSEApp.UserActivePage"
+             BackgroundColor="#2A2D42"
+             NavigationPage.HasNavigationBar="False">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:FirstValidationErrorConverter x:Key="FirstValidationErrorConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <StackLayout HorizontalOptions="FillAndExpand"
+                 VerticalOptions="Center">
+        <StackLayout VerticalOptions="Start"
+                     HorizontalOptions="CenterAndExpand">
+            <Image HorizontalOptions="CenterAndExpand"
+                   Source="wwu_logo.png" />
+        </StackLayout>
+
+        <StackLayout HorizontalOptions="FillAndExpand"
+                     VerticalOptions="FillAndExpand"
+                     Padding="10,10,10,10">
+
+
+
+
+            <StackLayout Spacing="0"
+                         HorizontalOptions="FillAndExpand"
+                         VerticalOptions="Center">
+                <Frame CornerRadius="5"
+                       BackgroundColor="#FBFDFF"
+                       HasShadow="False"
+                       VerticalOptions="FillAndExpand">
+                    <StackLayout HorizontalOptions="Fill"
+                                 VerticalOptions="CenterAndExpand">
+                        <Label Style="{StaticResource TitleLabelStyle}"
+                               Text="Please enter new Password to active user"
+                               HorizontalOptions="Fill"
+                               VerticalOptions="CenterAndExpand"
+                               TextColor="#77797E"></Label>
+                        <Entry Text="{Binding OtpCode.Value, Mode=TwoWay}"
+                               Placeholder="OTP Code"
+                               Keyboard="Numeric">
+                            <Entry.Style>
+                                <OnPlatform x:TypeArguments="Style">
+                                    <On Platform="iOS, Android, UWP"
+                                        Value="{StaticResource EntryStyle}" />
+                                </OnPlatform>
+                            </Entry.Style>
+                            <Entry.Behaviors>
+                                <local:EventToCommandBehavior EventName="TextChanged"
+                                                              Command="{Binding ValidateOTPCodeCommand}" />
+                            </Entry.Behaviors>
+                            <Entry.Triggers>
+                                <DataTrigger TargetType="Entry"
+                                             Binding="{Binding OtpCode.IsValid}"
+                                             Value="False">
+                                    <Setter Property="local:LineColorBehavior.LineColor"
+                                            Value="{StaticResource ErrorColor}" />
+                                </DataTrigger>
+                            </Entry.Triggers>
+                        </Entry>
+                        <Label Text="{Binding OtpCode.Errors, Converter={StaticResource FirstValidationErrorConverter}"
+                               Style="{StaticResource ValidationErrorLabelStyle}" />
+
+
+                        <Entry Text="{Binding Password.Value, Mode=TwoWay}"
+                               Placeholder="Password"
+                               IsPassword="True">
+                            <Entry.Effects>
+                                <ef:ShowHidePassEffect />
+                            </Entry.Effects>
+                            <Entry.Style>
+                                <OnPlatform x:TypeArguments="Style">
+                                    <On Platform="iOS, Android, UWP"
+                                        Value="{StaticResource EntryStyle}" />
+                                </OnPlatform>
+                            </Entry.Style>
+                            <Entry.Behaviors>
+                                <local:EventToCommandBehavior EventName="TextChanged"
+                                                              Command="{Binding ValidatePasswordCommand}" />
+                            </Entry.Behaviors>
+                            <Entry.Triggers>
+                                <DataTrigger TargetType="Entry"
+                                             Binding="{Binding Password.IsValid}"
+                                             Value="False">
+                                    <Setter Property="local:LineColorBehavior.LineColor"
+                                            Value="{StaticResource ErrorColor}" />
+                                </DataTrigger>
+                            </Entry.Triggers>
+                        </Entry>
+                        <Label Text="Minimum 8 characters, at least 1 uppercase and 1 special character"
+                               Style="{StaticResource labelTitleStyle}" />
+                        <Label Text="{Binding Password.Errors, Converter={StaticResource FirstValidationErrorConverter}"
+                               Style="{StaticResource ValidationErrorLabelStyle}" />
+
+                        <Entry Text="{Binding ConfirmPassword.Value, Mode=TwoWay}"
+                               Placeholder="Confirm Password"
+                               IsPassword="True">
+                            <Entry.Effects>
+                                <ef:ShowHidePassEffect />
+                            </Entry.Effects>
+                            <Entry.Style>
+                                <OnPlatform x:TypeArguments="Style">
+                                    <On Platform="iOS, Android, UWP"
+                                        Value="{StaticResource EntryStyle}" />
+                                </OnPlatform>
+                            </Entry.Style>
+                            <Entry.Behaviors>
+                                <local:EventToCommandBehavior EventName="TextChanged"
+                                                              Command="{Binding ValidateConfirmPasswordCommand}" />
+                            </Entry.Behaviors>
+                            <Entry.Triggers>
+                                <DataTrigger TargetType="Entry"
+                                             Binding="{Binding ConfirmPassword.IsValid}"
+                                             Value="False">
+                                    <Setter Property="local:LineColorBehavior.LineColor"
+                                            Value="{StaticResource ErrorColor}" />
+                                </DataTrigger>
+                            </Entry.Triggers>
+                        </Entry>
+                       
+                        <Label Text="{Binding ConfirmPassword.Errors, Converter={StaticResource FirstValidationErrorConverter}"
+                               Style="{StaticResource ValidationErrorLabelStyle}" />
+
+
+
+                        <Button x:Name="btnChangePassword"
+                                Command="{Binding SubmitCommand}"
+                                Style="{StaticResource LoginButtonStyle}"
+                                Text="Active User"
+                                TextColor="White"
+                                FontAttributes="Bold"
+                                FontSize="Large"
+                                HorizontalOptions="FillAndExpand"
+                                BackgroundColor="#EF7B10" />
+                        <Label Text="{Binding Message}"
+                               Style="{StaticResource ValidationErrorLabelStyle}" />
+                    </StackLayout>
+                </Frame>
+
+
+
+            </StackLayout>
+        </StackLayout>
+        <StackLayout    HorizontalOptions="Center"
+                        VerticalOptions="FillAndExpand">
+            <StackLayout   Orientation="Horizontal"
+                           HorizontalOptions="FillAndExpand"
+                           VerticalOptions="FillAndExpand">
+
+                <StackLayout  Orientation="Horizontal"
+                              HorizontalOptions="Center">
+                    <Button x:Name="btnSignIn"
+                            Command="{Binding SignInCommand}"
+                            Text="Cancel"
+                            TextColor="White"
+                            FontSize="Medium"
+                            HorizontalOptions="Center"
+                            BackgroundColor="Transparent" />
+                </StackLayout>
+            </StackLayout>
+        </StackLayout>
+    </StackLayout>
+</ContentPage>

@@ -1,0 +1,17 @@
+.card {
+    text-align: center;
+    padding: auto;
+}
+
+.row {
+    padding: 2%;
+}
+
+.img-fluid {
+    max-width: 100%; 
+    height: auto;
+}
+
+img {
+    padding: 3px;
+}

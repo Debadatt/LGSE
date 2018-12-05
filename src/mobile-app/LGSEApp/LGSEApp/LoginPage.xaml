@@ -1,0 +1,160 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:LGSEApp.Behaviors"
+             xmlns:converters="clr-namespace:LGSEApp.Converters"
+             xmlns:ef="clr-namespace:LGSEApp.Effects"
+             x:Class="LGSEApp.LoginPage"
+             BackgroundColor="#2A2D42"
+             NavigationPage.HasNavigationBar="False">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:FirstValidationErrorConverter x:Key="FirstValidationErrorConverter" />
+
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <StackLayout HorizontalOptions="FillAndExpand"
+                 VerticalOptions="Center">
+        <StackLayout VerticalOptions="Start"
+                     HorizontalOptions="CenterAndExpand">
+            <Image HorizontalOptions="CenterAndExpand"
+                   Source="wwu_logo.png" />
+        </StackLayout>
+        <StackLayout HorizontalOptions="FillAndExpand"
+                     VerticalOptions="Center"
+                     Padding="10,10,10,10">        
+
+
+
+
+            <StackLayout Spacing="0"
+                         HorizontalOptions="FillAndExpand"
+                         VerticalOptions="Center">
+
+                <Frame  CornerRadius="5"
+                        BackgroundColor="#FBFDFF"
+                        HasShadow="False"
+                        VerticalOptions="FillAndExpand">
+                    <StackLayout 
+                                 HorizontalOptions="Fill"
+                                 VerticalOptions="CenterAndExpand">
+                        <Label Style="{StaticResource TitleLabelStyle}"
+                               Text="Sign in with your work Account"
+                               HorizontalOptions="Fill"
+                               VerticalOptions="CenterAndExpand"
+                               TextColor="#77797E"></Label>
+                        <Entry Text="{Binding UserName.Value, Mode=TwoWay}"
+                               Placeholder="Work Email" 
+                               Keyboard="Email">
+                            <Entry.Style>
+                                <OnPlatform x:TypeArguments="Style">
+                                    <On Platform="iOS, Android, UWP"
+                                        Value="{StaticResource EntryStyle}" />
+                                </OnPlatform>
+                            </Entry.Style>
+                            <Entry.Behaviors>
+                                <local:EventToCommandBehavior EventName="TextChanged"
+                                                              Command="{Binding ValidateUserNameCommand}" />
+                            </Entry.Behaviors>
+                            <Entry.Triggers>
+                                <DataTrigger TargetType="Entry"
+                                             Binding="{Binding UserName.IsValid}"
+                                             Value="False">
+                                    <Setter Property="local:LineColorBehavior.LineColor"
+                                            Value="{StaticResource ErrorColor}" />
+                                </DataTrigger>
+                            </Entry.Triggers>
+                        </Entry>
+                        <Label Text="{Binding UserName.Errors, Converter={StaticResource FirstValidationErrorConverter}"
+                               Style="{StaticResource ValidationErrorLabelStyle}" />
+                        <Entry Text="{Binding Password.Value, Mode=TwoWay}"
+                               Placeholder="Password"
+                               IsPassword="True">
+                            <Entry.Effects>
+                                <ef:ShowHidePassEffect />
+                            </Entry.Effects>
+                            <Entry.Style>
+                                <OnPlatform x:TypeArguments="Style">
+                                    <On Platform="iOS, Android, UWP"
+                                        Value="{StaticResource EntryStyle}" />
+
+                                </OnPlatform>
+                            </Entry.Style>
+                            <Entry.Behaviors>
+                                <local:EventToCommandBehavior EventName="TextChanged"
+                                                              Command="{Binding ValidatePasswordCommand}" />
+                            </Entry.Behaviors>
+                            <Entry.Triggers>
+                                <DataTrigger TargetType="Entry"
+                                             Binding="{Binding Password.IsValid}"
+                                             Value="False">
+                                    <Setter Property="local:LineColorBehavior.LineColor"
+                                            Value="{StaticResource ErrorColor}" />
+                                </DataTrigger>
+                            </Entry.Triggers>
+                        </Entry>
+                        <Label Text="{Binding Password.Errors, Converter={StaticResource FirstValidationErrorConverter}"
+                               Style="{StaticResource ValidationErrorLabelStyle}" />
+
+
+                        <Button x:Name="btnLogin"
+                                Command="{Binding SignInCommand}"
+                                Style="{StaticResource ButtonStyle}"
+                                Text="NEXT"
+                                TextColor="White"                           
+                              
+                                HorizontalOptions="FillAndExpand"
+                                />
+                        <Label x:Name="lblLoginMsg"
+                               Text="{Binding Message}"     Style="{StaticResource ValidationErrorLabelStyle}"                          
+                               />
+                    </StackLayout>
+                </Frame>
+            </StackLayout>
+        </StackLayout>
+        <!--Text="Invalid Work Email and Password entered."-->
+        <StackLayout HorizontalOptions="Center"
+                         VerticalOptions="FillAndExpand">
+                <Button x:Name="btnForgotPassword"
+                        Command="{Binding ForgotCommand}"
+                        Text="FORGOT PASSWORD?"
+                        TextColor="White"
+                        FontAttributes="Bold"
+                        FontSize="Medium"
+                        HorizontalOptions="FillAndExpand"
+                        BackgroundColor="#2A2D42" />
+            </StackLayout>
+            <StackLayout    HorizontalOptions="Center"
+                            VerticalOptions="FillAndExpand">
+                <StackLayout   Orientation="Horizontal"
+                               HorizontalOptions="FillAndExpand"
+                               VerticalOptions="FillAndExpand">
+                    <StackLayout  Orientation="Horizontal"
+                                  HorizontalOptions="Center">
+                        <Label Text="Do not have an account?"
+                               FontAttributes="Bold"
+                               TextColor="White"
+                               FontSize="Small"
+                               HorizontalOptions="Center"
+                               VerticalOptions="Center">
+                        </Label>
+                    </StackLayout>
+                    <StackLayout  Orientation="Horizontal"
+                                  HorizontalOptions="Center">
+                        <Button x:Name="btnSignUp"
+                                Command="{Binding SignUpCommand}"
+                                Text="SIGN UP"
+                                TextColor="White"
+                                FontAttributes="Bold"
+                                FontSize="Medium"
+                                HorizontalOptions="FillAndExpand"
+                                BackgroundColor="#2A2D42" />
+                    </StackLayout>
+                </StackLayout>
+            </StackLayout>
+
+
+        </StackLayout>
+    
+</ContentPage> 

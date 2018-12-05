@@ -1,0 +1,306 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Application xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+              xmlns:behaviors="clr-namespace:LGSEApp.Behaviors"
+             x:Class="LGSEApp.App">
+	<Application.Resources>
+        <ResourceDictionary>
+
+            <!-- COLORS -->
+            <Color x:Key="WhiteColor">#ffffff</Color>
+            <Color x:Key="BlackColor">#000000</Color>
+            <Color x:Key="EntryPlaceholderColor">#77797E</Color>
+            <Color x:Key="BackgroundColor">#F4F6FA</Color>
+            <Color x:Key="BarBackgroundColor">#2A2E43</Color>
+            <Color x:Key="GreenColor">#00A69C</Color>
+            <Color x:Key="ErrorColor">#ff5252</Color>
+            <Color x:Key="TextColor">#757575</Color>
+            <Color x:Key="FilterApplyColor">#e79228</Color>
+            <Color x:Key="ButtonColor">#EF7B10</Color>
+            <!-- FONTS -->
+            <OnPlatform x:Key="ComfortaaRegular"
+                        x:TypeArguments="x:String">
+                <On Platform="iOS" Value="Comfortaa-Regular" />
+                <On Platform="Android" Value="Comfortaa-Regular.ttf#Comfortaa" />
+                <On Platform="UWP" Value="Assets/Fonts/Comfortaa-Regular.ttf#Comfortaa" />
+            </OnPlatform>
+            <OnPlatform x:Key="arial"
+                        x:TypeArguments="x:String">
+                <On Platform="iOS" Value="arial" />
+                <On Platform="Android" Value="arial.ttf#arial" />
+                <On Platform="UWP" Value="Assets/Fonts/arial.ttf#arial" />
+            </OnPlatform>
+
+            <OnPlatform x:Key="ComfortaaBold"
+                        x:TypeArguments="x:String">
+                <On Platform="iOS" Value="Montserrat-Bold" />
+                <On Platform="Android" Value="Comfortaa-Bold.ttf#Comfortaa" />
+                <On Platform="UWP" Value="Assets/Fonts/Comfortaa-Bold.ttf#Comfortaa" />
+            </OnPlatform>
+
+            <OnPlatform x:Key="RalewayRegular"
+                        x:TypeArguments="x:String">
+                <On Platform="iOS" Value="raleway.regular" />                
+                <On Platform="Android" Value="raleway.regular.ttf#raleway" />
+                <On Platform="UWP" Value="Assets/Fonts/raleway.regular.ttf#raleway" />
+            </OnPlatform>
+
+
+            <OnPlatform x:Key="LittleSize"
+                        x:TypeArguments="x:Double">
+                <On Platform="iOS" Value="12" />
+                <On Platform="Android, UWP, WinRT, WinPhone" Value="12" />
+            </OnPlatform>
+
+            <OnPlatform x:Key="MidMediumSize"
+                        x:TypeArguments="x:Double">
+                <On Platform="iOS" Value="14" />
+                <On Platform="Android, UWP, WinRT, WinPhone" Value="14" />
+            </OnPlatform>
+
+            <OnPlatform x:Key="MediumSize"
+                        x:TypeArguments="x:Double">
+                <On Platform="iOS" Value="14" />
+                <On Platform="Android, UWP, WinRT, WinPhone" Value="14" />
+            </OnPlatform>
+
+            <OnPlatform x:Key="LargeSize"
+                        x:TypeArguments="x:Double">
+                <On Platform="iOS" Value="16" />
+                <On Platform="Android, UWP" Value="18" />
+            </OnPlatform>
+
+            <OnPlatform x:Key="LargerSize"
+                        x:TypeArguments="x:Double">
+                <On Platform="iOS" Value="18" />
+                <On Platform="Android, UWP" Value="20" />
+            </OnPlatform>
+
+            <OnPlatform x:Key="BigSize"
+                        x:TypeArguments="x:Double">
+                <On Platform="iOS" Value="20" />
+                <On Platform="Android, UWP" Value="24" />
+            </OnPlatform>
+
+            <OnPlatform x:Key="ExtraBigSize"
+                        x:TypeArguments="x:Double">
+                <On Platform="iOS" Value="24" />
+                <On Platform="Android, UWP" Value="32" />
+            </OnPlatform>
+
+            <OnPlatform x:Key="HugeSize"
+                        x:TypeArguments="x:Double">
+                <On Platform="iOS" Value="32" />
+                <On Platform="Android, UWP" Value="48" />
+            </OnPlatform>
+
+            <OnPlatform x:TypeArguments="FontAttributes"
+                        x:Key="BaseButtonFontAttributes">
+                <On Platform="iOS" Value="Bold" />
+                <On Platform="Android" Value="None" />
+            </OnPlatform>
+
+            <!-- EXPLICIT STYLES -->
+            <Style x:Key="ValidationErrorLabelStyle"
+                   TargetType="{x:Type Label}">
+                <Setter Property="TextColor"
+                           Value="{StaticResource ErrorColor}" />
+                <Setter Property="FontSize"
+                           Value="{StaticResource LittleSize}" />
+            </Style>
+            <!-- Label title -->
+            <Style x:Key="labelTitleStyle"
+                   TargetType="{x:Type Label}">
+                <Setter Property="FontFamily"
+                        Value="{StaticResource arial}" />
+                <Setter Property="TextColor"
+                        Value="{StaticResource EntryPlaceholderColor}" />
+                <Setter Property="FontSize"
+                        Value="Small" />
+                <Setter Property="HorizontalOptions"
+                        Value="FillAndExpand" />                
+                <Setter Property="BackgroundColor"
+                        Value="Transparent" />
+            </Style>
+            <!-- Label title -->
+            <Style x:Key="labelStyle"
+                   TargetType="{x:Type Label}">
+                <Setter Property="FontFamily"
+                        Value="{StaticResource arial}" />
+                <Setter Property="TextColor"
+                        Value="{StaticResource BlackColor}" />
+                <Setter Property="FontSize"
+                        Value="Small" />
+                <Setter Property="HorizontalOptions"
+                        Value="FillAndExpand" />                
+                <Setter Property="BackgroundColor"
+                        Value="Transparent" />
+            </Style>
+            <!-- Label title -->
+            <Style x:Key="labelDetailsStyle"
+                   TargetType="{x:Type Label}">
+                <Setter Property="FontFamily"
+                        Value="{StaticResource arial}" />
+                <Setter Property="TextColor"
+                        Value="{StaticResource BlackColor}" />
+                <Setter Property="FontSize"
+                        Value="Small" />
+                <Setter Property="HorizontalOptions"
+                        Value="FillAndExpand" />
+                <Setter Property="BackgroundColor"
+                        Value="Transparent" />
+                <Setter Property="Margin"
+                        Value="10, 0,0,0" />
+            </Style>
+            <!-- Entry STYLES -->
+            <Style x:Key="EntryStyle"
+                   TargetType="{x:Type Entry}">
+                <Setter Property="FontFamily"
+                        Value="{StaticResource arial}" />
+                <Setter Property="TextColor"
+                        Value="{StaticResource BlackColor}" />
+                <Setter Property="PlaceholderColor"
+                        Value="{StaticResource EntryPlaceholderColor}" />
+                <Setter Property="FontSize"
+                        Value="Small" />
+                <Setter Property="HorizontalOptions"
+                        Value="FillAndExpand" />
+                <Setter Property="FontAttributes"
+                        Value="Bold" />
+                <Setter Property="BackgroundColor" 
+                        Value="Transparent" />
+                <Setter Property="Opacity"
+                        Value="0.4" />
+                <Setter Property="behaviors:LineColorBehavior.ApplyLineColor"
+                        Value="True" />
+                <Setter Property="behaviors:LineColorBehavior.LineColor"
+                        Value="{StaticResource BlackColor}" />
+                <Style.Triggers>
+                    <Trigger TargetType="Entry"
+                             Property="IsFocused" 
+                             Value="True">
+                        <Setter Property="Opacity" Value="0.6" />
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+            
+             
+
+            <Style x:Key="UwpEntryStyle"
+                   TargetType="{x:Type Entry}">
+                <Setter Property="FontFamily"
+                        Value="{StaticResource ComfortaaRegular}" />
+                <Setter Property="TextColor"
+                        Value="{StaticResource BlackColor}" />
+                <Setter Property="PlaceholderColor"
+                        Value="{StaticResource EntryPlaceholderColor}" />
+                <Setter Property="FontSize"
+                        Value="Small" />
+                <Setter Property="HorizontalOptions"                      
+                        Value="FillAndExpand" />
+                <Setter Property="FontAttributes"
+                        Value="Bold" />
+                <Setter Property="BackgroundColor" 
+                        Value="Transparent" />
+                <Setter Property="Opacity"
+                        Value="0.6" />
+                <Setter Property="behaviors:LineColorBehavior.ApplyLineColor"
+                        Value="True" />
+                <Setter Property="behaviors:LineColorBehavior.LineColor"
+                        Value="Gray" />
+                <Style.Triggers>
+                    <Trigger TargetType="Entry"
+                       Property="IsFocused"
+                       Value="True">
+                        <Setter Property="Opacity" Value="1" />
+                        <Setter Property="behaviors:LineColorBehavior.LineColor"                        
+                                Value="{StaticResource GreenColor}" />
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+            <Style x:Key="TitleLabelStyle"
+                   TargetType="{x:Type Label}">
+                <Setter Property="FontFamily"
+                        Value="{StaticResource ComfortaaBold}" />
+                <Setter Property="FontAttributes"
+                        Value="Bold" />
+                <Setter Property="FontSize"
+                        Value="Medium" />
+                <Setter Property="HorizontalOptions"
+                        Value="Center" />
+                <Setter Property="Margin"
+                        Value="0, 2" />
+            </Style>
+
+            <!--Picker Style-->
+            <Style x:Key="PickerStyle"
+                   TargetType="{x:Type Label}">
+                <Setter Property="FontFamily"
+                        Value="{StaticResource arial}" />
+                <Setter Property="TextColor"
+                        Value="{StaticResource EntryPlaceholderColor}" />
+                <Setter Property="FontSize"
+                        Value="Small" />
+                <Setter Property="HorizontalOptions"
+                        Value="FillAndExpand" />
+                <Setter Property="FontAttributes"
+                        Value="Bold" />
+            </Style>
+            <!--Picker Style-->
+            <Style x:Key="CheckBoxStyle"
+                   TargetType="{x:Type Label}">
+                <Setter Property="FontFamily"
+                        Value="{StaticResource arial}" />
+                <Setter Property="TextColor"
+                        Value="{StaticResource EntryPlaceholderColor}" />
+                <Setter Property="FontSize"
+                        Value="Small" />
+                <Setter Property="HorizontalOptions"
+                        Value="FillAndExpand" />
+                <Setter Property="FontAttributes"
+                        Value="Bold" />
+            </Style>
+            <!--Button Style-->
+            <Style x:Key="ButtonStyle"
+                   TargetType="{x:Type Label}">
+                <Setter Property="FontFamily"
+                        Value="{StaticResource ComfortaaRegular}" />
+                <Setter Property="TextColor"
+                        Value="{StaticResource WhiteColor}" />
+                <Setter Property="HorizontalOptions"
+                        Value="FillAndExpand" />
+                <Setter Property="VerticalOptions"
+                        Value="Center" />
+                <Setter Property="FontAttributes"
+                        Value="Bold" />
+                <Setter Property="BackgroundColor"
+                        Value="{StaticResource ButtonColor}" />
+                <Setter Property="TextColor"
+                        Value="{StaticResource WhiteColor}" />
+                <Setter Property="FontSize"
+                        Value="Large" />
+            </Style> 
+            <Style x:Key="LoginButtonStyle"
+                   TargetType="{x:Type Label}">
+                <Setter Property="FontFamily"
+                        Value="{StaticResource ComfortaaRegular}" />
+                <Setter Property="TextColor"
+                        Value="{StaticResource WhiteColor}" />
+                <Setter Property="HorizontalOptions"
+                        Value="FillAndExpand" />
+                <Setter Property="VerticalOptions"
+                        Value="Center" />
+                <Setter Property="FontAttributes"
+                        Value="Bold" />
+                <Setter Property="BackgroundColor"
+                        Value="{StaticResource ButtonColor}" />
+                <Setter Property="TextColor"
+                        Value="{StaticResource WhiteColor}" />
+            </Style>
+            <Style TargetType="NavigationPage">
+                <Setter Property="BarBackgroundColor" Value="{StaticResource BarBackgroundColor}"/>
+                <Setter Property="BarTextColor" Value="{StaticResource WhiteColor}"/>
+            </Style>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

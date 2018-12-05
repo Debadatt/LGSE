@@ -1,0 +1,87 @@
+<div class="content">
+    <div>
+        <div class="content div">
+            <div class="simple-page-form animated zoomIn">
+                <div>
+                    <div class="row">
+                        <div class="col-md-12 clo-lg-12">
+                            <label class="lblsubtitle" translate>ACCESSPERMISSION.title.text</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div>
+                                <label style="font-weight: bold;" translate>ACCESSPERMISSION.rolename.text </label>
+                                : {{roleName}}
+                            </div>
+                        </div>
+                    </div>
+                    <mat-table [dataSource]="dataSource" matSort class="table table-striped content tbl mat-elevation-z8">
+                        <ng-container matColumnDef="featureId" hidden>
+                            <mat-header-cell *matHeaderCellDef mat-sort-header mat-sort-header-arrow>
+                                <label translate>ACCESSPERMISSION.feature.text</label>
+                            </mat-header-cell>
+                            <mat-cell *matCellDef="let element">{{element.featureId}} </mat-cell>
+                        </ng-container>
+
+                        <ng-container matColumnDef="featureText">
+                            <mat-header-cell *matHeaderCellDef mat-sort-header class="mat-column-CODIGO">
+                                <label translate>ACCESSPERMISSION.feature.text</label>
+                            </mat-header-cell>
+                            <mat-cell *matCellDef="let element">
+                                <span class="mat-cell-responsive-label" translate>ACCESSPERMISSION.feature.text</span>
+                                <span class="ellipsis mat-cell-text">{{element.featureText}}</span>
+                            </mat-cell>
+                        </ng-container>
+
+                        <ng-container matColumnDef="readPermission">
+                            <mat-header-cell *matHeaderCellDef mat-sort-header class="mat-column-CODIGO">
+                                <label translate>ACCESSPERMISSION.write.text</label>
+                            </mat-header-cell>
+                            <mat-cell *matCellDef="let element;let i=index;">
+                                <label class="mat-cell-responsive-label" translate>ACCESSPERMISSION.write.text</label>
+                                <mat-checkbox [(ngModel)]="element.readPermission" [ngModelOptions]="{standalone: true}" [disabled]="element.createPermission || element.updatePermission"></mat-checkbox>
+                            </mat-cell>
+                        </ng-container>
+
+                        <ng-container matColumnDef="createPermission">
+                            <mat-header-cell *matHeaderCellDef mat-sort-header class="mat-column-CODIGO">
+                                <label translate>ACCESSPERMISSION.create.text</label>
+                            </mat-header-cell>
+                            <mat-cell *matCellDef="let element;let i=index;">
+                                <label class="mat-cell-responsive-label" translate>ACCESSPERMISSION.create.text</label>
+                                <mat-checkbox [(ngModel)]="element.createPermission" [ngModelOptions]="{standalone: true}" (ngModelChange)="checkedReadPermission(element.featureText)"></mat-checkbox>
+                            </mat-cell>
+                        </ng-container>
+
+                        <ng-container matColumnDef="updatePermission">
+                            <mat-header-cell *matHeaderCellDef mat-sort-header class="mat-column-CODIGO">
+                                <label translate>ACCESSPERMISSION.update.text</label>
+                            </mat-header-cell>
+                            <mat-cell *matCellDef="let element;let i=index;">
+                                <label class="mat-cell-responsive-label" translate>ACCESSPERMISSION.update.text</label>
+                                <mat-checkbox [(ngModel)]="element.updatePermission" [ngModelOptions]="{standalone: true}" (ngModelChange)="checkedReadPermission(element.featureText)"></mat-checkbox>
+                            </mat-cell>
+                        </ng-container>
+
+                        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                    </mat-table>
+                    <br>
+                    <div class="row">
+                        <div class="pull-right" style="display: inline-flex;">
+                            <span *ngIf="localstorageservice.checkUpdatePermission(feature.PORTAL_MANAGEMENT)">
+                                <button class="btn btn-orange" (click)="submit()">
+                                    <span translate>ACCESSPERMISSION.save.button.text</span>
+                                </button>
+                            </span>
+                            <button class="btn btn-orange" style="margin-left:5px;" routerLink="/portalManagment/roleList">
+                                <span translate>ACCESSPERMISSION.cancel.button.text</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

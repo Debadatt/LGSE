@@ -1,0 +1,283 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:LGSEApp.Behaviors"
+             xmlns:converters="clr-namespace:LGSEApp.Converters"            
+             x:Class="LGSEApp.SignUpPage"
+             BackgroundColor="#2A2D42"
+             NavigationPage.HasNavigationBar="False">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:FirstValidationErrorConverter x:Key="FirstValidationErrorConverter" />
+
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <StackLayout HorizontalOptions="FillAndExpand"
+                 VerticalOptions="Center">
+        <StackLayout HorizontalOptions="FillAndExpand"
+                     VerticalOptions="FillAndExpand"
+                     Padding="15,0,15,0">
+
+
+            <StackLayout VerticalOptions="Start"
+                         HorizontalOptions="CenterAndExpand">
+                <Image 
+                       HorizontalOptions="CenterAndExpand"
+                       Source="wwu_logo.png" />
+            </StackLayout>
+
+
+
+
+            <StackLayout Spacing="0"
+                         HorizontalOptions="FillAndExpand"
+                         VerticalOptions="FillAndExpand">
+                <ScrollView>
+                    <Frame CornerRadius="5"
+                           HorizontalOptions="FillAndExpand"
+                           VerticalOptions="Center"
+                           BackgroundColor="#FBFDFF"
+                           HasShadow="False">
+
+                        <StackLayout HorizontalOptions="Fill"
+                                     VerticalOptions="CenterAndExpand">
+                            <Label  Style="{StaticResource TitleLabelStyle}"
+                                    Text="Sign up with your work Email"
+                                    HorizontalOptions="Fill"
+                                    VerticalOptions="CenterAndExpand"
+                                    TextColor="#77797E"></Label>
+
+                            <Entry Text="{Binding Email.Value, Mode=TwoWay}"
+                                   Placeholder="Work Email*"
+                                   Keyboard="Email">
+                                <Entry.Style>
+                                    <OnPlatform x:TypeArguments="Style">
+                                        <On Platform="iOS, Android, UWP"
+                                            Value="{StaticResource EntryStyle}" />
+                                    </OnPlatform>
+                                </Entry.Style>
+                                <Entry.Behaviors>
+                                    <local:EventToCommandBehavior EventName="TextChanged"
+                                                                  Command="{Binding ValidateEmailCommand}" />
+                                </Entry.Behaviors>
+                                <Entry.Triggers>
+                                    <DataTrigger TargetType="Entry"
+                                                 Binding="{Binding Email.IsValid}"
+                                                 Value="False">
+                                        <Setter Property="local:LineColorBehavior.LineColor"
+                                                Value="{StaticResource ErrorColor}" />
+                                    </DataTrigger>
+                                </Entry.Triggers>
+                            </Entry>
+                            <Label Text="{Binding Email.Errors, Converter={StaticResource FirstValidationErrorConverter}"
+                                   Style="{StaticResource ValidationErrorLabelStyle}" />
+
+                            <Entry Text="{Binding FirstName.Value, Mode=TwoWay}"
+                                   Placeholder="First Name*">
+                                <Entry.Style>
+                                    <OnPlatform x:TypeArguments="Style">
+                                        <On Platform="iOS, Android, UWP"
+                                            Value="{StaticResource EntryStyle}" />
+                                    </OnPlatform>
+                                </Entry.Style>
+                                <Entry.Behaviors>
+                                    <local:EventToCommandBehavior EventName="TextChanged"
+                                                                  Command="{Binding ValidateFirstNameCommand}" />
+                                </Entry.Behaviors>
+                                <Entry.Triggers>
+                                    <DataTrigger TargetType="Entry"
+                                                 Binding="{Binding FirstName.IsValid}"
+                                                 Value="False">
+                                        <Setter Property="local:LineColorBehavior.LineColor"
+                                                Value="{StaticResource ErrorColor}" />
+                                    </DataTrigger>
+                                </Entry.Triggers>
+                            </Entry>
+                            <Label Text="{Binding FirstName.Errors, Converter={StaticResource FirstValidationErrorConverter}"
+                                   Style="{StaticResource ValidationErrorLabelStyle}" />
+
+                            <Entry Text="{Binding LastName.Value, Mode=TwoWay}"
+                                   Placeholder="Last Name*">
+                                <Entry.Style>
+                                    <OnPlatform x:TypeArguments="Style">
+                                        <On Platform="iOS, Android, UWP"
+                                            Value="{StaticResource EntryStyle}" />
+                                    </OnPlatform>
+                                </Entry.Style>
+                                <Entry.Behaviors>
+                                    <local:EventToCommandBehavior EventName="TextChanged"
+                                                                  Command="{Binding ValidateLastNameCommand}" />
+                                </Entry.Behaviors>
+                                <Entry.Triggers>
+                                    <DataTrigger TargetType="Entry"
+                                                 Binding="{Binding LastName.IsValid}"
+                                                 Value="False">
+                                        <Setter Property="local:LineColorBehavior.LineColor"
+                                                Value="{StaticResource ErrorColor}" />
+                                    </DataTrigger>
+                                </Entry.Triggers>
+                            </Entry>
+                            <Label Text="{Binding LastName.Errors, Converter={StaticResource FirstValidationErrorConverter}"
+                                   Style="{StaticResource ValidationErrorLabelStyle}" />
+                            <Entry Text="{Binding EmployeeId.Value, Mode=TwoWay}"
+                                   Placeholder="Employee ID">
+                                <Entry.Style>
+                                    <OnPlatform x:TypeArguments="Style">
+                                        <On Platform="iOS, Android, UWP"
+                                            Value="{StaticResource EntryStyle}" />
+                                    </OnPlatform>
+                                </Entry.Style>
+                                <Entry.Behaviors>
+                                    <local:EventToCommandBehavior EventName="TextChanged" />
+                                </Entry.Behaviors>
+                                <Entry.Triggers>
+                                    <DataTrigger TargetType="Entry"
+                                                 Binding="{Binding EmployeeId.IsValid}"
+                                                 Value="False">
+                                        <Setter Property="local:LineColorBehavior.LineColor"
+                                                Value="{StaticResource ErrorColor}" />
+                                    </DataTrigger>
+                                </Entry.Triggers>
+                            </Entry>
+
+                            <Picker Style="{StaticResource PickerStyle}"
+                                    x:Name="Roles" 
+                                    Title="Select a Role*"
+                                    ItemsSource="{Binding RoleList}"
+                                    ItemDisplayBinding="{Binding RoleName}"
+                                    SelectedItem="{Binding Roles}">
+
+                            </Picker>
+                            <Label Text="{Binding RoleMessage}"                                  
+                                   Style="{StaticResource ValidationErrorLabelStyle}" />
+                            <Entry x:Name="EUSR"                                   
+                                   Text="{Binding EUSR.Value, Mode=TwoWay}"
+                                   Placeholder="EUSR*"
+                                   Keyboard="Numeric"
+                                   IsVisible="{Binding eusr}">
+                                <Entry.Style>
+                                    <OnPlatform x:TypeArguments="Style">
+                                        <On Platform="iOS, Android, UWP"
+                                            Value="{StaticResource EntryStyle}" />
+                                    </OnPlatform>
+                                </Entry.Style>
+                                <Entry.Behaviors>
+                                    <local:EventToCommandBehavior EventName="TextChanged"
+                                                                  Command="{Binding ValidateEUSRCommand}" />
+
+                                </Entry.Behaviors>
+                                <Entry.Triggers>
+                                    <DataTrigger TargetType="Entry"
+                                                 Binding="{Binding EUSR.IsValid}"
+                                                 Value="False">
+                                        <Setter Property="local:LineColorBehavior.LineColor"
+                                                Value="{StaticResource ErrorColor}" />
+                                    </DataTrigger>
+                                </Entry.Triggers>
+                            </Entry>
+                            <Label IsVisible="{Binding eusr}"
+                                   Text="{Binding EUSR.Errors, Converter={StaticResource FirstValidationErrorConverter}"
+                                   Style="{StaticResource ValidationErrorLabelStyle}" />
+                            <Entry Text="{Binding ContactNo.Value, Mode=TwoWay}"
+                                  
+                                   Keyboard="Telephone"
+                                   Placeholder="Contact No">
+                                <Entry.Style>
+                                    <OnPlatform x:TypeArguments="Style">
+                                        <On Platform="iOS, Android, UWP"
+                                            Value="{StaticResource EntryStyle}" />
+                                    </OnPlatform>
+                                </Entry.Style>
+                                <Entry.Behaviors>
+                                    <local:EventToCommandBehavior EventName="TextChanged"
+                                                                  Command="{Binding ValidateContactCommand}" />
+
+                                </Entry.Behaviors>
+                                <Entry.Triggers>
+                                    <DataTrigger TargetType="Entry"
+                                                 Binding="{Binding ContactNo.IsValid}"
+                                                 Value="False">
+                                        <Setter Property="local:LineColorBehavior.LineColor"
+                                                Value="{StaticResource ErrorColor}" />
+                                    </DataTrigger>
+                                </Entry.Triggers>
+                            </Entry>
+                            <Label Text="{Binding ContactNo.Errors, Converter={StaticResource FirstValidationErrorConverter}"
+                                   Style="{StaticResource ValidationErrorLabelStyle}" />
+                            <Grid RowSpacing="0"
+                                  Padding="0,0,0,0"
+                                  HorizontalOptions="FillAndExpand">
+
+                                <Grid.RowDefinitions>
+                                    <RowDefinition   Height="auto" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto" />
+                                    <ColumnDefinition Width="auto" />
+                                </Grid.ColumnDefinitions>
+                                <Switch Grid.Column="0"
+                                        Grid.Row="0"
+                                        IsToggled="{Binding IsAccept}"
+                                        HorizontalOptions="Start" />
+                                
+                                <Label Text="Accept Terms and Conditions"
+                                       x:Name="lblTerms"
+                                       Grid.Column="1" 
+                                       Grid.Row="0" 
+                                       HorizontalOptions="FillAndExpand"
+                                       VerticalOptions="Center"
+                                       LineBreakMode="NoWrap"
+                                       FontSize="Small"
+                                       Style="{StaticResource labelStyle}" />
+                            </Grid>
+                            <Button Command="{Binding SubmitCommand}" Padding="0,4,0,0"
+                                    Style="{StaticResource LoginButtonStyle}"
+                                    Text="SIGN UP"
+                                    TextColor="White"
+                                    FontAttributes="Bold"
+                                    FontSize="Large"
+                                    HorizontalOptions="FillAndExpand"
+                                    BackgroundColor="#EF7B10" />
+                            <Label x:Name="lblMsg"
+                                   Text="{Binding Message}"
+                                   Style="{StaticResource ValidationErrorLabelStyle}" />
+
+                        </StackLayout>
+
+                    </Frame>
+                </ScrollView>
+            </StackLayout>
+            <StackLayout    HorizontalOptions="Center"
+                            VerticalOptions="FillAndExpand">
+                <StackLayout   Orientation="Horizontal"
+                               HorizontalOptions="FillAndExpand"
+                               VerticalOptions="FillAndExpand">
+                    <StackLayout  Orientation="Horizontal"
+                                  HorizontalOptions="Center">
+                        <Label Text="Already have an account ?"
+                               FontAttributes="Bold"
+                               TextColor="White"
+                               FontSize="Medium"
+                               HorizontalOptions="Center"
+                               VerticalOptions="Center">
+                        </Label>
+                    </StackLayout>
+                    <StackLayout  Orientation="Horizontal"
+                                  HorizontalOptions="Center">
+                        <Button x:Name="btnSignIn"
+                                Command="{Binding SignInCommand}"
+                                Text="SIGN IN"
+                                TextColor="White"                              
+                                FontSize="Medium"
+                                HorizontalOptions="Center"
+                                BackgroundColor="Transparent" />
+                    </StackLayout>
+                </StackLayout>
+            </StackLayout>
+
+        </StackLayout>
+    </StackLayout>
+
+
+
+</ContentPage>

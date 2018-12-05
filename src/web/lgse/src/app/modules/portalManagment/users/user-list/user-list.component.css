@@ -1,0 +1,14 @@
+@import '../../../../shared/assets/css/misc-pages.css';
+.statusBlock {
+    padding: .3em .6em .4em;
+    font-size: 75%;
+    font-weight: 500;
+    line-height: 1;
+    color: #fff;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: .25em;
+    display: inline-block;
+    text-align: center;
+    width: 6em;
+  }

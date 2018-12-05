@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="LGSEApp.View.PropertyHistoryPage"
+             Title="{Binding MPRN}">
+    <ContentPage.Content>
+        <StackLayout>
+
+            <StackLayout HorizontalOptions="FillAndExpand"
+                         VerticalOptions="FillAndExpand">
+                <ListView     x:Name="ItemsListView"
+                              ItemsSource="{Binding PropertyHistoryModels}"
+                              VerticalOptions="FillAndExpand"
+                              HasUnevenRows="true"
+                              SeparatorVisibility="None"
+                              IsRefreshing="False"
+                              IsPullToRefreshEnabled="False"
+                              CachingStrategy="RecycleElement">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Frame IsClippedToBounds="True"
+                                       HasShadow="True"
+                                       CornerRadius="15"
+                                       Padding="0,0,0,0"
+                                       BackgroundColor="{StaticResource WhiteColor}">
+
+                                    <Frame.Margin>
+                                        <OnPlatform x:TypeArguments="Thickness"
+                                                    Android="5"
+                                                    iOS="10" />
+                                    </Frame.Margin>
+                                    <StackLayout  Orientation="Horizontal">
+                                        <BoxView Color="#2A2D42"
+                                                 WidthRequest="10" />
+
+                                        <Grid VerticalOptions="CenterAndExpand"
+                                              Padding="0,5,5,5"
+                                              RowSpacing="0"
+                                              HorizontalOptions="FillAndExpand">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition   Height="*" />
+                                                <RowDefinition Height="*" />
+                                                <RowDefinition Height="auto" />
+                                                <RowDefinition Height="auto" />
+                                            </Grid.RowDefinitions>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*" />
+                                            </Grid.ColumnDefinitions>
+
+
+                                            <Label LineBreakMode="NoWrap"
+                                                   Grid.Row="0"
+                                                   Grid.Column="0"
+                                                   Text="{Binding FirstRow}"
+                                                   Style="{StaticResource labelStyle}">
+
+                                            </Label>
+
+                                            <Label LineBreakMode="NoWrap"
+                                                   Grid.Row="1"
+                                                   Grid.Column="0"
+                                                   Text="{Binding SecoundRow} "
+                                                   Style="{StaticResource labelStyle}">
+
+                                            </Label>
+
+                                            <Label Text="{Binding StatusChangedOn, StringFormat='\{0:dd/MM/yyyy hh:mm tt}'}"
+                                                   LineBreakMode="NoWrap"
+                                                   Grid.Row="2"                                               
+                                                   Grid.Column="0"
+                                                   Style="{StaticResource labelStyle}" />
+
+                                            <Label Text="{Binding Notes}"
+                                                   LineBreakMode="WordWrap"
+                                                   Grid.Row="3"                                                   
+                                                   Grid.Column="0"
+                                                   Style="{StaticResource labelStyle}" />
+
+                                        </Grid>
+                                    </StackLayout>
+                                </Frame>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

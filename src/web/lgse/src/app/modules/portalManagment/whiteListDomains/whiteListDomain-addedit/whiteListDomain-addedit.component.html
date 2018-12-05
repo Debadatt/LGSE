@@ -1,0 +1,59 @@
+<div>
+    <!-- HOME -->
+    <section>
+        <div class="row">
+            <div class="col" style="align-self: center">
+                <div>
+                    <div class="simple-page-form animated zoomIn" id="whiteListDomainadd-form">
+                        <span class="lblsubtitle" translate>DOMAINADD.title.text</span>
+                        <form [formGroup]="domainAddForm" (ngSubmit)="onSubmit()">
+                            <div class="domainAdd-group" style="padding-top: 10px">
+
+                                <!-- 1st row -->
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-12">
+                                        <span *ngIf="!domainAddForm.get('domainName').valid && domainAddForm.get('domainName').touched" class="help-box" translate>DOMAINADD.domainname.validate.text</span>
+                                        <div class="form-group has-float-label">
+                                            <input id="domainName" type="text" class="form-control" placeholder="" formControlName="domainName">
+                                            <label for="domainName" translate>DOMAINADD.domainname.text
+                                                <i class="text-danger">*</i>
+                                            </label>
+                                            <p translate>DOMAINADD.helptext.text </p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12">
+                                        <span *ngIf="!domainAddForm.get('organisation').valid && domainAddForm.get('organisation').touched" class="help-box" translate>DOMAINADD.organisation.validate.text</span>
+                                        <div class="form-group has-float-label">
+                                            <input id="organisation" type="text" class="form-control" placeholder="" formControlName="organisation">
+                                            <label for="organisation" translate>DOMAINADD.organisation.text
+                                                <i class="text-danger">*</i>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- 2nd row -->
+                                <div class="row">
+                                    <div class="pull-right" style="display: inline-flex;">
+                                        <span *ngIf="localstorageservice.checkCreatePermission(feature.PORTAL_MANAGEMENT)">
+                                            <button class="btn btn-orange" [disabled]="!domainAddForm.valid">
+                                                <span translate>DOMAINADD.save.button.text</span>
+                                            </button>
+                                        </span>
+                                        <button class="btn btn-orange" type="button" style="margin-left:5px;" routerLink="/portalManagment/whiteListDomain">
+                                            <span translate>DOMAINADD.cancel.button.text</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- #whiteListDomainadd-form -->
+                </div>
+                <!-- .simple-page-wrap -->
+            </div>
+            <!-- end col -->
+        </div>
+    </section>
+    <!-- END HOME -->
+</div>

@@ -1,0 +1,137 @@
+@import '../../shared/assets/css/misc-pages.css';
+.content .tblbtn  {
+  background-color: #1CBECA;
+  min-width: 168% !important;
+}
+
+.mat-form-field {
+    font-size: 14px;
+    width: 100%;
+  }
+  .red{
+    color:red;
+  }
+
+  .icon-background {
+    color: #FF6901;
+}
+.fa-stack-1x {
+  line-height: inherit;
+  color: white;
+}
+.fa-stack {
+  position: relative;
+  display: inline-block;
+  width: 2em;
+  height: 2em;
+  line-height: 2em;
+  vertical-align: middle;
+  font-size: 21px;
+}
+.mat-expansion-panel-header-description {
+  flex-grow: 0 !important;
+}
+
+
+.mat-expansion-panel:not(.mat-expanded) .mat-expansion-panel-header:not([aria-disabled="true"]):hover {
+    background-color: #66a3ff;
+  }
+  
+  .mat-expansion-panel-header.mat-expanded:focus,
+  .mat-expansion-panel-header.mat-expanded:hover {
+    background-color: #66a3ff;
+  }
+  
+  /* .align {
+    text-align: end;
+  } */
+  
+  .mat-expansion-panel-header-description {
+    flex-grow: 0 !important;
+  }
+  
+  .mat-expansion-panel-header-description,
+  .mat-expansion-panel-header-title {
+    display: flex;
+  }
+  
+  .icon-color {
+    color: #23C6C8;
+  }
+  
+  .list-icon {
+    color: #23C6C8;
+    font-size: 27px;
+  }
+
+  mat-icon.icon-color.mat-icon.material-icons {
+    width: 6px !important;
+  }
+  .icon-color {
+    color: white;
+}
+
+  .back-color {
+    background-color: #01A7CE !important;
+  }
+  
+  .ng-trigger-expansionHeight {
+    height: 48px !important;
+  }
+  
+  /* .actionButton {
+    display: flex;
+  } */
+  
+  .space {
+    flex-grow: 1;
+  }
+  
+  .mat-expansion-panel-header-description {
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .set_space {
+    flex-grow: 0.5;
+    font-size: 18px;
+  }
+  
+  .readonley {
+    pointer-events: none;
+    display: none;
+  }
+  
+  .baseheading {
+    color: #16a58a;
+    font-weight: 600;
+  }
+  
+  .btn-download {
+    background-color: #2cb130;
+    border: none;
+    color: white;
+    padding: 2px 8px;
+    cursor: pointer;
+    font-size: 20px;
+  }
+  
+  .bank-name-font {
+    color: #16a58a;
+    text-align: center;
+    font-size: 17px;
+    font-weight: bold;
+  }
+  .accordian-padding{
+    margin-bottom:11px;
+  }
+  .mat-expansion-panel-header-title {
+    color: white;
+}
+/* .mat-expansion-panel-body {
+  padding: 11px 22px 7px !important;
+} */
+
+.row-top-padding{
+padding-top: 15px;
+}

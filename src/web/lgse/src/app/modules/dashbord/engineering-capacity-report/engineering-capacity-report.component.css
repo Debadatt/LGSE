@@ -1,0 +1,15 @@
+.diseable{
+    margin-left: 18px;
+    pointer-events: none;
+    opacity: 0.8;
+    cursor: wait;
+}
+.inline{
+    display: inline !important;
+}
+.customfont  {
+    font-family: Helvetica, Arial, sans-serif !important;
+  }
+  .fa-refresh {
+    font-size: 13px;
+  }

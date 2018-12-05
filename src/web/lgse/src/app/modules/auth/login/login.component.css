@@ -1,0 +1,24 @@
+/* @import '../../../shared/assets/css/core.css';
+@import '../../../shared/assets/css/custom.css';
+@import '../../../shared/assets/css/misc-pages.css';
+@import '../../../shared/libs/bower/animate.css/animate.min.css';
+@import '../../../shared/libs/bower/material-design-iconic-font/dist/css/material-design-iconic-font.min.css';
+@import '../../../shared/libs/bower/font-awesome/css/font-awesome.min.css'; */
+
+@import '../../../shared/assets/css/misc-pages.css';
+
+.help-box {
+    font-size: 12px;
+    color: red;
+}
+.error {
+    text-align: center;
+}
+input {
+    border-bottom: 1px solid #000000 !important;
+}
+
+.wordbreak{
+    width: 100% !important;
+    word-break: break-all !important;
+}

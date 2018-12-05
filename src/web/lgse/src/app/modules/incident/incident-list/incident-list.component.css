@@ -1,0 +1,80 @@
+
+@import '../../../shared/assets/css/misc-pages.css';
+.content .tblbtn  {
+  background-color: #1CBECA;
+  min-width: 168% !important;
+}
+.statusBlock {
+  padding: .3em .6em .4em;
+  font-size: 75%;
+  font-weight: 500;
+  line-height: 1;
+  color: #fff;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: .25em;
+  display: inline-block;
+  text-align: center;
+  width: 6em;
+}
+.circle {
+  display: inline-block;
+  min-width: 10px;
+  padding: 5px 7px;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1;
+  color: #fff;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  background-color: #FF7300;
+  border-radius: 10px;
+}
+.btn-fb {
+  color: #fff;
+  background-color: #0F5888;
+  border-color: #0F5888;
+}
+
+.btn-tw {
+  color: #fff;
+  background-color: #10C9EF;
+  border-color: #10C9EF;
+}
+
+
+.modal-footer {
+  padding: 10px;
+  text-align: left;
+  border-top: 1px solid #e5e5e5;
+}
+
+.modal-body {
+  position: relative;
+  padding: 5px;
+}
+
+.modal-header {
+  padding: 10px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.close {
+  line-height: 0;
+}
+
+.oval-shape{
+  display: inline-block;
+min-width: 10px;
+padding: 2px 7px;
+font-weight: bold;
+color: #fff;
+vertical-align: middle;
+white-space: nowrap;
+text-align: center;
+
+border-radius: 12px;
+margin: 1px;
+font-size: 12px;
+}

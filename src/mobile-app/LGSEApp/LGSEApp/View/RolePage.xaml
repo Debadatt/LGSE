@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:converters="clr-namespace:LGSEApp.Converters"
+             x:Class="LGSEApp.View.RolePage"
+             BackgroundColor="#2A2D42"
+             NavigationPage.HasNavigationBar="False">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:FirstValidationErrorConverter x:Key="FirstValidationErrorConverter" />
+
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <StackLayout HorizontalOptions="FillAndExpand"
+                 VerticalOptions="Center">
+        <StackLayout HorizontalOptions="FillAndExpand"
+                     VerticalOptions="FillAndExpand"
+                     Padding="10,10,10,10">
+
+
+            <StackLayout VerticalOptions="Start"
+                         HorizontalOptions="CenterAndExpand">
+                <Image HorizontalOptions="CenterAndExpand"
+                       Source="wwu_logo.png" />
+            </StackLayout>
+
+
+
+
+            <StackLayout Spacing="0"
+                         HorizontalOptions="FillAndExpand"
+                         VerticalOptions="Center">
+                <Frame BackgroundColor="#FBFDFF"
+                       HasShadow="False">
+                    <StackLayout HorizontalOptions="Fill"
+                                 VerticalOptions="CenterAndExpand">
+                        <Label Style="{StaticResource TitleLabelStyle}"
+                               Text="Please select your Role to Login"
+                               HorizontalOptions="Fill"
+                               VerticalOptions="CenterAndExpand"
+                               TextColor="#77797E"></Label>
+                        <Picker Style="{StaticResource PickerStyle}"
+                                x:Name="Roles"
+                                Title="Select a Role"
+                                ItemsSource="{Binding RoleList}"
+                                ItemDisplayBinding="{Binding RoleName}"
+                                SelectedItem="{Binding Roles}">
+
+                        </Picker>
+                        <Label Text="{Binding Roles.Errors, Converter={StaticResource FirstValidationErrorConverter}"
+                               Style="{StaticResource ValidationErrorLabelStyle}" />
+
+                        <Button Command="{Binding SubmitCommand}"
+                                Style="{StaticResource LoginButtonStyle}"
+                                Text="SIGN IN"
+                                TextColor="White"
+                                FontAttributes="Bold"
+                                FontSize="Large"
+                                HorizontalOptions="FillAndExpand"
+                                BackgroundColor="#EF7B10" />
+                        <Label  Text="{Binding Message}"
+                                Style="{StaticResource ValidationErrorLabelStyle}" />
+                    </StackLayout>
+                </Frame>
+
+            </StackLayout>
+        </StackLayout>
+    </StackLayout>
+
+</ContentPage>

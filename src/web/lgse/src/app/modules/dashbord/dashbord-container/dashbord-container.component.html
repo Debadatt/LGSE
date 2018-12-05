@@ -1,0 +1,69 @@
+<div class="content">
+  <div class="content div">
+    <div class="animated zoomIn">
+      <div *ngIf="passIncident.id">
+        <div class="row">
+          <div class="col-12">
+            <app-mprn-status-count [Incident]="passIncident"></app-mprn-status-count>
+          </div>
+        </div>
+
+        <div class="row">
+          <div [ngClass]="(fullscreen==true)?'col-sm-12 col-md-12 col-lg-12':'col-sm-12 col-md-12 col-lg-6'" style="padding-top: 12px;">
+            <app-zonewise-incident-status [Incident]="passIncident"></app-zonewise-incident-status>
+          </div>
+          <div [ngClass]="(fullscreen==true)?'col-sm-12 col-md-12 col-lg-12':'col-sm-12 col-md-12 col-lg-6'" style="padding-top: 12px;">
+            <app-cellwise-incident-status [Incident]="passIncident"></app-cellwise-incident-status>
+          </div>
+        </div>
+
+        <div *ngIf="status!=0">
+          <div class="row" style="padding-top:12px;">
+            <div class="col-12">
+              <app-incident-level-average-time-taken [Incident]="passIncident"></app-incident-level-average-time-taken>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-12 col-md-6 col-lg-6'" style="padding-top: 12px;">
+              <app-user-wise-incident-summary [Incident]="passIncident"></app-user-wise-incident-summary>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-6'" style="padding-top: 12px;">
+              <app-zone-level-average-time-taken [Incident]="passIncident"></app-zone-level-average-time-taken>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-12 col-md-6 col-lg-6'" style="padding-top: 12px;">
+              <app-cell-level-average-time-taken [Incident]="passIncident"></app-cell-level-average-time-taken>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-6'" style="padding-top: 12px;">
+              <app-user-level-average-time-taken [Incident]="passIncident"></app-user-level-average-time-taken>
+            </div>
+          </div>
+
+        </div>
+        <div class="row" style="padding-top: 12px;">
+          <div class="col-12">
+            <!-- <mat-accordion>
+            <mat-expansion-panel (opened)="onExpand()">
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  <label translate>DASHBOARD.Engcapacity.text</label>
+
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <div *ngIf="ispannelopened">
+                <app-engineering-capacity-report [Incident]="passIncident" s></app-engineering-capacity-report>
+              </div>
+            </mat-expansion-panel>
+          </mat-accordion> -->
+            <app-engineering-capacity-report [Incident]="passIncident" s></app-engineering-capacity-report>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="isdataavailable==false">
+        
+        <label  translate>DASHBOARD.incidentnotavailable.text</label>
+      </div>
+    </div>
+  </div>
+</div>

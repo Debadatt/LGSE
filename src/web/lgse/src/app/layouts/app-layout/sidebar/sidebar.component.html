@@ -1,0 +1,83 @@
+
+<aside id="menubar" class="menubar light in">
+  <div class="app-user">
+    <div class="media">
+      <div class="media-left">
+        <!-- <div class="avatar avatar-md avatar-circle">
+          <a href="javascript:void(0)"><img class="img-responsive" src="../assets/images/221.jpg" alt="avatar"/></a>
+        </div> -->
+      </div>
+      <div class="media-body">
+        <div class="foldable">
+        {{passdataService.userName }}
+          <h5><a href="javascript:void(0);" style="cursor: default;" class="username"></a></h5>
+          <ul>
+            <li class="dropdown">
+              <a href="javascript:void(0);" style="cursor: default;" class="usertitle">
+                <!-- <small>Incident Manager</small> -->
+                <small>{{userRoleName}}</small>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div><!-- .media-body -->
+    </div><!-- .media -->
+  </div><!-- .app-user -->
+  <div class="main-features">
+    <!-- <span class="menu-text">Main features</span> -->
+  </div>
+  
+  
+  <div class="menubar-scroll">
+    <div class="menubar-scroll-inner">
+      <ul class="app-menu"> 
+        <li [routerLinkActive]="['active']" *ngIf="localstorageservice.checkBaseModuleACL(feature.DASHBOARD);">
+          <a href="javascript:void(0)" routerLink="/dashboard">
+            <i class="menu-icon zmdi zmdi-view-dashboard zmdi-hc-lg"></i>
+            <span class="menu-text">Dashboard </span>
+          </a>
+        </li>
+        
+        <li [routerLinkActive]="['active']" *ngIf="localstorageservice.checkBaseModuleACL(feature.INCIDENT_MANAGEMENT);">
+          <a href="javascript:void(0)" routerLink="/incident">
+            <i class="menu-icon fa fa-cube zmdi-hc-lg"></i>
+            <span class="menu-text">Incident Management</span>
+          </a>
+        </li>
+        <!--  -->
+        <li class="has-submenu" *ngIf="localstorageservice.checkBaseModuleACL(feature.RESOURCE_MANAGEMENT);">
+          <a href="javascript:void(0)" class="submenu-toggle">
+            <i class="menu-icon zmdi zmdi-puzzle-piece zmdi-hc-lg"></i>
+            <span class="menu-text">Resource Management</span>
+            <i class="menu-caret zmdi zmdi-hc-sm zmdi-chevron-right"></i>
+          </a>
+          <ul class="submenu">
+            <li  [routerLinkActive]="['active']"><a href="javascript:void(0)" routerLink="/resources/all-resources"><span class="menu-text">Resources</span></a></li>
+            <!-- <li><a href="javascript:void(0)" routerLink="/resources/assigned-resources"><span class="menu-text">Assigned Resources</span></a></li> -->
+            <li  [routerLinkActive]="['active']"><a href="javascript:void(0)" routerLink="/resources/assign-mprn"><span class="menu-text">Properties</span></a></li>
+          </ul>
+        </li>
+
+        <li class="has-submenu" *ngIf="localstorageservice.checkBaseModuleACL(feature.PORTAL_MANAGEMENT);">
+          <a href="javascript:void(0)" class="submenu-toggle">
+            <i class="menu-icon zmdi zmdi-pages zmdi-hc-lg"></i>
+            <span class="menu-text">Portal Management</span>
+            <i class="menu-caret zmdi zmdi-hc-sm zmdi-chevron-right"></i>
+          </a>
+          <ul class="submenu">
+            <li  [routerLinkActive]="['active']"><a href="javascript:void(0)" routerLink="/portalManagment/userList"><span class="menu-text">Users</span></a></li>
+            <li  [routerLinkActive]="['active']"><a href="javascript:void(0)" routerLink="/portalManagment/roleList"><span class="menu-text">Roles</span></a></li>
+            <li  [routerLinkActive]="['active']"><a href="javascript:void(0)" routerLink="/portalManagment/whiteListDomain"><span class="menu-text">White List Domain</span></a></li>
+            <li  [routerLinkActive]="['active']"><a href="javascript:void(0)" routerLink="/portalManagment/welcomeText"><span class="menu-text">Welcome Text</span></a></li>
+          </ul>
+        </li>
+        <li  [routerLinkActive]="['active']" class="" *ngIf="localstorageservice.checkBaseModuleACL(feature.ASSIGNED_MPRN);">
+            <a href="javascript:void(0)" (click)="navAssignedMprn()">
+              <i class="menu-icon zmdi zmdi-view-list-alt zmdi-hc-lg"></i>
+              <span class="menu-text">Assigned Properties</span>
+            </a>
+          </li>
+      </ul><!-- .app-menu -->
+    </div><!-- .menubar-scroll-inner -->
+  </div><!-- .menubar-scroll -->
+</aside>

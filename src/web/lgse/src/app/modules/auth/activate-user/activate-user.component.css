@@ -1,0 +1,21 @@
+@import '../../../shared/assets/css/misc-pages.css';
+
+.help-box {
+    font-size: 12px;
+    color: red;
+}
+.error {
+    text-align: center;
+}
+
+input {
+    border-bottom: 1px solid #000000 !important;
+}
+
+.valid-password p { 
+    font-size: 12px;
+}
+.wordbreak{
+    width: 100% !important;
+    word-break: break-all !important;
+}

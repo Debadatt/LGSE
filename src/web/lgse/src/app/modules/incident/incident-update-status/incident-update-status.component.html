@@ -1,0 +1,155 @@
+<section>
+    <div class="row">
+        <div class="col" style="align-self: center">
+            <div>
+                <div class="simple-page-wrap">
+                    <div class="simple-page-form animated zoomIn" id="incidentUpdateStatus-form">
+                        <span class="lblsubtitle" translate>PROPERTYLIST.updatestatus.title</span>
+                        <br>
+                        <br>
+                        <form [formGroup]="incidentUpdateStatusForm">
+                            <div class="incidentUpdateStatus-group">
+                                <div style="padding-top: 10px">
+                                    <!-- 1st row -->
+                                    <div class="row">
+                                        <div class="col-sm-6 col-md-5">
+                                            <div class="form-group has-float-label">
+                                                <input type="text" id="mprn" class="form-control" placeholder="" formControlName="mprn" readonly>
+                                                <label translate>PROPERTYLIST.mprn.text</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-1"></div>
+                                        <div class="col-sm-6 col-md-5">
+                                            <div class="form-group has-float-label">
+                                                <input type="text" class="form-control" placeholder="" formControlName="buildingName" readonly>
+                                                <label translate>PROPERTYLIST.buildingname.text</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- 2nd row -->
+                                    <div class="row">
+                                        <div class="col-sm-6 col-md-5">
+                                            <div class="form-group has-float-label">
+                                                <input type="text" class="form-control" placeholder="" formControlName="buildingNumber" readonly>
+                                                <label translate>PROPERTYLIST.buildingnumber.text</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-1"></div>
+                                        <div class="col-sm-6 col-md-5">
+                                            <div class="form-group has-float-label">
+                                                <input type="text" class="form-control" placeholder="" formControlName="principalStreet" readonly>
+                                                <label translate>PROPERTYLIST.principle.text</label>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <!-- 3rd row -->
+                                    <div class="row">
+                                        <div class="col-sm-6 col-md-5">
+                                            <div class="form-group has-float-label">
+                                                <input type="text" class="form-control" placeholder="" formControlName="priorityCustomer" readonly>
+                                                <label translate>PROPERTYLIST.prioriycustomer.text</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-1"></div>
+                                        <div class="col-sm-6 col-md-5">
+                                            <div class="form-group has-float-label">
+                                                <input type="text" class="form-control" placeholder="" formControlName="zones" readonly>
+                                                <label translate>PROPERTYLIST.zone.text</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- 4th row -->
+
+                                    <div class="row">
+                                        <div class="col-sm-12 col-md-5">
+                                            <div class="form-group has-float-label">
+                                                <input type="text" class="form-control" placeholder="" formControlName="cells" readonly>
+                                                <label translate>PROPERTYLIST.cell.text</label>
+
+                                            </div>
+                                        </div>
+                                        <div class="col-md-1"></div>
+                                        <span *ngIf="incidentstatus==1 ||incidentstatus==2">
+                                            <div class="col-sm-12 col-md-5  example-container">
+                                                <mat-form-field style="line-height: 1.800!important;">
+                                                    <mat-select required placeholder="Select Status" id="status" formControlName="status" #status (selectionChange)="selectChangeHandler()"
+                                                        disabled="true">
+                                                        <mat-option *ngFor="let status of formStatus" [value]="status.id">{{status.status}}</mat-option>
+                                                    </mat-select>
+                                                </mat-form-field>
+                                            </div>
+                                        </span>
+                                        <span *ngIf="incidentstatus==0">
+                                            <div class="col-sm-12 col-md-5  example-container">
+                                                <mat-form-field style="line-height: 1.800!important;">
+                                                    <mat-select required placeholder="Select Status" id="status" formControlName="status" #status (selectionChange)="selectChangeHandler()">
+                                                        <mat-option *ngFor="let status of formStatus" [value]="status.id">{{status.status}}</mat-option>
+                                                    </mat-select>
+                                                </mat-form-field>
+                                            </div>
+                                        </span>
+
+                                    </div>
+                                    <!-- 5th row -->
+                                    <div class="row">
+                                        <span *ngIf="incidentstatus==1 ||incidentstatus==2">
+
+                                            <div class="col-sm-12 col-md-5 example-container">
+                                                <mat-form-field>
+                                                    <mat-select required placeholder="Select Sub Status" id="subStatus" formControlName="subStatus" disabled="true">
+                                                        <mat-option *ngFor="let subStatus of formSubStatus" [value]="subStatus.id">{{subStatus.subStatus}}</mat-option>
+                                                    </mat-select>
+                                                </mat-form-field>
+                                            </div>
+                                        </span>
+                                        <span *ngIf="incidentstatus==0 && subStatusCount>0">
+                                            <div class="col-sm-12 col-md-5 example-container">
+                                                <mat-form-field>
+                                                    <mat-select required placeholder="Select Sub Status" id="subStatus" formControlName="subStatus">
+                                                        <mat-option *ngFor="let subStatus of formSubStatus" [value]="subStatus.id">{{subStatus.subStatus}}</mat-option>
+                                                    </mat-select>
+                                                </mat-form-field>
+                                            </div>
+                                        </span>
+
+                                        <!-- </div> -->
+                                    </div>
+
+                                    <!-- 6th row -->
+                                    <div class="row">
+                                        <div class="col-sm-12 col-md-5">
+                                            <span *ngIf="incidentstatus==1 ||incidentstatus==2">
+                                                <div class="form-group has-float-label">
+                                                    <textarea id="incidentNotes" class="form-control" placeholder="" formControlName="notes" readonly></textarea>
+                                                    <label translate>PROPERTYLIST.notes.text</label>
+                                                </div>
+                                            </span>
+                                            <span *ngIf="incidentstatus==0">
+                                                <div class="form-group has-float-label">
+                                                    <textarea id="incidentNotes" class="form-control" placeholder="" formControlName="notes"></textarea>
+                                                    <label translate>PROPERTYLIST.notes.text</label>
+                                                </div>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="pull-right" style="display: inline-flex;">
+                                        <span *ngIf="localstorageservice.checkUpdatePermission(feature.INCIDENT_MANAGEMENT) || localstorageservice.checkUpdatePermission(feature.ASSIGNED_MPRN)">
+                                            <button class="btn btn-orange" type="button" (click)="onSubmit()">
+                                                <span translate>PROPERTYLIST.complete.button.text</span>
+                                            </button>
+                                        </span>
+                                        <button class="btn btn-orange" type="button" style="margin-left: 5px;" (click)="cancel()">Cancel</button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

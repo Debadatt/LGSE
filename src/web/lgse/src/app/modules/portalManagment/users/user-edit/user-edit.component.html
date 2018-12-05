@@ -1,0 +1,132 @@
+<div>
+    <!-- HOME -->
+    <section>
+        <div class="row">
+            <div class="col" style="align-self: center">
+                <div class="simple-page-wrap">
+                    <div class="simple-page-form animated zoomIn" id="useradd-form">
+                        <span class="lblsubtitle" translate>USERADD.edittitle.text</span>
+                        <form [formGroup]="userAddForm" (ngSubmit)="onSubmit()">
+                            <div class="userAdd-group" style="padding-top: 10px">
+                                <!-- 1st row -->
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-12">
+                                        <span *ngIf="!userAddForm.get('firstName').valid && userAddForm.get('firstName').touched" class="help-box" translate>USERADD.firstname.validate.text</span>
+                                        <div class="form-group has-float-label">
+                                            <input id="firstName" type="text" class="form-control" placeholder="" formControlName="firstName" maxlength="20">
+                                            <label for="firstName" translate>USERADD.firstname.text
+                                                <i class="text-danger">*</i>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12">
+                                        <span *ngIf="!userAddForm.get('lastName').valid && userAddForm.get('lastName').touched" class="help-box" translate>USERADD.lastname.validate.text</span>
+                                        <div class="form-group has-float-label">
+                                            <input id="lastName" type="text" class="form-control" placeholder="" formControlName="lastName" maxlength="20">
+                                            <label for="lastName" translate>USERADD.lastname.text
+                                                <i class="text-danger">*</i>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- 2nd row -->
+
+                                <!-- 3nd row -->
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-12">
+                                        <!-- <span class="help-box" *ngIf="!userAddForm.get('employeeId').valid && userAddForm.get('employeeId').touched" translate>USERADD.empid.validate.text</span> -->
+                                        <div class="form-group has-float-label">
+                                            <input id="employeeId" type="text" class="form-control" placeholder="" formControlName="employeeId">
+                                            <label for="employeeId" translate>USERADD.empid.text
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12">
+                                        <!-- <span *ngIf="role.name==Engineer"> -->
+                                        <span class="help-box" *ngIf="!userAddForm.get('eusr').valid && userAddForm.get('eusr').touched" translate>USERADD.eusr.validate.text</span>
+                                        <div class="form-group has-float-label">
+                                            <input id="eusr" type="text" class="form-control" placeholder="" formControlName="eusr" maxlength="9">
+                                            <label for="eusr" translate>USERADD.eusr.text
+                                            </label>
+                                        </div>
+                                        <!-- </span> -->
+                                    </div>
+                                </div>
+
+                                <!-- 4th row -->
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-12">
+
+                                        <div class="form-group has-float-label">
+                                            <input id="email" type="text" class="form-control" placeholder="" formControlName="email" readonly>
+                                            <label for="email" translate>USERADD.emailid.text
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6 col-sm-12">
+                                        <!-- <span class="help-box" *ngIf="!userAddForm.get('contactNo').valid && userAddForm.get('contactNo').touched" translate>USERADD.contactno.validate.text</span> -->
+                                        <div class="form-group has-float-label">
+                                            <input id="contactNo" type="text" class="form-control" placeholder="" formControlName="contactNo" maxlength="13">
+                                            <label for="contactNo" translate>USERADD.contactno.text
+                                                <!-- <i class="text-danger">*</i> -->
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- 5th row -->
+                                <div class="row">
+
+                                    <div class="col-md-6 col-sm-12">
+                                        <mat-radio-group class="example-radio-group" formControlName="isActive">
+                                            <mat-radio-button value="1">
+                                                <span translate>USERADD.active.text</span>
+                                            </mat-radio-button>
+                                            <mat-radio-button value="0" style="padding-left:10px">
+                                                <span translate>USERADD.deactive.text</span>
+                                            </mat-radio-button>
+                                        </mat-radio-group>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12">
+                                        <!-- <input id="otp" type="text" class="form-control" placeholder="" formControlName="otp" readonly> -->
+                                        <span *ngIf="otplength>0">
+                                            <label for="otp">OTP: {{otp}}
+                                            </label>
+                                        </span>
+                                    </div>
+
+                                </div>
+                                <!-- 6rd row -->
+                                <div class="row" *ngIf="backpath">
+                                    <div class="pull-right" style="display: inline-flex;">
+                                        <span *ngIf="isActivated==false">
+                                            <button class="btn btn-orange" type="button" (click)="sendAcivationLink()" *ngIf="localstorageservice.checkUpdatePermission(feature.PORTAL_MANAGEMENT);">
+                                                <span translate>USERADD.sendactivationlink.button.text</span>
+                                            </button>
+                                        </span>
+                                        <button class="btn btn-orange" type="button" style="margin-left:5px;width:auto;" (click)="resetPassword()" *ngIf="localstorageservice.checkUpdatePermission(feature.PORTAL_MANAGEMENT);">
+                                            <span translate>USERADD.resetpassword.button.text</span>
+                                        </button>
+
+                                        <button class="btn btn-orange" type="submit" style="margin-left:5px;width:auto;" [disabled]="!userAddForm.valid" *ngIf="localstorageservice.checkUpdatePermission(feature.PORTAL_MANAGEMENT);">
+                                            <span translate>USERADD.save.button.text</span>
+                                        </button>
+                                        <button class="btn btn-orange" type="button" style="margin-left:5px;width:auto;" (click)="cancel()" *ngIf="localstorageservice.checkUpdatePermission(feature.PORTAL_MANAGEMENT);">
+                                            <span translate>USERADD.cancel.button.text</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- #userEdit-form -->
+                </div>
+
+                <!-- .simple-page-wrap -->
+            </div>
+            <!-- end col -->
+        </div>
+    </section>
+    <!-- END HOME -->
+</div>

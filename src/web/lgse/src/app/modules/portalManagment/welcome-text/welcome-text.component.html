@@ -1,0 +1,55 @@
+<div>
+    <!-- HOME -->
+    <section>
+      <div class="row">
+        <div class="col" style="align-self: center">
+          <div>
+            <div class="simple-page-wrap">
+              <div class="simple-page-form animated zoomIn" id="welcomeText-form">
+                <span class="lblsubtitle" translate>WELCOMETXT.title.text</span>
+                <br>
+                <br>
+                <form [formGroup]="welcomeTextForm" (ngSubmit)="onSubmit()">
+                  <div class="welcoeText-group" style="padding-top: 10px">
+                      <div class="row">
+                          <div class="col-md-12 col-sm-12">
+                            <span class="help-box"></span>
+                            <div class="form-group has-float-label">
+                                <mat-checkbox formControlName="isDefaultText"><span translate>WELCOMETXT.default.text</span></mat-checkbox>
+                            </div>
+                          </div>
+                        </div>
+                    <!-- 2nd row -->
+                    <div class="row">
+                      <div class="col-md-12 col-sm-12">
+                        <span class="help-box"></span>
+                        <div class="form-group has-float-label">
+                          <textarea id="welcomeText" class="form-control" rows="2" placeholder="" formControlName="welcomeText" maxlength="500"></textarea>
+                          <label for="welcomeText" translate>WELCOMETXT.description.text</label>
+                          <i class="text-danger"></i>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!--3rd row-->
+                    <div class="row">
+                        <div class="pull-right" style="display: inline-flex;">
+                          <button class="rightmargin btn btn-orange" [disabled]="!welcomeTextForm.valid">
+                            <span translate>WELCOMETXT.save.button.text</span>
+                          </button>
+                          <!-- <button class="btn btn-orange" style="margin-left: 5px;" routerLink="/incident"><span translate>WELCOMETXT.cancel.button.text</span></button> -->
+                        </div>
+                      </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+            <!-- #welcomeText-form -->
+          </div>
+          <!-- .simple-page-wrap -->
+        </div>
+        <!-- end col -->
+      </div>
+    </section>
+    <!-- END HOME -->
+  </div>

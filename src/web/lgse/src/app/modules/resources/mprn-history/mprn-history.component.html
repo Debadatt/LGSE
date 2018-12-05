@@ -1,0 +1,83 @@
+<div class="content">
+  <div>
+    <div class="content div">
+      <div class="simple-page-form animated zoomIn">
+        <label class="lblsubtitle" translate> MPRNHISTORY.subtitle.text</label> MPRN - {{mprnnumber}}
+
+        <div>
+          <mat-table [dataSource]="dataSource" matSort class="table table-striped content tbl mat-elevation-z8">
+            <ng-container matColumnDef="name" hidden>
+              <mat-header-cell *matHeaderCellDef>
+                <label translate>MPRNHISTORY.name.text</label>
+              </mat-header-cell>
+              <mat-cell *matCellDef="let mprn">
+                <label class="mat-cell-responsive-label" translate>MPRNHISTORY.name.text</label>
+                {{mprn.firstName}} {{mprn.lastName}} </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="email" hidden>
+              <mat-header-cell *matHeaderCellDef>
+                <label translate>MPRNHISTORY.email.text</label>
+              </mat-header-cell>
+              <mat-cell *matCellDef="let mprn">
+                <label class="mat-cell-responsive-label" translate>MPRNHISTORY.email.text</label>
+                {{mprn.email}} </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="status" hidden>
+              <mat-header-cell *matHeaderCellDef>
+                <label translate>MPRNHISTORY.status.text</label>
+              </mat-header-cell>
+              <mat-cell *matCellDef="let mprn">
+                <label class="mat-cell-responsive-label" translate>MPRNHISTORY.status.text</label>
+                {{mprn.status}} </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="subStatus" hidden>
+              <mat-header-cell *matHeaderCellDef>
+                <label translate>MPRNHISTORY.subStatus.text</label>
+              </mat-header-cell>
+              <mat-cell *matCellDef="let mprn">
+                <label class="mat-cell-responsive-label" translate>MPRNHISTORY.subStatus.text</label>
+                {{mprn.subStatus}} </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="statusChangedOn" hidden>
+              <mat-header-cell *matHeaderCellDef>
+                <label translate>MPRNHISTORY.statusChangedOn.text</label>
+              </mat-header-cell>
+              <mat-cell *matCellDef="let mprn">
+                <label class="mat-cell-responsive-label" translate>MPRNHISTORY.statusChangedOn.text</label>
+                {{mprn.statusChangedOn | date: 'dd/MM/yyyy hh:mm:ss a' }} </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="roleName" hidden>
+              <mat-header-cell *matHeaderCellDef>
+                <label translate>MPRNHISTORY.roleName.text</label>
+              </mat-header-cell>
+              <mat-cell *matCellDef="let mprn">
+                <label class="mat-cell-responsive-label" translate>MPRNHISTORY.roleName.text</label>
+                {{mprn.roleName}} </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="notes" hidden>
+              <mat-header-cell *matHeaderCellDef>
+                <label translate>MPRNHISTORY.notes.text</label>
+              </mat-header-cell>
+              <mat-cell *matCellDef="let mprn">
+                <label class="mat-cell-responsive-label" translate>MPRNHISTORY.notes.text</label>
+                {{mprn.notes}} </mat-cell>
+            </ng-container>
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+          </mat-table>
+        </div>
+        <div class="row">
+          <div class="pull-right" style="display: inline-flex;margin-top:6px;">
+            <button class="btn btn-warning" (click)="back()" translate>BUTTONS.back.text</button>
+          </div>
+        </div>
+        <p class="red" *ngIf="mprnhistorylist.length==0">
+          <label translate>BUTTONS.notfound.text</label>
+        </p>
+
+
+        <!-- end of markup     -->
+      </div>
+    </div>
+  </div>
+</div>
