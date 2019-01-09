@@ -13,6 +13,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 import { ShowMapComponent } from './show-map/show-map.component';
 import { BingMapComponent } from 'src/app/modules/incident/bing-map/bing-map.component';
+import { PapaParseModule } from 'ngx-papaparse';
 
 @NgModule({
   imports: [
@@ -21,6 +22,7 @@ import { BingMapComponent } from 'src/app/modules/incident/bing-map/bing-map.com
     AppCommonModule,
     CommonModule,
     ReactiveFormsModule,
+    PapaParseModule,
     TranslateModule,
     FormsModule,
     

@@ -20,5 +20,5 @@ input {
 
 .wordbreak{
     width: 100% !important;
-    word-break: break-all !important;
+    word-break: normal !important;
 }

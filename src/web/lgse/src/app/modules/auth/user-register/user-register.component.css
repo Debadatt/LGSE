@@ -19,7 +19,7 @@ input {
     padding-left: 10px;
 }
 .wordbreak{
-    width: 100% !important;
-    word-break: break-all !important;
+    width: 100% !important;  
+    word-break: normal !important;
 }
 

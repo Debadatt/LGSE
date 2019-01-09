@@ -3,5 +3,6 @@
 }
 .wordbreak{
     width: 100% !important;
-    word-break: break-all !important;
+    /* word-break: break-all !important; */
+    white-space:nowrap;
 }

@@ -227,6 +227,7 @@ export class UserService implements OnInit {
     return this.serverApiInterfaceService.post<ApiSuccessResponse>(this.setNewPasswordUrl, newPasswordReq).subscribe(
       (response) => {
         this.translateService.get('RESPONSE-CODES.' + response.message).subscribe((res: string) => {
+          localStorage.clear();
           this.setChangePasswordSuccessMessage(res);
         });
       },
@@ -321,8 +322,8 @@ export class UserService implements OnInit {
         localStorage.clear();
         this.localstorageservice.userACLResponseArray = [];
         this.localstorageservice.userACLResponseMap = null;
-        if (isnavigate) {    
-            this.router.navigate(['/auth/login']);
+        if (isnavigate) {
+          this.router.navigate(['/auth/login']);
         }
       },
       (error) => {

@@ -36,6 +36,7 @@
     "material-design-iconic-font": "^2.2.0",
     "ngx-cookie": "^4.0.2",
     "ngx-filter-pipe": "^2.1.0",
+    "ngx-papaparse": "^3.0.1",
     "ngx-toastr": "^9.0.2",
     "rxjs": "^6.0.0",
     "web-animations-js": "^2.3.1",

@@ -153,7 +153,7 @@ export class AssignMprnComponent implements OnInit {
       controlvalues: null
     });
     this.customSearchData.push({
-      searchkeydisplayname: 'Zone Manager',
+      searchkeydisplayname: 'Zone Controller',
       searchkey: 'ZoneManagerName',
       controltype: 'input',
       controlvalues: null

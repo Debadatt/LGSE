@@ -8,7 +8,7 @@ import { AppNotificationService } from '../../../services/notification/app-notif
 import { ProcessRequest } from '../../../models/api/process.request.model';
 import { CsvHeareds } from 'src/app/app-common-constants';
 import { DuplicateIncidentRec } from 'src/app/models/ui/incident/duplicate-incident-rec';
-
+import { Papa } from 'ngx-papaparse';
 @Component({
   selector: 'app-incident-edit',
   templateUrl: './incident-edit.component.html',
@@ -49,6 +49,7 @@ export class IncidentEditComponent implements OnInit {
   //Declaration End
 
   constructor(private router: Router,
+    private papa: Papa,
     private incidentService: IncidentService, private activtedroute: ActivatedRoute,
     private apiErrorService: ApiErrorService,
     private appNotificationService: AppNotificationService) { }
@@ -88,62 +89,101 @@ export class IncidentEditComponent implements OnInit {
 
   //Conversion of CSV fil to JSON Object
   private csvJSON(csv) {
-    // spliting file from
-    console.log('in json to csv');
-    // saparating hearders and data in saparate line.
-    var linesRead = csv.split("\r\n");
-    // validation for blank csv
-    if (linesRead.length === 0) {
+    let options = {
+      header: true,
+      skipEmptyLines: true
+      // Add your options here
+    };
+    console.log('headers', this.papa.parse(csv, options));
+    let jsondata = this.papa.parse(csv, options);
+    console.log('jsondata.data.length', jsondata.data.length);
+    if (jsondata.data.length == 0) {
       this.appNotificationService.error("You Can Not Upload Blank File");
       return;
     }
-    var result = [];
-    // create hearders from csv
-    var headers = linesRead[0].split(",");
-    let invalidheaders = false;
     // check headers validaty
-    for (const header in headers) {
-      const item = CsvHeareds.filter(commanheader => commanheader == headers[header])[0];
+    let invalidheader = false;
+    for (const header in jsondata.meta.fields) {
+      const item = CsvHeareds.filter(commanheader => commanheader == jsondata.meta.fields[header])[0];
       if (!item) {
-        invalidheaders = true;
+        invalidheader = true;
         break;
       }
     }
     // if heareds are invalid then throw an errror
-    if (invalidheaders) {
+    if (invalidheader) {
       this.appNotificationService.error("You have entered invalid headers in CSV");
       return;
     }
-    const lines = [];
-    // cheking blank line in csv if it is then break from line.
-    for (let lineslen = 1; lineslen < linesRead.length; lineslen++) {
-      if (linesRead[lineslen] == '') {
+    let ismprnempty = false;
+    for (const csvinfo of jsondata.data) {
+      if (csvinfo.MPRN == '' || csvinfo.MPRN == ' ') {
+        ismprnempty = true;
         break;
       }
-      else {
-        lines.push(linesRead[lineslen]);
-      }
     }
-    if (lines.length == 0) {
-      this.appNotificationService.error("You Can Not Upload Blank File");
+    if (ismprnempty) {
+      this.appNotificationService.error("MPRN should not be empty");
       return;
     }
-    else {
-      //Headers and data pushed to result
-      for (var i = 0; i < lines.length; i++) {
-        var obj = {};
-        var currentline = lines[i].split(",");
-        let testarray = [];
-        let testboj = {};
-        for (var j = 0; j < headers.length; j++) {
-          obj[headers[j]] = currentline[j];
-        }
-        result.push(obj);
-      }
-    }
-    //Returning JSON format
-    console.log('csv too json', result);
-    return result;
+    
+     return jsondata.data
+    // // spliting file from
+    // console.log('in json to csv');
+    // // saparating hearders and data in saparate line.
+    // var linesRead = csv.split("\r\n");
+    // // validation for blank csv
+    // if (linesRead.length === 0) {
+    //   this.appNotificationService.error("You Can Not Upload Blank File");
+    //   return;
+    // }
+    // var result = [];
+    // // create hearders from csv
+    // var headers = linesRead[0].split(",");
+    // let invalidheaders = false;
+    // // check headers validaty
+    // for (const header in headers) {
+    //   const item = CsvHeareds.filter(commanheader => commanheader == headers[header])[0];
+    //   if (!item) {
+    //     invalidheaders = true;
+    //     break;
+    //   }
+    // }
+    // // if heareds are invalid then throw an errror
+    // if (invalidheaders) {
+    //   this.appNotificationService.error("You have entered invalid headers in CSV");
+    //   return;
+    // }
+    // const lines = [];
+    // // cheking blank line in csv if it is then break from line.
+    // for (let lineslen = 1; lineslen < linesRead.length; lineslen++) {
+    //   if (linesRead[lineslen] == '') {
+    //     break;
+    //   }
+    //   else {
+    //     lines.push(linesRead[lineslen]);
+    //   }
+    // }
+    // if (lines.length == 0) {
+    //   this.appNotificationService.error("You Can Not Upload Blank File");
+    //   return;
+    // }
+    // else {
+    //   //Headers and data pushed to result
+    //   for (var i = 0; i < lines.length; i++) {
+    //     var obj = {};
+    //     var currentline = lines[i].split(",");
+    //     let testarray = [];
+    //     let testboj = {};
+    //     for (var j = 0; j < headers.length; j++) {
+    //       obj[headers[j]] = currentline[j];
+    //     }
+    //     result.push(obj);
+    //   }
+    // }
+    // //Returning JSON format
+    // console.log('csv too json', result);
+    // return result;
   }// end of fucntion.
 
   //Upload Csv File
