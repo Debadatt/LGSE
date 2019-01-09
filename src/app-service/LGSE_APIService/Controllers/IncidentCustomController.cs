@@ -1296,7 +1296,7 @@ namespace LGSE_APIService.Controllers
             CSVHelper.AppendValue(sb, "Postcode", false, false);
             CSVHelper.AppendValue(sb, "PriorityCustomer", false, false);
             CSVHelper.AppendValue(sb, "Zone", false, false);
-            CSVHelper.AppendValue(sb, "ZoneManager", false, false);
+            CSVHelper.AppendValue(sb, "ZoneController", false, false);
             CSVHelper.AppendValue(sb, "Cell", false, false);
             CSVHelper.AppendValue(sb, "CellManager", false, false);
             foreach (var item in statusLists)
