@@ -11,6 +11,7 @@
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 		<string>UIInterfaceOrientationPortraitUpsideDown</string>
+		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>UISupportedInterfaceOrientations~ipad</key>
@@ -23,16 +24,18 @@
 	<key>MinimumOSVersion</key>
 	<string>10.0</string>
 	<key>CFBundleDisplayName</key>
-	<string>LGSE Support</string>
+	<string>LGSE&#x2007;Support</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.wwuutilities.LGSEApp</string>
+	<string>com.wwutilities.LGSEApp</string>
 	<key>CFBundleVersion</key>
-	<string>1.0</string>
-	<key>UILaunchStoryboardName</key>
-	<string>(not set)</string>
+	<string>1.6</string>
 	<key>CFBundleName</key>
 	<string>LGSE Support</string>
 	<key>XSAppIconAssets</key>
 	<string>Asset.xcassets/AppIcon.appiconset</string>
+	<key>UILaunchStoryboardName</key>
+	<string>LaunchScreen</string>
+	<key>NSCalendarsUsageDescription</key>
+	<string>New Entry</string>
 </dict>
 </plist>

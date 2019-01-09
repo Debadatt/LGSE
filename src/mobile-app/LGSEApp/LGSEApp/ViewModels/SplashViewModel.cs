@@ -76,7 +76,8 @@ namespace LGSEApp.ViewModels
                     {
                         GetApplicationData();
                          NavigationSync();
-                        await Application.Current.MainPage.Navigation.PushAsync(new MainPage(true));
+                        Application.Current.MainPage = new NavigationPage(new MainPage(true));
+                        //  await Application.Current.MainPage.Navigation.PushAsync(new MainPage(true));
 
                         //Page you want the user to see if he is logged in
                     }
@@ -113,7 +114,8 @@ namespace LGSEApp.ViewModels
 
         async void navigationOnLogin()
         {
-            await Application.Current.MainPage.Navigation.PushAsync(new LoginPage());
+          Application.Current.MainPage = new NavigationPage(new LoginPage());
+          //  await Application.Current.MainPage.Navigation.PushAsync(new LoginPage());
         }
     }
 }

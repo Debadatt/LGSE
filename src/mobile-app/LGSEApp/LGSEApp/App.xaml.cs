@@ -1,5 +1,6 @@
 using LGSEApp.Services.Services;
 using LGSEApp.View;
+using LGSEApp.ViewModels;
 using System;
 using System.Diagnostics;
 using Xamarin.Essentials;
@@ -16,8 +17,8 @@ namespace LGSEApp
         {
 
             InitializeComponent();
-           
-            MainPage = new NavigationPage(new SplashPage());
+            LoadMainAsync();
+          //  MainPage = new NavigationPage(new SplashPage());
             var seconds = TimeSpan.FromSeconds(20);
             Xamarin.Forms.Device.StartTimer(seconds, () =>
                 {
@@ -25,7 +26,13 @@ namespace LGSEApp
                 }
             );
         }
-
+       
+        private async void LoadMainAsync()
+        {
+           // await Task.Delay(2000);
+            SplashViewModel splashViewModel = new SplashViewModel();
+            await splashViewModel.Splash();
+        }
         private bool CheckConnection()
         {
             var networkAccess = Connectivity.NetworkAccess;

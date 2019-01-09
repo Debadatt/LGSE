@@ -24,7 +24,7 @@ namespace LGSEApp.Services.Services
         public static bool IsLogged { get; set; }
         public static bool IsPermission { get; set; }
         public static int PendingCount { get; set; }
-        public static async Task<HttpResponseMessage> PostAsAsync(string _strUri, dynamic dynamicJson)
+        public static async Task<HttpResponseMessage> PostAsAsync(string _strUri, object dynamicJson)
         {
             HttpResponseMessage httpRespon = null;
             try
